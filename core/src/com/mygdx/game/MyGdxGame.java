@@ -6,7 +6,7 @@ import com.mygdx.game.Screens.*;
 
 public class MyGdxGame extends Game {
 //prova pull branch2
-	//rigamodificata
+	//prova modifica di riga
 	public static final int V_WIDTH = 400;
 	public static final int V_HEIGHT = 208;
 	public static final float PPM = 100;
