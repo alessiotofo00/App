@@ -1,3 +1,8 @@
 2D Platform:
 -3 personaggi con caratteristiche diverse
--Livelli + boss finale per ogni livello
+-Fuga dall'inferno in più livelli
+-Boss finale per ogni livello
+-Store per power-up prima di ogni boss
+
+Da decidere:
+-movimenti e tipologia dei nemici
