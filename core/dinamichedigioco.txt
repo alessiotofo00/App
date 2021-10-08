@@ -1,0 +1,3 @@
+2D Platform:
+-3 personaggi con caratteristiche diverse
+-Livelli + boss finale per ogni livello

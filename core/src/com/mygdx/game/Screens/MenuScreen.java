@@ -17,9 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 
 public class MenuScreen implements Screen, InputProcessor {
@@ -28,9 +26,6 @@ public class MenuScreen implements Screen, InputProcessor {
 
     private Stage stage;
     private Skin skin;
-
-    private OrthographicCamera gamecam;
-    private Viewport gamePort;
 
     private Table table;
     private TextButton startButton;
@@ -50,10 +45,7 @@ public class MenuScreen implements Screen, InputProcessor {
     public MenuScreen(final MyGdxGame game){
         this.game = game;
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
-        gamecam = new OrthographicCamera();
-        gamePort = new FitViewport(MyGdxGame.V_WIDTH / MyGdxGame.PPM,
-                MyGdxGame.V_HEIGHT / MyGdxGame.PPM, gamecam);
-        stage = new Stage(gamePort);
+        stage = new Stage(new ScreenViewport());
 
         table = new Table();
         table.setWidth(stage.getWidth());
