@@ -5,12 +5,10 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -24,7 +22,7 @@ public class MenuScreen implements Screen, InputProcessor {
 
     private MyGdxGame game;
 
-    private Stage stage;
+    private Stage stageMS;
     private Skin skin;
 
     private Table table;
@@ -45,10 +43,10 @@ public class MenuScreen implements Screen, InputProcessor {
     public MenuScreen(final MyGdxGame game){
         this.game = game;
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
-        stage = new Stage(new ScreenViewport());
+        stageMS = new Stage(new ScreenViewport());
 
         table = new Table();
-        table.setWidth(stage.getWidth());
+        table.setWidth(stageMS.getWidth());
         table.align(Align.center | Align.top);
         table.setPosition(0, Gdx.graphics.getHeight());
 
@@ -107,13 +105,13 @@ public class MenuScreen implements Screen, InputProcessor {
         table.add(quitButton).padBottom(30);
 
 
-        stage.addActor(table);
+        stageMS.addActor(table);
 
         batch = new SpriteBatch();
         sprite = new Sprite(new Texture(Gdx.files.internal("dragon-menu.jpg")));
         sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        InputMultiplexer im = new InputMultiplexer(stage, this);
+        InputMultiplexer im = new InputMultiplexer(stageMS, this);
         Gdx.input.setInputProcessor(im);
     }
 
@@ -159,7 +157,7 @@ public class MenuScreen implements Screen, InputProcessor {
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(stage);
+        Gdx.input.setInputProcessor(stageMS);
     }
 
     @Override
@@ -170,8 +168,8 @@ public class MenuScreen implements Screen, InputProcessor {
         sprite.draw(batch);
         batch.end();
 
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
+        stageMS.act(Gdx.graphics.getDeltaTime());
+        stageMS.draw();
     }
 
     @Override
@@ -196,6 +194,6 @@ public class MenuScreen implements Screen, InputProcessor {
 
     @Override
     public void dispose() {
-        stage.dispose();
+        stageMS.dispose();
     }
 }

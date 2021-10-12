@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 
@@ -27,7 +28,7 @@ public class Hud implements Disposable {
     int level = 1;
 
     public Hud(SpriteBatch sb){
-        viewport = new FitViewport(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
+        viewport = new ScreenViewport();
         stage = new Stage(viewport, sb);
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
 

@@ -10,7 +10,14 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
@@ -20,10 +27,15 @@ public class PlayScreen implements Screen {
 
     private MyGdxGame game;
 
+    private Skin skin;
+
     private OrthographicCamera gamecam;
     private Viewport gamePort;
 
     private Hud hud;
+
+    //boolean per lo stato di gioco(vedi metodo render)
+    boolean paused;
 
     //variabili per la creazione del mondo di gioco
     private World world;
@@ -33,14 +45,13 @@ public class PlayScreen implements Screen {
     //sprite di prova per i cuori
     private Sprite hearts;
 
-    public PlayScreen(MyGdxGame game){
+    public PlayScreen(final MyGdxGame game){
 
         this.game = game;
+        this.skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
 
         gamecam = new OrthographicCamera();
-        gamePort = new FitViewport(MyGdxGame.V_WIDTH / MyGdxGame.PPM,
-                MyGdxGame.V_HEIGHT / MyGdxGame.PPM,
-                gamecam);
+        gamePort = new ScreenViewport();
         hud = new Hud(game.batch);
 
         gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
@@ -49,7 +60,7 @@ public class PlayScreen implements Screen {
         b2dr = new Box2DDebugRenderer();
         creator = new B2WorldCreator(this);
 
-        //hearts = new Sprite(new Texture(Gdx.files.internal("hearts.png")));
+
     }
 
     @Override
@@ -59,7 +70,10 @@ public class PlayScreen implements Screen {
 
     //method useful to catch the keyboard inputs
     public void handleInput(float dt){
-
+        if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+            paused = true;
+            //game.changeScreen(MyGdxGame.MENU);
+        }
     }
 
     //we will call this method in our render method
@@ -70,17 +84,27 @@ public class PlayScreen implements Screen {
     @Override
     public void render(float delta) {
         // TODO Auto-generated method stub
-        update(delta);
-
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        if(paused){
+            if(Gdx.input.isKeyJustPressed(Input.Keys.P))
+                paused = false;
+        }
+        else{
+            update(delta);
+        }
 
         game.batch.setProjectionMatrix(gamecam.combined);
         hud.stage.draw();
         game.batch.begin();
-        //hearts.draw(game.batch);
+            //hearts.draw(game.batch);
+            if(paused){
+                Sprite sprite = new Sprite(new Texture(Gdx.files.internal("pause.png")));
+                sprite.draw(game.batch);
+            }
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+
     }
 
     @Override
