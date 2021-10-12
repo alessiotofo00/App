@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
@@ -98,7 +99,7 @@ public class PlayScreen implements Screen {
         game.batch.begin();
             //hearts.draw(game.batch);
             if(paused){
-                Sprite sprite = new Sprite(new Texture(Gdx.files.internal("pause.png")));
+                Sprite sprite = new Sprite(new Texture(Gdx.files.internal("pause2.png")));
                 sprite.draw(game.batch);
             }
         game.batch.end();
