@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -24,7 +27,7 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Tools.B2WorldCreator;
 
-public class PlayScreen implements Screen {
+public class  PlayScreen implements Screen {
 
     private MyGdxGame game;
 
@@ -34,7 +37,10 @@ public class PlayScreen implements Screen {
     private Viewport gamePort;
 
     private Hud hud;
-
+    //map declarations
+    private TmxMapLoader mapLoader;
+    private TiledMap map;
+    private OrthogonalTiledMapRenderer renderer;
     //boolean per lo stato di gioco(vedi metodo render)
     boolean paused;
 
@@ -54,6 +60,13 @@ public class PlayScreen implements Screen {
         gamecam = new OrthographicCamera();
         gamePort = new ScreenViewport();
         hud = new Hud(game.batch);
+
+        mapLoader = new TmxMapLoader();
+        map = mapLoader.load("Hell_1.tmx");
+        renderer = new OrthogonalTiledMapRenderer(map, 1);
+        //gamecam.position necessario per non centrare in posizione 0.0 (il centro della mappa, visto come assi cartesiani)
+        //divido quindi per 2 h e l
+        gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
         gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
@@ -80,6 +93,9 @@ public class PlayScreen implements Screen {
     //we will call this method in our render method
     public void update(float dt) {
         handleInput(dt);
+
+        gamecam.update();
+        renderer.setView(gamecam);
     }
 
     @Override
