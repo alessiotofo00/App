@@ -42,7 +42,7 @@ public class MenuScreen implements Screen, InputProcessor {
     public MenuScreen(final MyGdxGame game){
         this.game = game;
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
-        viewport = new FitViewport(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
+        viewport = new FitViewport((MyGdxGame.V_WIDTH)/2, MyGdxGame.V_HEIGHT-256, new OrthographicCamera());
         stageMS = new Stage(viewport);
 
         table = new Table();
