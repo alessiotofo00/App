@@ -8,8 +8,8 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		//default fullscreen
-		config.width = 1024;
-		config.height = 768;
+		config.width = MyGdxGame.V_WIDTH;
+		config.height = MyGdxGame.V_HEIGHT;
 		config.fullscreen = true;
 
 		new LwjglApplication(new MyGdxGame(), config);
