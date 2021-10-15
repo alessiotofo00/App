@@ -58,21 +58,21 @@ public class  PlayScreen implements Screen {
         this.skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
 
         gamecam = new OrthographicCamera();
-        gamePort = new ScreenViewport();
+        gamePort = new FitViewport(MyGdxGame.V_WIDTH / MyGdxGame.PPM,
+                MyGdxGame.V_HEIGHT / MyGdxGame.PPM,
+                gamecam);
         hud = new Hud(game.batch);
 
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("Hell_1.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map, 1);
+        map = mapLoader.load("Hell_newcompression.tmx");
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / MyGdxGame.PPM);
         //gamecam.position necessario per non centrare in posizione 0.0 (il centro della mappa, visto come assi cartesiani)
         //divido quindi per 2 h e l
         gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
-
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
         creator = new B2WorldCreator(this);
-
 
     }
 
@@ -109,6 +109,9 @@ public class  PlayScreen implements Screen {
             update(delta);
         }
 
+        renderer.render();
+        b2dr.render(world, gamecam.combined);
+
         game.batch.setProjectionMatrix(gamecam.combined);
         hud.stage.draw();
         game.batch.begin();
@@ -120,12 +123,17 @@ public class  PlayScreen implements Screen {
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-
+        hud.stage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
         // TODO Auto-generated method stub
+        gamePort.update(width, height);
+    }
+
+    public TiledMap getMap(){
+        return map;
     }
 
     public World getWorld(){
@@ -150,5 +158,10 @@ public class  PlayScreen implements Screen {
     @Override
     public void dispose() {
         // TODO Auto-generated method stub
+        map.dispose();
+        renderer.dispose();
+        world.dispose();
+        b2dr.dispose();
+        hud.dispose();
     }
 }

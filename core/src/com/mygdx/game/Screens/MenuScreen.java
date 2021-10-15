@@ -32,11 +32,6 @@ public class MenuScreen implements Screen, InputProcessor {
 
     private Label titleLabel;
 
-    private Texture volumeTexture;
-    private TextureRegion volumeTexRegion;
-    private TextureRegionDrawable volumeTexRegDrawable;
-    private ImageButton volumeButton;
-
     private SpriteBatch batch;
     private Sprite sprite;
 
@@ -56,11 +51,6 @@ public class MenuScreen implements Screen, InputProcessor {
 
         titleLabel = new Label("GAME TITLE", skin);
 
-        volumeTexture = new Texture(Gdx.files.internal("volume-up2.png"));
-        volumeTexRegion = new TextureRegion(volumeTexture);
-        volumeTexRegDrawable = new TextureRegionDrawable(volumeTexRegion);
-        volumeButton = new ImageButton(volumeTexRegDrawable);
-
         startButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -79,13 +69,6 @@ public class MenuScreen implements Screen, InputProcessor {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.exit();
-            }
-        });
-
-        volumeButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.log("ClickedVolume", "yes");
             }
         });
 
