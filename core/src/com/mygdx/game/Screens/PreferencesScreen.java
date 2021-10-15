@@ -3,12 +3,14 @@ package com.mygdx.game.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGdxGame;
 
@@ -22,6 +24,8 @@ public class PreferencesScreen implements Screen {
     private Stage stage;
     private Skin skin;
 
+    private FitViewport viewport;
+
     private Table table;
     private Label titleLabel;
     private Label musicOnOffLabel;
@@ -34,12 +38,12 @@ public class PreferencesScreen implements Screen {
         this.game = game;
 
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
-        stage = new Stage(new ScreenViewport());
+        viewport = new FitViewport(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
+        stage = new Stage(viewport);
 
         table = new Table();
-        table.setWidth(stage.getWidth());
-        table.align(Align.center | Align.top);
-        table.setPosition(0, Gdx.graphics.getHeight());
+        table.top(); //set the table on the top of the stage
+        table.setFillParent(true); //now the table's size is the same of the stage's size
 
         final CheckBox musicCheckBox = new CheckBox(null, skin);
         musicCheckBox.setChecked(true);
@@ -75,7 +79,7 @@ public class PreferencesScreen implements Screen {
         musicOnOffLabel = new Label( "Music", skin );
         soundOnOffLabel = new Label( "Sounds", skin );
 
-        table.add(titleLabel).padTop(50).padBottom(100);
+        table.add(titleLabel).padTop(100).padBottom(100);
         table.row();
         table.add(musicOnOffLabel).padBottom(30);
         table.add(musicCheckBox).padBottom(30);

@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGdxGame;
 
@@ -24,6 +26,8 @@ public class MenuScreen implements Screen, InputProcessor {
 
     private Stage stageMS;
     private Skin skin;
+
+    private FitViewport viewport;
 
     private Table table;
     private TextButton startButton;
@@ -38,12 +42,12 @@ public class MenuScreen implements Screen, InputProcessor {
     public MenuScreen(final MyGdxGame game){
         this.game = game;
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
-        stageMS = new Stage(new ScreenViewport());
+        viewport = new FitViewport(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
+        stageMS = new Stage(viewport);
 
         table = new Table();
-        table.setWidth(stageMS.getWidth());
-        table.align(Align.center | Align.top);
-        table.setPosition(0, Gdx.graphics.getHeight());
+        table.top(); //set the table on the top of the stage
+        table.setFillParent(true); //now the table's size is the same of the stage's size
 
         startButton = new TextButton("New Game", skin);
         quitButton = new TextButton("Quit Game", skin);
@@ -78,14 +82,14 @@ public class MenuScreen implements Screen, InputProcessor {
         float scale = unit / startButton.getHeight();
         float width = startButton.getWidth() * scale;
        */
-        table.padTop(20);
-        table.add(titleLabel).padBottom(100);
+        table.padTop(40);
+        table.add(titleLabel).padBottom(200);
         table.row();
-        table.add(startButton).padBottom(30);
+        table.add(startButton).padBottom(60);
         table.row();
-        table.add(optionsButton).padBottom(30);
+        table.add(optionsButton).padBottom(60);
         table.row();
-        table.add(quitButton).padBottom(30);
+        table.add(quitButton).padBottom(60);
 
 
         stageMS.addActor(table);
