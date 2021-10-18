@@ -18,7 +18,7 @@ public class MyGdxGame extends Game {
 	private MenuScreen menuScreen;
 	private PlayScreen playScreen;
 	private EndScreen endScreen;
-
+	//variabili per lo switch case dei vari screen
 	public final static int MENU = 0;
 	public final static int PREFERENCES = 1;
 	public final static int APPLICATION = 2;
@@ -42,6 +42,7 @@ public class MyGdxGame extends Game {
 		super.render();
 	}
 
+	//metodo per switchare gli schermi
 	public void changeScreen(int screen){
 		switch(screen){
 			case MENU:

@@ -85,7 +85,7 @@ public class  PlayScreen implements Screen {
     public void handleInput(float dt){
         if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             paused = true;
-            //game.changeScreen(MyGdxGame.MENU);
+            game.changeScreen(MyGdxGame.MENU);
         }
     }
 

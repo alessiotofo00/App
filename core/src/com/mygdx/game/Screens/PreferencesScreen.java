@@ -38,7 +38,7 @@ public class PreferencesScreen implements Screen {
         this.game = game;
 
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
-        viewport = new FitViewport(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
+        viewport = new FitViewport((MyGdxGame.V_WIDTH)/2, MyGdxGame.V_HEIGHT-256, new OrthographicCamera());
         stage = new Stage(viewport);
 
         table = new Table();
@@ -79,15 +79,15 @@ public class PreferencesScreen implements Screen {
         musicOnOffLabel = new Label( "Music", skin );
         soundOnOffLabel = new Label( "Sounds", skin );
 
-        table.add(titleLabel).padTop(100).padBottom(100);
+        table.add(titleLabel).padBottom(200);
         table.row();
-        table.add(musicOnOffLabel).padBottom(30);
-        table.add(musicCheckBox).padBottom(30);
+        table.add(musicOnOffLabel).padBottom(60);
+        table.add(musicCheckBox).padBottom(60);
         table.row();
-        table.add(soundOnOffLabel).padBottom(50);
-        table.add(soundsCheckBox).padBottom(50);
+        table.add(soundOnOffLabel).padBottom(60);
+        table.add(soundsCheckBox).padBottom(60);
         table.row();
-        table.add(backButton).padBottom(30);
+        table.add(backButton).padTop(120);
 
         stage.addActor(table);
 

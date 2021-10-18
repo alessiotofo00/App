@@ -24,6 +24,7 @@ public class MenuScreen implements Screen, InputProcessor {
 
     private MyGdxGame game;
 
+    //palcoscenico su cui vanno in atto gli attori aggiunti(es. table)
     private Stage stageMS;
     private Skin skin;
 
@@ -36,7 +37,6 @@ public class MenuScreen implements Screen, InputProcessor {
 
     private Label titleLabel;
 
-    private SpriteBatch batch;
     private Sprite sprite;
 
     public MenuScreen(final MyGdxGame game){
@@ -94,12 +94,9 @@ public class MenuScreen implements Screen, InputProcessor {
 
         stageMS.addActor(table);
 
-        batch = new SpriteBatch();
         sprite = new Sprite(new Texture(Gdx.files.internal("dragon-menu.jpg")));
         sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        InputMultiplexer im = new InputMultiplexer(stageMS, this);
-        Gdx.input.setInputProcessor(im);
     }
 
     @Override
@@ -142,18 +139,19 @@ public class MenuScreen implements Screen, InputProcessor {
         return false;
     }
 
+    //riceve eventi input da tastiera e mouse
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(stageMS);
+       Gdx.input.setInputProcessor(stageMS);
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        batch.begin();
-        sprite.draw(batch);
-        batch.end();
+        game.batch.begin();
+        sprite.draw(game.batch);
+        game.batch.end();
 
         stageMS.act(Gdx.graphics.getDeltaTime());
         stageMS.draw();
