@@ -25,6 +25,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
+import com.mygdx.game.Sprites.Player;
 import com.mygdx.game.Tools.B2WorldCreator;
 
 public class  PlayScreen implements Screen {
@@ -48,7 +49,7 @@ public class  PlayScreen implements Screen {
     private World world;
     private Box2DDebugRenderer b2dr;
     private B2WorldCreator creator;
-
+    private Player player;
     //sprite di prova per i cuori
     private Sprite hearts;
 
@@ -70,10 +71,10 @@ public class  PlayScreen implements Screen {
         //divido quindi per 2 h e l
         gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
-        world = new World(new Vector2(0, -10), true);
+        world = new World(new Vector2(0, -10), true); //il -10 indica la gravità nel mondo di gioco
         b2dr = new Box2DDebugRenderer();
         creator = new B2WorldCreator(this);
-
+        player = new Player(this);
     }
 
     @Override
@@ -83,16 +84,32 @@ public class  PlayScreen implements Screen {
 
     //method useful to catch the keyboard inputs
     public void handleInput(float dt){
+        //tasto per la pausa
         if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             paused = true;
             game.changeScreen(MyGdxGame.MENU);
         }
+        //tasti per il movimento
+        if(Gdx.input.isKeyJustPressed(Input.Keys.W))
+            player.b2body.applyLinearImpulse(new Vector2(0, 5f), player.b2body.getWorldCenter(), true);
+
+        if(Gdx.input.isKeyPressed(Input.Keys.D) && player.b2body.getLinearVelocity().x <= 2)
+            player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
+
+        if(Gdx.input.isKeyPressed(Input.Keys.A) && player.b2body.getLinearVelocity().x >= -2)
+            player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
     }
 
     //we will call this method in our render method
     public void update(float dt) {
         handleInput(dt);
 
+        world.step(1/60f, 6, 2);
+        //aggiorno il player
+        player.update(dt);
+        //gamecam che segue il player
+        gamecam.position.x = player.b2body.getPosition().x;
+        //aggiorno la gamecam
         gamecam.update();
         renderer.setView(gamecam);
     }
