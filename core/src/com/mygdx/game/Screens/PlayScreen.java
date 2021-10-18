@@ -29,25 +29,25 @@ import com.mygdx.game.Tools.B2WorldCreator;
 
 public class  PlayScreen implements Screen {
 
-    private MyGdxGame game;
+    private final MyGdxGame game;
 
-    private Skin skin;
+    private final Skin skin;
 
-    private OrthographicCamera gamecam;
-    private Viewport gamePort;
+    private final OrthographicCamera gamecam;
+    private final Viewport gamePort;
 
-    private Hud hud;
+    private final Hud hud;
     //map declarations
-    private TmxMapLoader mapLoader;
-    private TiledMap map;
-    private OrthogonalTiledMapRenderer renderer;
+    private final TmxMapLoader mapLoader;
+    private final TiledMap map;
+    private final OrthogonalTiledMapRenderer renderer;
     //boolean per lo stato di gioco(vedi metodo render)
     boolean paused;
 
     //variabili per la creazione del mondo di gioco
-    private World world;
-    private Box2DDebugRenderer b2dr;
-    private B2WorldCreator creator;
+    private final World world;
+    private final Box2DDebugRenderer b2dr;
+    private final B2WorldCreator creator;
 
     //sprite di prova per i cuori
     private Sprite hearts;

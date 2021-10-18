@@ -1,13 +1,13 @@
 package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+//import com.badlogic.gdx.scenes.scene2d.Stage;
+//import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.mygdx.game.MyGdxGame;
 
 public class LoadingScreen implements Screen {
-
-    private MyGdxGame game;
+ //cambiato in "final"
+    private final MyGdxGame game;
 
     public LoadingScreen(MyGdxGame game){
         this.game = game;

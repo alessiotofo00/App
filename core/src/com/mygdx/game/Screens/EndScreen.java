@@ -5,7 +5,7 @@ import com.mygdx.game.MyGdxGame;
 
 public class EndScreen implements Screen {
 
-    private MyGdxGame game;
+    private final MyGdxGame game;
 
     public EndScreen(MyGdxGame game){
         this.game = game;
