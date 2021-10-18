@@ -47,7 +47,7 @@ public class  PlayScreen implements Screen {
     //variabili per la creazione del mondo di gioco
     private final World world;
     private final Box2DDebugRenderer b2dr;
-    private final B2WorldCreator creator;
+    private B2WorldCreator creator;
 
     //sprite di prova per i cuori
     private Sprite hearts;
