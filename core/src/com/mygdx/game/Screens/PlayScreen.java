@@ -30,26 +30,28 @@ import com.mygdx.game.Tools.B2WorldCreator;
 
 public class  PlayScreen implements Screen {
 
-    private MyGdxGame game;
+    private final MyGdxGame game;
 
-    private Skin skin;
+    private final Skin skin;
 
-    private OrthographicCamera gamecam;
-    private Viewport gamePort;
+    private final OrthographicCamera gamecam;
+    private final Viewport gamePort;
 
-    private Hud hud;
+    private final Hud hud;
     //map declarations
-    private TmxMapLoader mapLoader;
-    private TiledMap map;
-    private OrthogonalTiledMapRenderer renderer;
+    private final TmxMapLoader mapLoader;
+    private final TiledMap map;
+    private final OrthogonalTiledMapRenderer renderer;
+    //player declaration
+    private Player player;
     //boolean per lo stato di gioco(vedi metodo render)
     boolean paused;
 
     //variabili per la creazione del mondo di gioco
-    private World world;
-    private Box2DDebugRenderer b2dr;
-    private B2WorldCreator creator;
-    private Player player;
+    private final World world;
+    private final Box2DDebugRenderer b2dr;
+    private final B2WorldCreator creator;
+
     //sprite di prova per i cuori
     private Sprite hearts;
 
@@ -65,7 +67,7 @@ public class  PlayScreen implements Screen {
         hud = new Hud(game.batch);
 
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("Livello1.tmx");
+        map = mapLoader.load("Hell_newcompression.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / MyGdxGame.PPM);
         //gamecam.position necessario per non centrare in posizione 0.0 (il centro della mappa, visto come assi cartesiani)
         //divido quindi per 2 h e l
@@ -75,6 +77,7 @@ public class  PlayScreen implements Screen {
         b2dr = new Box2DDebugRenderer();
         creator = new B2WorldCreator(this);
         player = new Player(this);
+
     }
 
     @Override

@@ -4,41 +4,44 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+//import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Align;
+//import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+//import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGdxGame;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import static com.mygdx.game.MyGdxGame.V_WIDTH;
+
+//import javax.swing.event.ChangeEvent;
+//import javax.swing.event.ChangeListener;
 
 public class PreferencesScreen implements Screen {
 
-    private MyGdxGame game;
+    private final MyGdxGame game;
 
-    private Stage stage;
-    private Skin skin;
+    private final Stage stage;
+    private final Skin skin;
 
-    private FitViewport viewport;
+    private final FitViewport viewport;
 
-    private Table table;
-    private Label titleLabel;
-    private Label musicOnOffLabel;
-    private Label soundOnOffLabel;
+    private final Table table;
+    private final Label titleLabel;
+    private final Label musicOnOffLabel;
+    private final Label soundOnOffLabel;
 
-    private SpriteBatch batch;
+    private final SpriteBatch batch;
 
     public PreferencesScreen(final MyGdxGame game){
 
         this.game = game;
-
+        //variabile w per evitare errore di divisione "integer division in floating-point"
+int w=V_WIDTH/2;
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
-        viewport = new FitViewport((MyGdxGame.V_WIDTH)/2, MyGdxGame.V_HEIGHT-256, new OrthographicCamera());
+        viewport = new FitViewport(w, MyGdxGame.V_HEIGHT-256, new OrthographicCamera());
         stage = new Stage(viewport);
 
         table = new Table();
@@ -53,7 +56,7 @@ public class PreferencesScreen implements Screen {
             }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 return true;
-            };
+            }
         });
         final CheckBox soundsCheckBox = new CheckBox(null, skin);
         soundsCheckBox.setChecked(true);
@@ -63,7 +66,7 @@ public class PreferencesScreen implements Screen {
             }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 return true;
-            };
+            }
         });
 
         // return to main screen button

@@ -1,48 +1,54 @@
 package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
+//import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+//import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+//import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Align;
+//import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+//import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+//import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGdxGame;
 
-public class MenuScreen implements Screen, InputProcessor {
+import static com.mygdx.game.MyGdxGame.V_WIDTH;
 
-    private MyGdxGame game;
+public class MenuScreen implements Screen, InputProcessor {
+ //aggiunto final per evitare errori e warning
+    //final: è un modifier che si mette su una classe per evitare che sia ereditata/modificata. Significato praticamente letterale,
+    //si usa per classi "finali",che non si possono estendere(extends) o modificare.
+    private final MyGdxGame game;
 
     //palcoscenico su cui vanno in atto gli attori aggiunti(es. table)
-    private Stage stageMS;
-    private Skin skin;
+    private final Stage stageMS;
+    private final Skin skin;
 
-    private FitViewport viewport;
+    private final FitViewport viewport;
 
-    private Table table;
-    private TextButton startButton;
-    private TextButton quitButton;
-    private TextButton optionsButton;
+    private final Table table;
+    private final TextButton startButton;
+    private final TextButton quitButton;
+    private final TextButton optionsButton;
 
-    private Label titleLabel;
+    private final Label titleLabel;
 
-    private Sprite sprite;
+    private final Sprite sprite;
 
     public MenuScreen(final MyGdxGame game){
         this.game = game;
+        //w->variabile creata per evitare errore in fase di commit
+        int w=V_WIDTH/2;
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
-        viewport = new FitViewport((MyGdxGame.V_WIDTH)/2, MyGdxGame.V_HEIGHT-256, new OrthographicCamera());
+        viewport = new FitViewport(w, MyGdxGame.V_HEIGHT-256, new OrthographicCamera());
         stageMS = new Stage(viewport);
 
         table = new Table();
