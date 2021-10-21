@@ -1,0 +1,40 @@
+
+RedKnight.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+knight 3 improved slash animation
+  rotate: false
+  xy: 1, 45
+  size: 800, 80
+  orig: 800, 80
+  offset: 0, 0
+  index: -1
+knight death animation
+  rotate: false
+  xy: 1, 1
+  size: 378, 42
+  orig: 378, 42
+  offset: 0, 0
+  index: -1
+knight walk animation
+  rotate: false
+  xy: 381, 1
+  size: 336, 42
+  orig: 336, 42
+  offset: 0, 0
+  index: -1
+knight 3 idle
+  rotate: false
+  xy: 803, 83
+  size: 168, 42
+  orig: 168, 42
+  offset: 0, 0
+  index: -1
+knight 3 block
+  rotate: false
+  xy: 719, 1
+  size: 294, 42
+  orig: 294, 42
+  offset: 0, 0
+  index: -1

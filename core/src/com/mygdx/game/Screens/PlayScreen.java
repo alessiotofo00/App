@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -31,6 +32,7 @@ import com.mygdx.game.Tools.B2WorldCreator;
 public class  PlayScreen implements Screen {
 
     private final MyGdxGame game;
+    private TextureAtlas atlas;
 
     private final Skin skin;
 
@@ -57,6 +59,7 @@ public class  PlayScreen implements Screen {
 
     public PlayScreen(final MyGdxGame game){
 
+        atlas = new TextureAtlas("RedKnight.pack");
         this.game = game;
         this.skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
 
@@ -76,10 +79,13 @@ public class  PlayScreen implements Screen {
         world = new World(new Vector2(0, -10), true); //il -10 indica la gravità nel mondo di gioco
         b2dr = new Box2DDebugRenderer();
         creator = new B2WorldCreator(this);
-        player = new Player(this);
+        player = new Player(world, this);
 
     }
 
+    public TextureAtlas getAtlas(){
+        return atlas;
+    }
     @Override
     public void show() {
         // TODO Auto-generated method stub
@@ -133,13 +139,14 @@ public class  PlayScreen implements Screen {
         b2dr.render(world, gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
-        hud.stage.draw();
+        //hud.stage.draw();
         game.batch.begin();
             //hearts.draw(game.batch);
             if(paused){
                 Sprite sprite = new Sprite(new Texture(Gdx.files.internal("pause2.png")));
                 sprite.draw(game.batch);
             }
+            player.draw(game.batch);
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
