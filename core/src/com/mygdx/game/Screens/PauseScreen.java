@@ -40,7 +40,7 @@ public class PauseScreen implements Screen {
         //w->variabile creata per evitare errore in fase di commit
         int w=V_WIDTH/2;
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
-        viewport = new FitViewport(w, MyGdxGame.V_HEIGHT-256, new OrthographicCamera());
+        viewport = new FitViewport(w*2, MyGdxGame.V_HEIGHT, new OrthographicCamera());
         stageMS = new Stage(viewport);
 
         table = new Table();
