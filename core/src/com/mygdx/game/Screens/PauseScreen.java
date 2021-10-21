@@ -76,14 +76,14 @@ public class PauseScreen implements Screen {
             }
         });
 
-        table.padTop(40);
-        table.add(pauseLabel).padBottom(200);
+        table.padTop(20);
+        table.add(pauseLabel).padBottom(150);
         table.row();
-        table.add(resumeButton).padBottom(60);
+        table.add(resumeButton).padBottom(40);
         table.row();
-        table.add(optionsButton).padBottom(60);
+        table.add(optionsButton).padBottom(40);
         table.row();
-        table.add(exitButton).padBottom(60);
+        table.add(exitButton).padBottom(40);
 
 
         stageMS.addActor(table);

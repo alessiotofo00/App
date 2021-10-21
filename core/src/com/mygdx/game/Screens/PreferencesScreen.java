@@ -85,13 +85,13 @@ int w=V_WIDTH/2;
         musicOnOffLabel = new Label( "Music", skin );
         soundOnOffLabel = new Label( "Sounds", skin );
 
-        table.add(titleLabel).padBottom(200);
+        table.add(titleLabel).padBottom(150);
         table.row();
-        table.add(musicOnOffLabel).padBottom(60);
-        table.add(musicCheckBox).padBottom(60);
+        table.add(musicOnOffLabel).padBottom(40);
+        table.add(musicCheckBox).padBottom(40);
         table.row();
-        table.add(soundOnOffLabel).padBottom(60);
-        table.add(soundsCheckBox).padBottom(60);
+        table.add(soundOnOffLabel).padBottom(40);
+        table.add(soundsCheckBox).padBottom(40);
         table.row();
         table.add(backButton).padTop(120);
 
