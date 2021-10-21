@@ -17,12 +17,16 @@ public class MyGdxGame extends Game {
 	private PreferencesScreen preferencesScreen;
 	private MenuScreen menuScreen;
 	private PlayScreen playScreen;
-	private EndScreen endScreen;
+	private PauseScreen pauseScreen;
 	//variabili per lo switch case dei vari screen
 	public final static int MENU = 0;
 	public final static int PREFERENCES = 1;
 	public final static int APPLICATION = 2;
-	public final static int ENDGAME = 3;
+	public final static int PAUSE = 3;
+	//salvo lo schermo precedente a quello attuale e lo schermo attuale
+	//(serve al PreferencesScreen per distinguere se è stato chiamato dal MenuScreen o dal PauseScreen)
+	public static int previousScreen;
+	public static int currentScreen;
 
 	@Override
 	public void create () {
@@ -46,20 +50,24 @@ public class MyGdxGame extends Game {
 	public void changeScreen(int screen){
 		switch(screen){
 			case MENU:
+				currentScreen = MENU;
 				if(menuScreen == null) menuScreen = new MenuScreen(this);
 				this.setScreen(menuScreen);
 				break;
 			case PREFERENCES:
+				currentScreen = PREFERENCES;
 				if(preferencesScreen == null) preferencesScreen = new PreferencesScreen(this);
 				this.setScreen(preferencesScreen);
 				break;
 			case APPLICATION:
+				currentScreen = APPLICATION;
 				if(playScreen == null) playScreen = new PlayScreen(this);
 				this.setScreen(playScreen);
 				break;
-			case ENDGAME:
-				if(endScreen == null) endScreen = new EndScreen(this);
-				this.setScreen(endScreen);
+			case PAUSE:
+				currentScreen = PAUSE;
+				if(pauseScreen == null) pauseScreen = new PauseScreen(this);
+				this.setScreen(pauseScreen);
 				break;
 		}
 	}

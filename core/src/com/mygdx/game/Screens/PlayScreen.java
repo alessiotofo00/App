@@ -47,7 +47,7 @@ public class  PlayScreen implements Screen {
     //player declaration
     private Player player;
     //boolean per lo stato di gioco(vedi metodo render)
-    boolean paused;
+    static boolean paused;
 
     //variabili per la creazione del mondo di gioco
     private final World world;
@@ -96,7 +96,7 @@ public class  PlayScreen implements Screen {
         //tasto per la pausa
         if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             paused = true;
-            game.changeScreen(MyGdxGame.MENU);
+            game.changeScreen(MyGdxGame.PAUSE);
         }
         //tasti per il movimento
         if(Gdx.input.isKeyJustPressed(Input.Keys.W))
@@ -128,8 +128,7 @@ public class  PlayScreen implements Screen {
         // TODO Auto-generated method stub
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         if(paused){
-            if(Gdx.input.isKeyJustPressed(Input.Keys.P))
-                paused = false;
+            Gdx.app.log("paused", "yes");
         }
         else{
             update(delta);

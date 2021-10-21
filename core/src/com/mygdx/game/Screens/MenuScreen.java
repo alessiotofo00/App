@@ -73,6 +73,7 @@ public class MenuScreen implements Screen, InputProcessor {
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("ClickedOptions", "yes");
                 game.changeScreen(MyGdxGame.PREFERENCES);
+                MyGdxGame.previousScreen = MyGdxGame.MENU;
             }
         });
         quitButton.addListener(new ClickListener(){

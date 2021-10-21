@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 //import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGdxGame;
 
-import static com.mygdx.game.MyGdxGame.V_WIDTH;
+import static com.mygdx.game.MyGdxGame.*;
 
 //import javax.swing.event.ChangeEvent;
 //import javax.swing.event.ChangeListener;
@@ -74,7 +74,10 @@ int w=V_WIDTH/2;
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.changeScreen(MyGdxGame.MENU);
+                if(MyGdxGame.previousScreen == MENU)
+                    game.changeScreen(MyGdxGame.MENU);
+                if(MyGdxGame.previousScreen == PAUSE)
+                    game.changeScreen(MyGdxGame.PAUSE);
             }
         });
 
