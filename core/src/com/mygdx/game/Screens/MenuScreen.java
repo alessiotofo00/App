@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 //import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGdxGame;
 
+import static com.mygdx.game.MyGdxGame.MENU;
 import static com.mygdx.game.MyGdxGame.V_WIDTH;
 
 public class MenuScreen implements Screen, InputProcessor {
@@ -65,6 +66,8 @@ public class MenuScreen implements Screen, InputProcessor {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("ClickedNewGame", "yes");
+                MyGdxGame.previousScreen = MyGdxGame.MENU;
+                PlayScreen.paused = false;
                 game.changeScreen(MyGdxGame.APPLICATION);
             }
         });
@@ -73,7 +76,7 @@ public class MenuScreen implements Screen, InputProcessor {
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("ClickedOptions", "yes");
                 game.changeScreen(MyGdxGame.PREFERENCES);
-                MyGdxGame.previousScreen = MyGdxGame.MENU;
+                MyGdxGame.previousScreen = MENU;
             }
         });
         quitButton.addListener(new ClickListener(){
