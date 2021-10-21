@@ -51,7 +51,7 @@ public class MenuScreen implements Screen, InputProcessor {
         //w->variabile creata per evitare errore in fase di commit
         int w=V_WIDTH/2;
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
-        viewport = new FitViewport(w, MyGdxGame.V_HEIGHT-256, new OrthographicCamera());
+        viewport = new FitViewport(w * 2, MyGdxGame.V_HEIGHT, new OrthographicCamera());
         stageMS = new Stage(viewport);
 
         table = new Table();
@@ -94,14 +94,14 @@ public class MenuScreen implements Screen, InputProcessor {
         float scale = unit / startButton.getHeight();
         float width = startButton.getWidth() * scale;
        */
-        table.padTop(40);
-        table.add(titleLabel).padBottom(200);
+        table.padTop(20);
+        table.add(titleLabel).padBottom(150);
         table.row();
-        table.add(startButton).padBottom(60);
+        table.add(startButton).padBottom(40);
         table.row();
-        table.add(optionsButton).padBottom(60);
+        table.add(optionsButton).padBottom(40);
         table.row();
-        table.add(quitButton).padBottom(60);
+        table.add(quitButton).padBottom(40);
 
 
         stageMS.addActor(table);
