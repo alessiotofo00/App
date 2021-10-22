@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
 
@@ -40,6 +41,19 @@ public class Player extends Sprite {
         previousState = State.STANDING;
         stateTimer = 0;
         runningRight = true;
+        //array temporaneo per salvare i frame dell'animazione corrente
+        Array<TextureRegion> frames = new Array<TextureRegion>();
+        //animazione dello stato RUNNING
+        for(int i = 14; i < 18; i++){
+            frames.add(new TextureRegion(getTexture(), i * 43, 5, 32, 35));
+        }
+        run = new Animation<TextureRegion>(0.1f, frames);
+        frames.clear();
+        //animazione dello stato JUMPING
+        for(int i = 12; i < 14; i++){
+            frames.add(new TextureRegion(getTexture(), i * 43, 5, 32, 35));
+        }
+        jump = new Animation<TextureRegion>(0.1f, frames);
 
         //chiamo la funzione definePlayer() che definisce tutte le caratteristiche del corpo del Player
         definePlayer();
