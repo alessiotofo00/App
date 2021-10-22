@@ -23,6 +23,7 @@ public class Player extends Sprite {
     private TextureRegion stand;
     private Animation<TextureRegion> run;
     private Animation<TextureRegion> jump;
+    private TextureRegion fall;
     //timer che indica il tempo speso in un certo stato (RUNNING,JUMPING, etc.),
     //rappresentato dalla corrispondente animazione(vedi il suo utilizzo come parametro nello switch del metodo getFrame)
     private float stateTimer;
@@ -54,7 +55,9 @@ public class Player extends Sprite {
             frames.add(new TextureRegion(getTexture(), i * 43, 5, 32, 35));
         }
         jump = new Animation<TextureRegion>(0.1f, frames);
-
+        frames.clear();
+        //frame dello stato FALLING
+        fall = new TextureRegion(getTexture(),12 * 43, 5, 32, 35);
         //chiamo la funzione definePlayer() che definisce tutte le caratteristiche del corpo del Player
         definePlayer();
 
@@ -85,6 +88,8 @@ public class Player extends Sprite {
                                                                   //l'animazione va ripetuta(es. RUNNING)
                 break;
             case FALLING:
+                region = fall;
+                break;
             case STANDING:
             default:
                 region = stand;
@@ -109,7 +114,7 @@ public class Player extends Sprite {
 
     //metodo che seleziona lo stato corrente in base alla velocita del Player
     public State getState(){
-        if(b2body.getLinearVelocity().y > 0 || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
+        if(b2body.getLinearVelocity().y > 0)
             return State.JUMPING;
         else if(b2body.getLinearVelocity().y < 0)
             return State.FALLING;
