@@ -88,8 +88,7 @@ public class  PlayScreen implements Screen {
     }
     @Override
     public void show() {
-        //batch=new SpriteBatch();
-        //sfondo
+
         // TODO Auto-generated method stub
     }
 
@@ -128,7 +127,7 @@ public class  PlayScreen implements Screen {
     @Override
     public void render(float delta) {
         // TODO Auto-generated method stub
-        //da cancellare, messo in multi
+
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         if(paused){
             Gdx.app.log("paused", "yes");
@@ -193,11 +192,5 @@ public class  PlayScreen implements Screen {
         b2dr.dispose();
         hud.dispose();
     }
-    // public void crete(){
-    //MenuScreen=new MenuScreen(this);
-    //backtomenu();
-    //public void backToMenu()
-    //{
-        //setScreen(menuScreen);
-    //}
+
 }

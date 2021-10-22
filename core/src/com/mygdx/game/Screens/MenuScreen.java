@@ -45,11 +45,11 @@ public class MenuScreen implements Screen, InputProcessor {
     private final Label titleLabel;
 
     private final Sprite sprite;
-//public MenuScreen(MultipleScreen game)
+
     public MenuScreen(final MyGdxGame game){
         this.game = game;
         //w->variabile creata per evitare errore in fase di commit
-        int w=V_WIDTH/2;
+        int w= V_WIDTH/2;
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
         viewport = new FitViewport(w * 2, MyGdxGame.V_HEIGHT, new OrthographicCamera());
         stageMS = new Stage(viewport);
@@ -156,14 +156,11 @@ public class MenuScreen implements Screen, InputProcessor {
     public void show() {
        Gdx.input.setInputProcessor(stageMS);
     }
-//private float f=0;
+
     @Override
     public void render(float delta) {
-        //messo in MULTISCREEN
+
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-//si può aggiungere qui il livello da cui si vuole partire impostando
-        //f+=delta;
-        //gam.changeScreen(new GameScreen(game);
         game.batch.begin();
         sprite.draw(game.batch);
         game.batch.end();
