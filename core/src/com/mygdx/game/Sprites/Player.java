@@ -3,6 +3,7 @@ package com.mygdx.game.Sprites;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
@@ -136,6 +137,13 @@ public class Player extends Sprite {
         fdef.shape = shape;
         b2body.createFixture(fdef);
 
+        //prova di come costruire i contorni di un oggetto davanti al personaggio, si potrebbe implementare un arma tipo lancia
+        //nel caso non si riuscisse a creare uno swing con la spada: carica->contatto->danno, tipo cavalliere
+        EdgeShape wepon=new EdgeShape();
+        wepon.set(new Vector2(8/MyGdxGame.PPM,-2/MyGdxGame.PPM),new Vector2(18/MyGdxGame.PPM,8/MyGdxGame.PPM));
+        fdef.shape=wepon;
+        fdef.isSensor=true;
+        b2body.createFixture(fdef).setUserData("wepon");
     }
 }
 
