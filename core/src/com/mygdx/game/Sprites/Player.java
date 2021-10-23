@@ -1,5 +1,7 @@
 package com.mygdx.game.Sprites;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -29,14 +31,18 @@ public class Player extends Sprite {
     private float stateTimer;
     //boolean utile a capire il verso in cui corre il Player e, di conseguenza, ad orientare la sua sprite
     private boolean runningRight;
+    //int per tenere conto del numero di colpi ricevuti dal Player
+    public int hits;
 
     public Player(World world, PlayScreen screen){
 
         //seleziono la regione di texture da cui partire per andare a costruire le varie animazioni
         //la stringa inserita come parametro è presente nel file 'RedKnight.pack' e ce n'è una per ogni regione
-        super(screen.getAtlas().findRegion("knight death animation"));
+        super(screen.getKnightAtlas().findRegion("knight death animation"));
         //setto il mondo di gioco del PlayScreen
         this.world = screen.getWorld();
+
+        hits = 0;
 
         currentState = State.STANDING;
         previousState = State.STANDING;
@@ -46,6 +52,8 @@ public class Player extends Sprite {
         Array<TextureRegion> frames = new Array<TextureRegion>();
         //animazione dello stato RUNNING
         for(int i = 14; i < 18; i++){
+            //le coordinate x e y le prendo dal file RedKnight.png
+            //se lo apri da IntelliJ e usi lo strumento show grid si crea una vera e propria griglia di pixel
             frames.add(new TextureRegion(getTexture(), i * 43, 5, 32, 35));
         }
         run = new Animation<TextureRegion>(0.1f, frames);
@@ -121,6 +129,13 @@ public class Player extends Sprite {
         else if(b2body.getLinearVelocity().x != 0)
             return State.RUNNING;
         else return State.STANDING;
+    }
+
+    public void hitDetect(){
+        //test di prova per il funzionamento della HealthBar
+        if(Gdx.input.isKeyJustPressed(Input.Keys.H)){
+            hits++;
+        }
     }
 
     public void definePlayer(){

@@ -26,13 +26,15 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
+import com.mygdx.game.Sprites.HealthBar;
 import com.mygdx.game.Sprites.Player;
 import com.mygdx.game.Tools.B2WorldCreator;
 
 public class  PlayScreen implements Screen {
 
     private final MyGdxGame game;
-    private TextureAtlas atlas;
+    private TextureAtlas knightAtlas;
+    private TextureAtlas healthBarAtlas;
 
     private final Skin skin;
 
@@ -49,17 +51,17 @@ public class  PlayScreen implements Screen {
     //boolean per lo stato di gioco(vedi metodo render)
     static boolean paused;
 
+    private HealthBar healthBar;
+
     //variabili per la creazione del mondo di gioco
-    private final World world;
+    public World world;
     private final Box2DDebugRenderer b2dr;
     private final B2WorldCreator creator;
 
-    //sprite di prova per i cuori
-    private Sprite hearts;
-//anche qua PlayScreen (MultipleScreen game){}
     public PlayScreen(final MyGdxGame game){
 
-        atlas = new TextureAtlas("RedKnight.pack");
+        knightAtlas = new TextureAtlas("RedKnight.pack");
+        healthBarAtlas = new TextureAtlas("HealthBar.pack");
         this.game = game;
         this.skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
 
@@ -67,7 +69,7 @@ public class  PlayScreen implements Screen {
         gamePort = new FitViewport(MyGdxGame.V_WIDTH / MyGdxGame.PPM,
                 MyGdxGame.V_HEIGHT / MyGdxGame.PPM,
                 gamecam);
-        hud = new Hud(game.batch);
+        hud = new Hud(game.batch, this);
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("mappa16x16.tmx");
@@ -80,15 +82,22 @@ public class  PlayScreen implements Screen {
         b2dr = new Box2DDebugRenderer();
         creator = new B2WorldCreator(this);
         player = new Player(world, this);
+        healthBar = new HealthBar(world, this);
 
     }
 
-    public TextureAtlas getAtlas(){
-        return atlas;
+    public TextureAtlas getKnightAtlas(){
+        return knightAtlas;
     }
+
+    public TextureAtlas getHealthBarAtlas(){
+        return healthBarAtlas;
+    }
+
+    public Player getPlayer() { return player;}
+
     @Override
     public void show() {
-
         // TODO Auto-generated method stub
     }
 
@@ -113,7 +122,7 @@ public class  PlayScreen implements Screen {
     //we will call this method in our render method
     public void update(float dt) {
         handleInput(dt);
-
+        healthBar.update(dt);
         world.step(1/60f, 6, 2);
         //aggiorno il player
         player.update(dt);
@@ -140,14 +149,13 @@ public class  PlayScreen implements Screen {
         b2dr.render(world, gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
-        //hud.stage.draw();
         game.batch.begin();
-            //hearts.draw(game.batch);
             if(paused){
                 Sprite sprite = new Sprite(new Texture(Gdx.files.internal("pause2.png")));
                 sprite.draw(game.batch);
             }
             player.draw(game.batch);
+            healthBar.draw(game.batch);
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
