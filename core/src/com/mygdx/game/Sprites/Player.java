@@ -14,7 +14,7 @@ import com.mygdx.game.Screens.PlayScreen;
 public class Player extends Sprite {
 
     //stati in cui si può trovare il Player. Utili per distinguere le animazioni da assegnare
-    public enum State { FALLING, JUMPING, STANDING, RUNNING}
+    public enum State { FALLING, JUMPING, STANDING, RUNNING, HIT}
     public State currentState;
     public State previousState;
 
