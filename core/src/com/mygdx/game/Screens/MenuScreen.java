@@ -51,7 +51,7 @@ public class MenuScreen implements Screen, InputProcessor {
         //w->variabile creata per evitare errore in fase di commit
         int w= V_WIDTH/2;
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
-        viewport = new FitViewport(w * 2, MyGdxGame.V_HEIGHT, new OrthographicCamera());
+        viewport = new FitViewport(w*2, MyGdxGame.V_HEIGHT, new OrthographicCamera());
         stageMS = new Stage(viewport);
 
         table = new Table();
@@ -106,7 +106,7 @@ public class MenuScreen implements Screen, InputProcessor {
 
         stageMS.addActor(table);
 
-        sprite = new Sprite(new Texture(Gdx.files.internal("dragon-menu.jpg")));
+        sprite = new Sprite(new Texture(Gdx.files.internal("inferno.jpg")));
         sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
     }
@@ -171,7 +171,9 @@ public class MenuScreen implements Screen, InputProcessor {
 
     @Override
     public void resize(int width, int height) {
-
+        //nel caso si riscontrasse il problema del cambio di dimensioni menu-gioco-menu
+        //questo dovrebbe ricreare da zero le dimensioni. Il booleano serve per centrare il menu nello schermo
+        // stageMS.getViewport().update(width, height,true);
     }
 
     @Override
