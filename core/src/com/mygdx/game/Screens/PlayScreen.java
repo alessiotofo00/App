@@ -78,7 +78,7 @@ public class  PlayScreen implements Screen {
         //divido quindi per 2 h e l
         gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
-        world = new World(new Vector2(0, -10), true); //il -10 indica la gravità nel mondo di gioco
+        world = new World(new Vector2(0, -13), true); //il -10 indica la gravità nel mondo di gioco
         b2dr = new Box2DDebugRenderer();
         creator = new B2WorldCreator(this);
         player = new Player(this);
@@ -111,14 +111,16 @@ public class  PlayScreen implements Screen {
             game.changeScreen(MyGdxGame.PAUSE);
         }
         //tasti per il movimento
-        if(Gdx.input.isKeyJustPressed(Input.Keys.W))
-            player.b2body.applyLinearImpulse(new Vector2(0, 5f), player.b2body.getWorldCenter(), true);
+        if(player.b2body.getLinearVelocity().y == 0) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.W))
+                player.b2body.applyLinearImpulse(new Vector2(0, 5f), player.b2body.getWorldCenter(), true);
+        }
 
         if(Gdx.input.isKeyPressed(Input.Keys.D) && player.b2body.getLinearVelocity().x <= 2)
-            player.b2body.applyLinearImpulse(new Vector2(0.2f, 0), player.b2body.getWorldCenter(), true);
+            player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
 
         if(Gdx.input.isKeyPressed(Input.Keys.A) && player.b2body.getLinearVelocity().x >= -2)
-            player.b2body.applyLinearImpulse(new Vector2(-0.2f, 0), player.b2body.getWorldCenter(), true);
+            player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
     }
 
     //we will call this method in our render method
