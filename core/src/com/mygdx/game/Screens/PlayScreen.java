@@ -165,7 +165,6 @@ public class  PlayScreen implements Screen {
 
         if(gameOver()){
             game.changeScreen(MyGdxGame.GAMEOVER);
-            dispose();
         }
     }
 

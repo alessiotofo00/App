@@ -14,23 +14,6 @@ import com.mygdx.game.Weapon.Weapon;
 
 public class Player extends Sprite {
 
-
-    public Weapon getCurrentWeapon() {
-        return CurrentWeapon;
-    }
-
-    public void setCurrentWeapon(Weapon currentWeapon) {
-        CurrentWeapon = currentWeapon;
-    }
-
-    public int getHits() {
-        return hits;
-    }
-
-    public void setHits(int hits) {
-        this.hits = hits;
-    }
-
     //stati in cui si può trovare il Player. Utili per distinguere le animazioni da assegnare
     public enum State { FALLING, JUMPING, STANDING, RUNNING, HIT, GAMEOVER}
     public State currentState;
@@ -180,6 +163,22 @@ public class Player extends Sprite {
     }
 
     public float getStateTimer(){ return stateTimer; }
+
+    public Weapon getCurrentWeapon() {
+        return CurrentWeapon;
+    }
+
+    public void setCurrentWeapon(Weapon currentWeapon) {
+        CurrentWeapon = currentWeapon;
+    }
+
+    public int getHits() {
+        return hits;
+    }
+
+    public void setHits(int hits) {
+        this.hits = hits;
+    }
 
     public void hitDetect(){
         //test di prova per il funzionamento della HealthBar

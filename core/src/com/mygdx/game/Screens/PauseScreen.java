@@ -69,6 +69,7 @@ public class PauseScreen implements Screen {
         exitButton.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("ClickedExit", "yes");
+                game.playScreen = new PlayScreen(game);
                 game.changeScreen(MyGdxGame.MENU);
             }
         });

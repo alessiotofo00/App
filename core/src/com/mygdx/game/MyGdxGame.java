@@ -13,11 +13,11 @@ public class MyGdxGame extends Game {
 
 	public SpriteBatch batch;
 
-	private PreferencesScreen preferencesScreen;
-	private MenuScreen menuScreen;
-	private PlayScreen playScreen;
-	private PauseScreen pauseScreen;
-	private GameOverScreen goScreen;
+	PreferencesScreen preferencesScreen;
+	MenuScreen menuScreen;
+	public PlayScreen playScreen;
+	PauseScreen pauseScreen;
+	GameOverScreen goScreen;
 	//variabili per lo switch case dei vari screen
 	public final static int MENU = 0;
 	public final static int PREFERENCES = 1;
