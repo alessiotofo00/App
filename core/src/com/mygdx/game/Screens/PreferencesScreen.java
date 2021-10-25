@@ -38,10 +38,9 @@ public class PreferencesScreen implements Screen {
     public PreferencesScreen(final MyGdxGame game){
 
         this.game = game;
-        //variabile w per evitare errore di divisione "integer division in floating-point"
-int w=V_WIDTH/2;
+
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
-        viewport = new FitViewport(w *2, MyGdxGame.V_HEIGHT, new OrthographicCamera());
+        viewport = new FitViewport(V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport);
 
         table = new Table();

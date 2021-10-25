@@ -81,7 +81,7 @@ public class  PlayScreen implements Screen {
         world = new World(new Vector2(0, -10), true); //il -10 indica la gravità nel mondo di gioco
         b2dr = new Box2DDebugRenderer();
         creator = new B2WorldCreator(this);
-        player = new Player(world, this);
+        player = new Player(this);
         healthBar = new HealthBar(world, this);
 
     }
@@ -95,6 +95,8 @@ public class  PlayScreen implements Screen {
     }
 
     public Player getPlayer() { return player;}
+
+    public MyGdxGame getGame() { return game;}
 
     @Override
     public void show() {
@@ -160,6 +162,18 @@ public class  PlayScreen implements Screen {
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
+
+        if(gameOver()){
+            game.changeScreen(MyGdxGame.GAMEOVER);
+            dispose();
+        }
+    }
+
+    public boolean gameOver(){
+        if(player.currentState == Player.State.GAMEOVER && player.getStateTimer() > 1.5){
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -8,7 +8,7 @@ public class B2ContactListener  implements ContactListener {
     private MyGdxGame game;
     @Override
     public void beginContact(Contact contact) { //comincia il contatto tra due corpi
-System.out.println("Contact");
+        System.out.println("Contact");
         Fixture fixA= contact.getFixtureA();
         Fixture fixB= contact.getFixtureB();
         System.out.println(fixA.getBody().getType()+" ha colpito "+ fixB.getBody().getType());

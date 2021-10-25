@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -21,9 +20,9 @@ public class PauseScreen implements Screen {
 
     private final MyGdxGame game;
 
-    private final Stage stageMS;
     private final Skin skin;
 
+    private final Stage stage;
     private final FitViewport viewport;
 
     private final Table table;
@@ -37,11 +36,9 @@ public class PauseScreen implements Screen {
 
         this.game = game;
 
-        //w->variabile creata per evitare errore in fase di commit
-        int w=V_WIDTH/2;
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
-        viewport = new FitViewport(w*2, MyGdxGame.V_HEIGHT, new OrthographicCamera());
-        stageMS = new Stage(viewport);
+        viewport = new FitViewport(V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
+        stage = new Stage(viewport);
 
         table = new Table();
         table.top(); //set the table on the top of the stage
@@ -86,13 +83,13 @@ public class PauseScreen implements Screen {
         table.add(exitButton).padBottom(40);
 
 
-        stageMS.addActor(table);
+        stage.addActor(table);
     }
 
     @Override
     public void show() {
         // TODO Auto-generated method stub
-        Gdx.input.setInputProcessor(stageMS);
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -103,8 +100,8 @@ public class PauseScreen implements Screen {
         game.batch.begin();
         game.batch.end();
 
-        stageMS.act(Gdx.graphics.getDeltaTime());
-        stageMS.draw();
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
     }
 
     @Override
@@ -130,6 +127,6 @@ public class PauseScreen implements Screen {
     @Override
     public void dispose() {
         // TODO Auto-generated method stub
-        stageMS.dispose();
+        stage.dispose();
     }
 }
