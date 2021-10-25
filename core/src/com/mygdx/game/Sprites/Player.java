@@ -26,6 +26,7 @@ public class Player extends Sprite {
     private TextureRegion stand;
     private Animation<TextureRegion> run;
     private Animation<TextureRegion> jump;
+    private Animation<TextureRegion> hit;
     private TextureRegion fall;
     //timer che indica il tempo speso in un certo stato (RUNNING,JUMPING, etc.),
     //rappresentato dalla corrispondente animazione(vedi il suo utilizzo come parametro nello switch del metodo getFrame)
@@ -55,23 +56,32 @@ public class Player extends Sprite {
         for(int i = 14; i < 18; i++){
             //le coordinate x e y le prendo dal file RedKnight.png
             //se lo apri da IntelliJ e usi lo strumento show grid si crea una vera e propria griglia di pixel
-            frames.add(new TextureRegion(getTexture(), i * 43, 5, 32, 35));
+            frames.add(new TextureRegion(getTexture(), i * 43, 5, 42, 42));
         }
         run = new Animation<TextureRegion>(0.1f, frames);
         frames.clear();
+
         //animazione dello stato JUMPING
         for(int i = 12; i < 14; i++){
-            frames.add(new TextureRegion(getTexture(), i * 43, 5, 32, 35));
+            frames.add(new TextureRegion(getTexture(), i * 43, 5, 42, 42));
         }
         jump = new Animation<TextureRegion>(0.1f, frames);
         frames.clear();
+
         //frame dello stato FALLING
-        fall = new TextureRegion(getTexture(),12 * 43, 5, 32, 35);
+        fall = new TextureRegion(getTexture(),12 * 43, 5, 42, 42);
+        frames.clear();
+
+        //animazione dello stato HIT
+        for(int i = 2; i < 6; i++){
+            frames.add(new TextureRegion(getTexture(), i * 79, 83, 55, 42));
+        }
+        hit = new Animation<TextureRegion>(0.1f, frames);
         //chiamo la funzione definePlayer() che definisce tutte le caratteristiche del corpo del Player
         definePlayer();
 
-        stand = new TextureRegion(getTexture(), 7, 7, 32, 35);
-        setBounds(0, 0, 32 / MyGdxGame.PPM, 35 / MyGdxGame.PPM);
+        stand = new TextureRegion(getTexture(), 7, 7, 42, 42);
+        setBounds(0, 0, 42 / MyGdxGame.PPM, 42 / MyGdxGame.PPM);
         setRegion(stand);
     }
 
@@ -99,6 +109,9 @@ public class Player extends Sprite {
             case FALLING:
                 region = fall;
                 break;
+            case HIT:
+                region = hit.getKeyFrame(stateTimer, true);
+                break;
             case STANDING:
             default:
                 region = stand;
@@ -123,7 +136,9 @@ public class Player extends Sprite {
 
     //metodo che seleziona lo stato corrente in base alla velocita del Player
     public State getState(){
-        if(b2body.getLinearVelocity().y > 0)
+        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT))
+                return State.HIT;
+        else if(b2body.getLinearVelocity().y > 0)
             return State.JUMPING;
         else if(b2body.getLinearVelocity().y < 0)
             return State.FALLING;
@@ -153,12 +168,12 @@ public class Player extends Sprite {
         b2body.createFixture(fdef);
 
         //prova di come costruire i contorni di un oggetto davanti al personaggio, si potrebbe implementare un arma tipo lancia
-        //nel caso non si riuscisse a creare uno swing con la spada: carica->contatto->danno, tipo cavalliere
-        EdgeShape wepon=new EdgeShape();
-        wepon.set(new Vector2(8/ MyGdxGame.PPM, -2 / MyGdxGame.PPM), new Vector2(20 / MyGdxGame.PPM, 10 / MyGdxGame.PPM));
-        fdef.shape=wepon;
-        fdef.isSensor=true;
-        b2body.createFixture(fdef).setUserData("wepon");
+        //nel caso non si riuscisse a creare uno swing con la spada: carica->contatto->danno, tipo cavaliere
+        EdgeShape weapon = new EdgeShape();
+        weapon.set(new Vector2(8/ MyGdxGame.PPM, -2 / MyGdxGame.PPM), new Vector2(20 / MyGdxGame.PPM, 10 / MyGdxGame.PPM));
+        fdef.shape = weapon;
+        fdef.isSensor = true;
+        b2body.createFixture(fdef).setUserData("weapon");
     }
 }
 
