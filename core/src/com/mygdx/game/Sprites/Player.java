@@ -56,7 +56,7 @@ public class Player extends Sprite {
     //int per tenere conto del numero di colpi ricevuti dal Player
     private int hits;
 
-    public Player(World world, PlayScreen screen){
+    public Player(PlayScreen screen){
 
         //seleziono la regione di texture da cui partire per andare a costruire le varie animazioni
         //la stringa inserita come parametro è presente nel file 'RedKnight.pack' e ce n'è una per ogni regione
@@ -178,6 +178,8 @@ public class Player extends Sprite {
             return State.GAMEOVER;
         else return State.STANDING;
     }
+
+    public float getStateTimer(){ return stateTimer; }
 
     public void hitDetect(){
         //test di prova per il funzionamento della HealthBar
