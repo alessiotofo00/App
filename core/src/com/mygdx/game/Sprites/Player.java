@@ -14,20 +14,21 @@ import com.mygdx.game.Screens.PlayScreen;
 public class Player extends Sprite {
 
     //stati in cui si può trovare il Player. Utili per distinguere le animazioni da assegnare
-    public enum State { FALLING, JUMPING, STANDING, RUNNING, HIT}
+    public enum State { FALLING, JUMPING, STANDING, RUNNING, HIT, GAMEOVER}
     public State currentState;
     public State previousState;
 
     public World world;
     public Body b2body;
 
-    //run e jump sono Animation di TextureRegion, in quanto serve piu di una TextureRegion per creare l'animazione
-    //del movimento e del salto. Per stand basta una sola TextureRegion (una sola immagine praticamente)
+    //run e jump(etc) sono Animation di TextureRegion, in quanto serve piu di una TextureRegion per creare l'animazione
+    //del movimento e del salto. Per stand/fall basta una sola TextureRegion (una sola immagine praticamente)
     private TextureRegion stand;
+    private TextureRegion fall;
     private Animation<TextureRegion> run;
     private Animation<TextureRegion> jump;
     private Animation<TextureRegion> hit;
-    private TextureRegion fall;
+    private Animation<TextureRegion> gameover;
     //timer che indica il tempo speso in un certo stato (RUNNING,JUMPING, etc.),
     //rappresentato dalla corrispondente animazione(vedi il suo utilizzo come parametro nello switch del metodo getFrame)
     private float stateTimer;
@@ -77,6 +78,13 @@ public class Player extends Sprite {
             frames.add(new TextureRegion(getTexture(), i * 79, 83, 55, 42));
         }
         hit = new Animation<TextureRegion>(0.1f, frames);
+        frames.clear();
+
+        //animazione dello stato GAMEOVER
+        for(int i = 1; i < 9; i++){
+            frames.add(new TextureRegion(getTexture(), i * 43, 5, 42, 42));
+        }
+        gameover = new Animation<TextureRegion>(0.1f, frames);
         //chiamo la funzione definePlayer() che definisce tutte le caratteristiche del corpo del Player
         definePlayer();
 
@@ -112,6 +120,9 @@ public class Player extends Sprite {
             case HIT:
                 region = hit.getKeyFrame(stateTimer, true);
                 break;
+            case GAMEOVER:
+                region = gameover.getKeyFrame(stateTimer);
+                break;
             case STANDING:
             default:
                 region = stand;
@@ -144,6 +155,8 @@ public class Player extends Sprite {
             return State.FALLING;
         else if(b2body.getLinearVelocity().x != 0)
             return State.RUNNING;
+        else if(hits == 4)
+            return State.GAMEOVER;
         else return State.STANDING;
     }
 
