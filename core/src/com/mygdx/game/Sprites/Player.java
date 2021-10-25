@@ -23,12 +23,12 @@ public class Player extends Sprite {
 
     //run e jump(etc) sono Animation di TextureRegion, in quanto serve piu di una TextureRegion per creare l'animazione
     //del movimento e del salto. Per stand/fall basta una sola TextureRegion (una sola immagine praticamente)
-    private TextureRegion stand;
-    private TextureRegion fall;
-    private Animation<TextureRegion> run;
-    private Animation<TextureRegion> jump;
-    private Animation<TextureRegion> hit;
-    private Animation<TextureRegion> gameover;
+    private final TextureRegion stand;
+    private final TextureRegion fall;
+    private final Animation<TextureRegion> run;
+    private final Animation<TextureRegion> jump;
+    private final Animation<TextureRegion> hit;
+    private final Animation<TextureRegion> gameover;
     //timer che indica il tempo speso in un certo stato (RUNNING,JUMPING, etc.),
     //rappresentato dalla corrispondente animazione(vedi il suo utilizzo come parametro nello switch del metodo getFrame)
     private float stateTimer;
@@ -52,21 +52,21 @@ public class Player extends Sprite {
         stateTimer = 0;
         runningRight = true;
         //array temporaneo per salvare i frame dell'animazione corrente
-        Array<TextureRegion> frames = new Array<TextureRegion>();
+        Array<TextureRegion> frames = new Array<>();
         //animazione dello stato RUNNING
         for(int i = 14; i < 18; i++){
             //le coordinate x e y le prendo dal file RedKnight.png
             //se lo apri da IntelliJ e usi lo strumento show grid si crea una vera e propria griglia di pixel
             frames.add(new TextureRegion(getTexture(), i * 43, 5, 42, 42));
         }
-        run = new Animation<TextureRegion>(0.1f, frames);
+        run = new Animation<>(0.1f, frames);
         frames.clear();
 
         //animazione dello stato JUMPING
         for(int i = 12; i < 14; i++){
             frames.add(new TextureRegion(getTexture(), i * 43, 5, 42, 42));
         }
-        jump = new Animation<TextureRegion>(0.1f, frames);
+        jump = new Animation<>(0.1f, frames);
         frames.clear();
 
         //frame dello stato FALLING
@@ -77,14 +77,14 @@ public class Player extends Sprite {
         for(int i = 2; i < 6; i++){
             frames.add(new TextureRegion(getTexture(), i * 79, 83, 55, 42));
         }
-        hit = new Animation<TextureRegion>(0.1f, frames);
+        hit = new Animation<>(0.1f, frames);
         frames.clear();
 
         //animazione dello stato GAMEOVER
         for(int i = 1; i < 9; i++){
             frames.add(new TextureRegion(getTexture(), i * 43, 5, 42, 42));
         }
-        gameover = new Animation<TextureRegion>(0.1f, frames);
+        gameover = new Animation<>(0.1f, frames);
         //chiamo la funzione definePlayer() che definisce tutte le caratteristiche del corpo del Player
         definePlayer();
 
