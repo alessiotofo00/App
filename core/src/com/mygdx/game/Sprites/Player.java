@@ -186,10 +186,12 @@ public class Player extends Sprite {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(10 / MyGdxGame.PPM);
+        shape.setRadius(8 / MyGdxGame.PPM);
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
+
+        b2body.createFixture(fdef).setUserData("body");
 
         //prova di come costruire i contorni di un oggetto davanti al personaggio, si potrebbe implementare un arma tipo lancia
         //nel caso non si riuscisse a creare uno swing con la spada: carica->contatto->danno, tipo cavaliere

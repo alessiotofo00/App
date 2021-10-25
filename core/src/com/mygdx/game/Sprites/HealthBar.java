@@ -10,9 +10,8 @@ public class HealthBar extends Sprite {
 
     private Player player;
     public World world;
-
     private TextureRegion healthBar;
-
+private double IncHealt;
     public HealthBar(World world, PlayScreen screen){
 
         super(screen.getHealthBarAtlas().findRegion("healthBar"));
@@ -53,6 +52,7 @@ public class HealthBar extends Sprite {
                 setRegion(healthBar);
                 break;
         }
+
 
     }
 }
