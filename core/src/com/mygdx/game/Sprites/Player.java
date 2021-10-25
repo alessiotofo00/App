@@ -5,12 +5,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
-import com.mygdx.game.Weapon.Weapon;
 
 public class Player extends Sprite {
 
@@ -19,7 +17,7 @@ public class Player extends Sprite {
     public State currentState;
     public State previousState;
 
-    private Weapon CurrentWeapon;
+
     public World world;
     public Body b2body;
 
@@ -164,13 +162,6 @@ public class Player extends Sprite {
 
     public float getStateTimer(){ return stateTimer; }
 
-    public Weapon getCurrentWeapon() {
-        return CurrentWeapon;
-    }
-
-    public void setCurrentWeapon(Weapon currentWeapon) {
-        CurrentWeapon = currentWeapon;
-    }
 
     public int getHits() {
         return hits;
@@ -202,11 +193,11 @@ public class Player extends Sprite {
 
         //prova di come costruire i contorni di un oggetto davanti al personaggio, si potrebbe implementare un arma tipo lancia
         //nel caso non si riuscisse a creare uno swing con la spada: carica->contatto->danno, tipo cavaliere
-        EdgeShape weapon = new EdgeShape();
-        weapon.set(new Vector2(8/ MyGdxGame.PPM, -2 / MyGdxGame.PPM), new Vector2(20 / MyGdxGame.PPM, 10 / MyGdxGame.PPM));
-        fdef.shape = weapon;
-        fdef.isSensor = true;
-        b2body.createFixture(fdef).setUserData("weapon");
+        //EdgeShape weapon = new EdgeShape();
+        //weapon.set(new Vector2(8/ MyGdxGame.PPM, -2 / MyGdxGame.PPM), new Vector2(20 / MyGdxGame.PPM, 10 / MyGdxGame.PPM));
+        //fdef.shape = weapon;
+        //fdef.isSensor = true;
+        //b2body.createFixture(fdef).setUserData("weapon");
     }
 }
 
