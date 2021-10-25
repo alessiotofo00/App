@@ -23,6 +23,8 @@ public class Coin extends InteractiveTileObject {
         Gdx.app.log("Hit", "Coin");
         //dopo che colpisco il denaro imposto che non esiste più
         setCategoryFilter(MyGdxGame.DESTROYED_BIT);
+        //cancello la grafica del denaro
+        getCell().setTile(null);
     }
 
 }

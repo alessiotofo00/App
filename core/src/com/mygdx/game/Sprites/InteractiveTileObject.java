@@ -1,6 +1,7 @@
 package com.mygdx.game.Sprites;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.MyGdxGame;
@@ -41,4 +42,8 @@ public void setCategoryFilter(short filterBit){
     fixture.setUserData(this);
 
 }
+public TiledMapTileLayer.Cell getCell(){
+    TiledMapTileLayer layer=(TiledMapTileLayer) map.getLayers().get(3); //numero di graphic, bisogna controllare l'ordine su tiled se è corretto
+    return layer.getCell((int)(body.getPosition().x*MyGdxGame.PPM/16),(int)(body.getPosition().y*MyGdxGame.PPM/16));
+    }
 }
