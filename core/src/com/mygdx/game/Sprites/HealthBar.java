@@ -35,7 +35,7 @@ public class HealthBar extends Sprite {
         //chiamo il metodo di Player per vedere se questo subisce colpi dai nemici
         player.hitDetect();
         //switch case per capire quanti colpi ha subito il player e quindi settare l'immagine corretta della healthBar
-        switch(player.hits){
+        switch(player.getHits()){
             case 1:
                 healthBar = new TextureRegion(healthBar.getTexture(), 39, 8, 24, 9);
                 setRegion(healthBar);

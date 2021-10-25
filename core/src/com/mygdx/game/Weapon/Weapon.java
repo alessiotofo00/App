@@ -1,4 +1,4 @@
-package com.mygdx.game.Sprites;
+package com.mygdx.game.Weapon;
 
 public class Weapon {
     private String name;

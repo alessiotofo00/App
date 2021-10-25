@@ -10,14 +10,32 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
+import com.mygdx.game.Weapon.Weapon;
 
 public class Player extends Sprite {
+
+    public Weapon getCurrentWeapon() {
+        return CurrentWeapon;
+    }
+
+    public void setCurrentWeapon(Weapon currentWeapon) {
+        CurrentWeapon = currentWeapon;
+    }
+
+    public int getHits() {
+        return hits;
+    }
+
+    public void setHits(int hits) {
+        this.hits = hits;
+    }
 
     //stati in cui si può trovare il Player. Utili per distinguere le animazioni da assegnare
     public enum State { FALLING, JUMPING, STANDING, RUNNING, HIT, GAMEOVER}
     public State currentState;
     public State previousState;
 
+    private Weapon CurrentWeapon;
     public World world;
     public Body b2body;
 
@@ -35,7 +53,7 @@ public class Player extends Sprite {
     //boolean utile a capire il verso in cui corre il Player e, di conseguenza, ad orientare la sua sprite
     private boolean runningRight;
     //int per tenere conto del numero di colpi ricevuti dal Player
-    public int hits;
+    private int hits;
 
     public Player(World world, PlayScreen screen){
 
@@ -45,7 +63,7 @@ public class Player extends Sprite {
         //setto il mondo di gioco del PlayScreen
         this.world = screen.getWorld();
 
-        hits = 0;
+        setHits(0);
 
         currentState = State.STANDING;
         previousState = State.STANDING;
@@ -155,7 +173,7 @@ public class Player extends Sprite {
             return State.FALLING;
         else if(b2body.getLinearVelocity().x != 0)
             return State.RUNNING;
-        else if(hits == 4)
+        else if(getHits() == 4)
             return State.GAMEOVER;
         else return State.STANDING;
     }
@@ -163,7 +181,7 @@ public class Player extends Sprite {
     public void hitDetect(){
         //test di prova per il funzionamento della HealthBar
         if(Gdx.input.isKeyJustPressed(Input.Keys.H)){
-            hits++;
+            setHits(getHits() + 1);
         }
     }
 
