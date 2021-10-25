@@ -35,5 +35,10 @@ public abstract class InteractiveTileObject {
         fixture = body.createFixture(fdef);
     }
     public abstract void bodyHit();
+public void setCategoryFilter(short filterBit){
+    Filter filter=new Filter();
+    filter.categoryBits=filterBit;
+    fixture.setUserData(this);
 
+}
 }

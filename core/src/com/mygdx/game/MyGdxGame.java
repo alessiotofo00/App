@@ -11,6 +11,11 @@ public class MyGdxGame extends Game {
 	//pixel per meter
 	public static final float PPM = 100;
 
+	//valori BIT per capire che tipo di collisione ho avuto
+	public static final short DEFAULT_BIT=1;
+	public static final short PLAYER_BIT=2;
+	public static final short COIN_BIT=4;
+	public static final short DESTROYED_BIT=16;
 	public SpriteBatch batch;
 
 	PreferencesScreen preferencesScreen;

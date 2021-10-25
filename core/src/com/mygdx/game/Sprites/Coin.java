@@ -15,12 +15,14 @@ public class Coin extends InteractiveTileObject {
     public Coin(PlayScreen screen, Rectangle bounds) {
         super(screen, bounds);
         fixture.setUserData(this);
-
+        setCategoryFilter(MyGdxGame.COIN_BIT);
     }
 
     @Override
     public void bodyHit() {
-       // Gdx.app.log("Hit Coin");
+        Gdx.app.log("Hit", "Coin");
+        //dopo che colpisco il denaro imposto che non esiste più
+        setCategoryFilter(MyGdxGame.DESTROYED_BIT);
     }
 
 }
