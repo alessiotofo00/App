@@ -18,6 +18,7 @@ public class Player extends Sprite {
     public State currentState;
     public State previousState;
 
+    public MyGdxGame game;
     public World world;
     public Body b2body;
 
@@ -37,13 +38,15 @@ public class Player extends Sprite {
     //int per tenere conto del numero di colpi ricevuti dal Player
     public int hits;
 
-    public Player(World world, PlayScreen screen){
+    public Player(PlayScreen screen){
 
         //seleziono la regione di texture da cui partire per andare a costruire le varie animazioni
         //la stringa inserita come parametro è presente nel file 'RedKnight.pack' e ce n'è una per ogni regione
         super(screen.getKnightAtlas().findRegion("knight death animation"));
         //setto il mondo di gioco del PlayScreen
         this.world = screen.getWorld();
+
+        this.game = screen.getGame();
 
         hits = 0;
 
@@ -148,7 +151,7 @@ public class Player extends Sprite {
     //metodo che seleziona lo stato corrente in base alla velocita del Player
     public State getState(){
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT))
-                return State.HIT;
+            return State.HIT;
         else if(b2body.getLinearVelocity().y > 0)
             return State.JUMPING;
         else if(b2body.getLinearVelocity().y < 0)
@@ -159,6 +162,8 @@ public class Player extends Sprite {
             return State.GAMEOVER;
         else return State.STANDING;
     }
+
+    public float getStateTimer(){ return stateTimer;}
 
     public void hitDetect(){
         //test di prova per il funzionamento della HealthBar

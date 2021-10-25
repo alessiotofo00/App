@@ -13,16 +13,17 @@ public class MyGdxGame extends Game {
 
 	public SpriteBatch batch;
 
-	private LoadingScreen loadingScreen;
 	private PreferencesScreen preferencesScreen;
 	private MenuScreen menuScreen;
 	private PlayScreen playScreen;
 	private PauseScreen pauseScreen;
+	private GameOverScreen goScreen;
 	//variabili per lo switch case dei vari screen
 	public final static int MENU = 0;
 	public final static int PREFERENCES = 1;
 	public final static int APPLICATION = 2;
 	public final static int PAUSE = 3;
+	public final static int GAMEOVER = 4;
 	//salvo lo schermo precedente a quello attuale e lo schermo attuale
 	//(serve al PreferencesScreen per distinguere se è stato chiamato dal MenuScreen o dal PauseScreen)
 	public static int previousScreen;
@@ -31,8 +32,8 @@ public class MyGdxGame extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		loadingScreen = new LoadingScreen(this);
-		setScreen(loadingScreen);
+		menuScreen = new MenuScreen(this);
+		setScreen(menuScreen);
 	}
 
 	@Override
@@ -68,6 +69,11 @@ public class MyGdxGame extends Game {
 				currentScreen = PAUSE;
 				if(pauseScreen == null) pauseScreen = new PauseScreen(this);
 				this.setScreen(pauseScreen);
+				break;
+			case GAMEOVER:
+				currentScreen = GAMEOVER;
+				if(goScreen == null) goScreen = new GameOverScreen(this);
+				this.setScreen(goScreen);
 				break;
 		}
 	}
