@@ -14,6 +14,7 @@ import com.mygdx.game.Weapon.Weapon;
 
 public class Player extends Sprite {
 
+
     public Weapon getCurrentWeapon() {
         return CurrentWeapon;
     }
