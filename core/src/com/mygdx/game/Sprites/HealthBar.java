@@ -11,7 +11,7 @@ public class HealthBar extends Sprite {
     private Player player;
     public World world;
     private TextureRegion healthBar;
-private double IncHealt;
+
     public HealthBar(World world, PlayScreen screen){
 
         super(screen.getHealthBarAtlas().findRegion("healthBar"));
@@ -35,6 +35,10 @@ private double IncHealt;
         player.hitDetect();
         //switch case per capire quanti colpi ha subito il player e quindi settare l'immagine corretta della healthBar
         switch(player.getHits()){
+            case 0:
+                healthBar = new TextureRegion(getTexture(), 6, 8, 24, 9);
+                setRegion(healthBar);
+                break;
             case 1:
                 healthBar = new TextureRegion(healthBar.getTexture(), 39, 8, 24, 9);
                 setRegion(healthBar);

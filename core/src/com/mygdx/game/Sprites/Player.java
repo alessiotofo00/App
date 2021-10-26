@@ -35,7 +35,7 @@ public class Player extends Sprite {
     //boolean utile a capire il verso in cui corre il Player e, di conseguenza, ad orientare la sua sprite
     private boolean runningRight;
     //int per tenere conto del numero di colpi ricevuti dal Player
-    private int hits;
+    public static int hits;
 
     public Player(PlayScreen screen){
 
@@ -168,7 +168,7 @@ public class Player extends Sprite {
     }
 
     public void setHits(int hits) {
-        this.hits = hits;
+        Player.hits = hits;
     }
 
     public void hitDetect(){

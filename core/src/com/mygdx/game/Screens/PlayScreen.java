@@ -107,6 +107,10 @@ world.setContactListener(new B2ContactListener());
 
     //method useful to catch the keyboard inputs
     public void handleInput(float dt){
+        //tasto provvisorio per provare lo shop
+        if(Gdx.input.isKeyJustPressed(Input.Keys.S)){
+            game.changeScreen(MyGdxGame.SHOP);
+        }
         //tasto per la pausa
         if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             paused = true;

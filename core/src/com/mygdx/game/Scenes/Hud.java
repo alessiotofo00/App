@@ -33,7 +33,7 @@ public class Hud extends Sprite implements Disposable{
     static Label  scoreLabel;
     Label coinsLabel;
     int level = 1;
-    int numCoins = 0;
+    public static int numCoins = 3;
 
     public Hud(SpriteBatch sb, PlayScreen screen){
 
