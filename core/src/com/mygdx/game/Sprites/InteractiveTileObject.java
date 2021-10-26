@@ -1,6 +1,7 @@
 package com.mygdx.game.Sprites;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.MyGdxGame;
@@ -33,5 +34,16 @@ public abstract class InteractiveTileObject {
                 , (bounds.getHeight() / 2) / MyGdxGame.PPM);
         fdef.shape = shape;
         fixture = body.createFixture(fdef);
+    }
+    public abstract void bodyHit();
+public void setCategoryFilter(short filterBit){
+    Filter filter=new Filter();
+    filter.categoryBits=filterBit;
+    fixture.setUserData(this);
+
+}
+public TiledMapTileLayer.Cell getCell(){
+    TiledMapTileLayer layer=(TiledMapTileLayer) map.getLayers().get(3); //numero di graphic, bisogna controllare l'ordine su tiled se è corretto
+    return layer.getCell((int)(body.getPosition().x*MyGdxGame.PPM/16),(int)(body.getPosition().y*MyGdxGame.PPM/16));
     }
 }

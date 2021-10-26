@@ -28,6 +28,7 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Sprites.HealthBar;
 import com.mygdx.game.Sprites.Player;
+import com.mygdx.game.Tools.B2ContactListener;
 import com.mygdx.game.Tools.B2WorldCreator;
 
 public class  PlayScreen implements Screen {
@@ -83,7 +84,8 @@ public class  PlayScreen implements Screen {
         creator = new B2WorldCreator(this);
         player = new Player(this);
         healthBar = new HealthBar(world, this);
-
+        //listener
+world.setContactListener(new B2ContactListener());
     }
 
     public TextureAtlas getKnightAtlas(){

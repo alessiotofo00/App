@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 //import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 //import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 //import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -17,7 +18,9 @@ import com.badlogic.gdx.utils.Disposable;
 //import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
+import com.mygdx.game.Sprites.Player;
 //import com.mygdx.game.MyGdxGame;
 
 public class Hud extends Sprite implements Disposable{
@@ -25,8 +28,9 @@ public class Hud extends Sprite implements Disposable{
     public Stage stage;
     private Viewport viewport;
     private Skin skin;
-
+    private static Integer score;
     Label levelLabel;
+    static Label  scoreLabel;
     Label coinsLabel;
     int level = 1;
     int numCoins = 0;
@@ -42,6 +46,7 @@ public class Hud extends Sprite implements Disposable{
         table.setFillParent(true);
 
         levelLabel = new Label(String.format("LEVEL %d", level), skin);
+        scoreLabel = new Label(String.format("COINS %d", score), skin);
         coinsLabel = new Label(String.format("COINS x%d", numCoins), skin);
 
         table.add(levelLabel).expandX();
@@ -50,7 +55,10 @@ public class Hud extends Sprite implements Disposable{
 
         stage.addActor(table);
     }
-
+    public static void addScore(int value){
+        score+=value;
+        scoreLabel.setText(String.format("%d",score));
+    }
     @Override
     public void dispose() {
         stage.dispose();
