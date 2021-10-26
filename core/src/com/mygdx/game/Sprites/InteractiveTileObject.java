@@ -43,7 +43,7 @@ public void setCategoryFilter(short filterBit){
 
 }
 public TiledMapTileLayer.Cell getCell(){
-    TiledMapTileLayer layer=(TiledMapTileLayer) map.getLayers().get(3); //numero di graphic, bisogna controllare l'ordine su tiled se è corretto
+    TiledMapTileLayer layer=(TiledMapTileLayer) map.getLayers().get(3); //numero di graphic
     return layer.getCell((int)(body.getPosition().x*MyGdxGame.PPM/16),(int)(body.getPosition().y*MyGdxGame.PPM/16));
     }
 }

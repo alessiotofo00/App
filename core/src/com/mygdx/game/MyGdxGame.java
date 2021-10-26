@@ -12,10 +12,13 @@ public class MyGdxGame extends Game {
 	public static final float PPM = 100;
 
 	//valori BIT per capire che tipo di collisione ho avuto
-	public static final short DEFAULT_BIT=1;
+	public static final short GROUND_BIT =1;
 	public static final short PLAYER_BIT=2;
 	public static final short COIN_BIT=4;
 	public static final short DESTROYED_BIT=16;
+	public static final short OBJECT_BIT=32;
+	public static final short ENEMY_BIT=64;
+
 	public SpriteBatch batch;
 
 	public PreferencesScreen preferencesScreen;

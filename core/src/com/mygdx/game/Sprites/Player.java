@@ -190,20 +190,20 @@ public class Player extends Sprite {
 //definisco con collisioni col player
         fdef.filter.categoryBits=MyGdxGame.PLAYER_BIT;
         //definisco le cose che possono collidere col player
-        fdef.filter.maskBits=MyGdxGame.DEFAULT_BIT|MyGdxGame.COIN_BIT;
+        fdef.filter.maskBits=MyGdxGame.GROUND_BIT |MyGdxGame.COIN_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
 
-        b2body.createFixture(fdef).setUserData("body");
+       b2body.createFixture(fdef).setUserData("body");
 
         //prova di come costruire i contorni di un oggetto davanti al personaggio, si potrebbe implementare un arma tipo lancia
         //nel caso non si riuscisse a creare uno swing con la spada: carica->contatto->danno, tipo cavaliere
-        //EdgeShape weapon = new EdgeShape();
-        //weapon.set(new Vector2(8/ MyGdxGame.PPM, -2 / MyGdxGame.PPM), new Vector2(20 / MyGdxGame.PPM, 10 / MyGdxGame.PPM));
-        //fdef.shape = weapon;
+        //EdgeShape body = new EdgeShape();
+        //body.set(new Vector2(0, -15 / MyGdxGame.PPM), new Vector2(0, 4 / MyGdxGame.PPM));
+        //fdef.shape = body;
         //fdef.isSensor = true;
-        //b2body.createFixture(fdef).setUserData("weapon");
+        //b2body.createFixture(fdef).setUserData("body");
     }
 }
 

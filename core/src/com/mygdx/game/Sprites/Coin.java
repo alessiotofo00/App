@@ -15,7 +15,7 @@ public class Coin extends InteractiveTileObject {
 
     public Coin(PlayScreen screen,Rectangle bounds) {
         super(screen, bounds);
-        tileSet=map.getTileSets().getTileSet("Various.tsx");
+        tileSet=map.getTileSets().getTileSet("various.tsx");
         fixture.setUserData(this);
         setCategoryFilter(MyGdxGame.COIN_BIT);
     }
