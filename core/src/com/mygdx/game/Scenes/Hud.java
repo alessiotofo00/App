@@ -28,7 +28,7 @@ public class Hud extends Sprite implements Disposable{
     public Stage stage;
     private Viewport viewport;
     private Skin skin;
-    private static Integer score;
+    private static Integer score = 0;
     Label levelLabel;
     static Label  scoreLabel;
     Label coinsLabel;
@@ -46,10 +46,11 @@ public class Hud extends Sprite implements Disposable{
         table.setFillParent(true);
 
         levelLabel = new Label(String.format("LEVEL %d", level), skin);
-        scoreLabel = new Label(String.format("COINS %d", score), skin);
+        scoreLabel = new Label(String.format("SCORE %d", score), skin);
         coinsLabel = new Label(String.format("COINS x%d", numCoins), skin);
 
         table.add(levelLabel).expandX();
+        table.add(scoreLabel).expandX();
         table.add(coinsLabel).expandX();
         table.row();
 

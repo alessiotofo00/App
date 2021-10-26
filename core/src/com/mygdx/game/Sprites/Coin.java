@@ -11,7 +11,7 @@ import com.mygdx.game.Screens.PlayScreen;
 
 public class Coin extends InteractiveTileObject {
     private static TiledMapTileSet tileSet;
-    private final int BLANK_COIN = 1532; //cambia il conteggio dell'ID, id di tiled è 1531, uno parte da 0 e l'altro da 1, non so quale dei due bisogna controllare
+    private final int BLANK_COIN = 1531; //cambia il conteggio dell'ID, id di tiled è 1531, uno parte da 0 e l'altro da 1, non so quale dei due bisogna controllare
 
     public Coin(PlayScreen screen,Rectangle bounds) {
         super(screen, bounds);
