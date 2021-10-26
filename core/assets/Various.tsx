@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.5" tiledversion="1.6.0" name="various" tilewidth="32" tileheight="32" tilecount="3072" columns="64">
  <image source="DungeonCrawl_ProjectUtumnoTileset.png" width="2048" height="1536"/>
+ <tile id="473">
+  <animation>
+   <frame tileid="473" duration="100"/>
+   <frame tileid="474" duration="100"/>
+   <frame tileid="475" duration="100"/>
+   <frame tileid="476" duration="100"/>
+   <frame tileid="477" duration="100"/>
+   <frame tileid="478" duration="100"/>
+   <frame tileid="479" duration="100"/>
+   <frame tileid="480" duration="100"/>
+  </animation>
+ </tile>
  <tile id="723">
   <animation>
    <frame tileid="723" duration="100"/>

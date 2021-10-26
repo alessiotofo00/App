@@ -12,6 +12,7 @@ public class Coin extends InteractiveTileObject{
     private final int BLANK_COIN=28;
 
     public Coin(PlayScreen screen,Rectangle bounds) {
+
         super(screen, bounds);
     }
 

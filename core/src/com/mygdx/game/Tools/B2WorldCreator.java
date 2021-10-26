@@ -53,5 +53,35 @@ public class B2WorldCreator {
             fdef.shape = shape;
             body.createFixture(fdef);
         }
+        //coins bodies and fixtures
+        for (MapObject obj : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) obj).getRectangle();
+
+            bdef.type = BodyDef.BodyType.StaticBody;
+            bdef.position.set((rect.getX() + rect.getWidth() / 2) / MyGdxGame.PPM,
+                    (rect.getY() + rect.getHeight() / 2) / MyGdxGame.PPM);
+
+            body = world.createBody(bdef);
+
+            shape.setAsBox((rect.getWidth() / 2) / MyGdxGame.PPM
+                    , (rect.getHeight() / 2) / MyGdxGame.PPM);
+            fdef.shape = shape;
+            body.createFixture(fdef);
+        }
+        //deadly water bodies and fixtures
+        for (MapObject obj : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) obj).getRectangle();
+
+            bdef.type = BodyDef.BodyType.StaticBody;
+            bdef.position.set((rect.getX() + rect.getWidth() / 2) / MyGdxGame.PPM,
+                    (rect.getY() + rect.getHeight() / 2) / MyGdxGame.PPM);
+
+            body = world.createBody(bdef);
+
+            shape.setAsBox((rect.getWidth() / 2) / MyGdxGame.PPM
+                    , (rect.getHeight() / 2) / MyGdxGame.PPM);
+            fdef.shape = shape;
+            body.createFixture(fdef);
+        }
     }
 }
