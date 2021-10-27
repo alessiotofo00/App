@@ -84,7 +84,7 @@ public class Specter extends Enemy{
 
         fdef.shape=head;
         fdef.restitution=0.5f;
-        fdef.filter.categoryBits=MyGdxGame.ENEMY_BIT;
+        fdef.filter.categoryBits=MyGdxGame.ENEMY_HIT_BIT;
         b2body.createFixture(fdef).setUserData(this);
     }
     public void draw(Batch batch){
