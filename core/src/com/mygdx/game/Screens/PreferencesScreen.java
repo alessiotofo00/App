@@ -5,14 +5,18 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 //import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 //import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 //import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGdxGame;
+import sun.awt.image.GifImageDecoder;
 
 import static com.mygdx.game.MyGdxGame.*;
 
@@ -32,8 +36,6 @@ public class PreferencesScreen implements Screen {
     private final Label titleLabel;
     private final Label musicOnOffLabel;
     private final Label soundOnOffLabel;
-
-    private final SpriteBatch batch;
 
     public PreferencesScreen(final MyGdxGame game){
 
@@ -96,8 +98,6 @@ public class PreferencesScreen implements Screen {
 
         stage.addActor(table);
 
-        batch = new SpriteBatch();
-
     }
 
     @Override
@@ -111,8 +111,9 @@ public class PreferencesScreen implements Screen {
         // TODO Auto-generated method stub
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        batch.begin();
-        batch.end();
+        game.batch.begin();
+
+        game.batch.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();

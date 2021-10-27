@@ -105,7 +105,7 @@ public class MenuScreen implements Screen, InputProcessor {
 
         stageMS.addActor(table);
 
-        sprite = new Sprite(new Texture(Gdx.files.internal("inferno.jpg")));
+        sprite = new Sprite(new Texture(Gdx.files.internal("darksouls_menu.jpg")));
         sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
     }

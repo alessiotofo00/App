@@ -34,37 +34,32 @@ import com.mygdx.game.Tools.B2WorldCreator;
 public class  PlayScreen implements Screen {
 
     private final MyGdxGame game;
-    private TextureAtlas knightAtlas;
-    private TextureAtlas healthBarAtlas;
-
-    private final Skin skin;
+    private final TextureAtlas knightAtlas;
+    private final TextureAtlas healthBarAtlas;
 
     private final OrthographicCamera gamecam;
     private final Viewport gamePort;
 
     private final Hud hud;
-    //map declarations
-    private final TmxMapLoader mapLoader;
     private final TiledMap map;
     private final OrthogonalTiledMapRenderer renderer;
     //player declaration
-    private Player player;
+    private final Player player;
     //boolean per lo stato di gioco(vedi metodo render)
     static boolean paused;
 
-    private HealthBar healthBar;
+    private final HealthBar healthBar;
 
     //variabili per la creazione del mondo di gioco
     public World world;
     private final Box2DDebugRenderer b2dr;
-    private final B2WorldCreator creator;
 
     public PlayScreen(final MyGdxGame game){
 
         knightAtlas = new TextureAtlas("RedKnight.pack");
         healthBarAtlas = new TextureAtlas("HealthBar.pack");
         this.game = game;
-        this.skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
+        Skin skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
 
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(MyGdxGame.V_WIDTH / MyGdxGame.PPM,
@@ -72,7 +67,8 @@ public class  PlayScreen implements Screen {
                 gamecam);
         hud = new Hud(game.batch, this);
 
-        mapLoader = new TmxMapLoader();
+        //map declarations
+        TmxMapLoader mapLoader = new TmxMapLoader();
         map = mapLoader.load("mappa16x16.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / MyGdxGame.PPM);
         //gamecam.position necessario per non centrare in posizione 0.0 (il centro della mappa, visto come assi cartesiani)
@@ -81,7 +77,7 @@ public class  PlayScreen implements Screen {
 
         world = new World(new Vector2(0, -13), true); //il -10 indica la gravità nel mondo di gioco
         b2dr = new Box2DDebugRenderer();
-        creator = new B2WorldCreator(this);
+        B2WorldCreator creator = new B2WorldCreator(this);
         player = new Player(this);
         healthBar = new HealthBar(world, this);
         //listener
@@ -177,10 +173,7 @@ world.setContactListener(new B2ContactListener());
     }
 
     public boolean gameOver(){
-        if(player.currentState == Player.State.GAMEOVER && player.getStateTimer() > 1.5){
-            return true;
-        }
-        return false;
+        return player.currentState == Player.State.GAMEOVER && player.getStateTimer() > 1.5;
     }
 
     @Override

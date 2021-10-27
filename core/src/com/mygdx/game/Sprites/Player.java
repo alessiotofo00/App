@@ -186,7 +186,7 @@ public class Player extends Sprite {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(10 / MyGdxGame.PPM);
+        shape.setRadius(12 / MyGdxGame.PPM);
 //definisco con collisioni col player
         fdef.filter.categoryBits=MyGdxGame.PLAYER_BIT;
         //definisco le cose che possono collidere col player
