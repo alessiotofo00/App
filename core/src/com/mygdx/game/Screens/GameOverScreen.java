@@ -35,7 +35,7 @@ public class GameOverScreen implements Screen {
         this.skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
 
         viewport = new FitViewport(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
-        stage = new Stage(viewport, game.batch);
+        stage = new Stage(viewport);
 
         table = new Table();
         table.top(); //set the table on the top of the stage
@@ -77,8 +77,12 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        game.batch.begin();
+
+        game.batch.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();

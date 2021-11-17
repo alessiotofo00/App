@@ -23,7 +23,7 @@ public class B2WorldCreator {
 
         //i numeri nel for (...'.get(n)'...) sono gli indici degli oggetti nella mappa Tiled
 
-        //ground bodie and fixtures
+        //ground bodies and fixtures
         for (MapObject obj : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) obj).getRectangle();
 

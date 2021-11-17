@@ -57,25 +57,25 @@ public class Player extends Sprite {
         for(int i = 14; i < 18; i++){
             //le coordinate x e y le prendo dal file RedKnight.png
             //se lo apri da IntelliJ e usi lo strumento show grid si crea una vera e propria griglia di pixel
-            frames.add(new TextureRegion(getTexture(), i * 43, 5, 42, 42));
+            frames.add(new TextureRegion(getTexture(), i * 42, 5, 42, 42));
         }
         run = new Animation<>(0.1f, frames);
         frames.clear();
 
         //animazione dello stato JUMPING
         for(int i = 12; i < 14; i++){
-            frames.add(new TextureRegion(getTexture(), i * 43, 5, 42, 42));
+            frames.add(new TextureRegion(getTexture(), i * 42, 5, 42, 42));
         }
         jump = new Animation<>(0.1f, frames);
         frames.clear();
 
         //frame dello stato FALLING
-        fall = new TextureRegion(getTexture(),12 * 43, 5, 42, 42);
+        fall = new TextureRegion(getTexture(),12 * 42, 5, 42, 42);
         frames.clear();
 
         //animazione dello stato HIT
-        for(int i = 2; i < 6; i++){
-            frames.add(new TextureRegion(getTexture(), i * 79, 83, 55, 42));
+        for(int i = 3; i < 6; i++){
+            frames.add(new TextureRegion(getTexture(), i * 79, 88, 55, 42));
         }
         hit = new Animation<>(0.1f, frames);
         frames.clear();
@@ -88,7 +88,7 @@ public class Player extends Sprite {
         //chiamo la funzione definePlayer() che definisce tutte le caratteristiche del corpo del Player
         definePlayer();
 
-        stand = new TextureRegion(getTexture(), 7, 7, 42, 42);
+        stand = new TextureRegion(getTexture(), 0, 5, 42, 42);
         setBounds(0, 0, 42 / MyGdxGame.PPM, 42 / MyGdxGame.PPM);
         setRegion(stand);
     }
@@ -147,13 +147,13 @@ public class Player extends Sprite {
 
     //metodo che seleziona lo stato corrente in base alla velocita del Player
     public State getState(){
-        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT))
+        if(Gdx.input.isKeyPressed(Input.Keys.K))
                 return State.HIT;
         else if(b2body.getLinearVelocity().y > 0)
             return State.JUMPING;
         else if(b2body.getLinearVelocity().y < 0)
             return State.FALLING;
-        else if(b2body.getLinearVelocity().x != 0)
+        else if(b2body.getLinearVelocity().x > 0.05f || b2body.getLinearVelocity().x < -0.05f)
             return State.RUNNING;
         else if(getHits() == 4)
             return State.GAMEOVER;
@@ -161,7 +161,6 @@ public class Player extends Sprite {
     }
 
     public float getStateTimer(){ return stateTimer; }
-
 
     public int getHits() {
         return hits;
@@ -185,8 +184,8 @@ public class Player extends Sprite {
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
-        CircleShape shape = new CircleShape();
-        shape.setRadius(12 / MyGdxGame.PPM);
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(8 / MyGdxGame.PPM, 14 / MyGdxGame.PPM);
 //definisco con collisioni col player
         fdef.filter.categoryBits=MyGdxGame.PLAYER_BIT;
         //definisco le cose che possono collidere col player
