@@ -7,9 +7,11 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 //import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 //import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -19,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 //import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Tools.GifDecoder;
 
 import static com.mygdx.game.MyGdxGame.MENU;
 import static com.mygdx.game.MyGdxGame.V_WIDTH;
@@ -44,7 +47,8 @@ public class MenuScreen implements Screen, InputProcessor {
 
     private final Label titleLabel;
 
-    private final Sprite sprite;
+    Animation<TextureRegion> animation;
+    float elapsed;
 
     public MenuScreen(final MyGdxGame game){
         this.game = game;
@@ -52,6 +56,8 @@ public class MenuScreen implements Screen, InputProcessor {
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
         viewport = new FitViewport(V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
         stageMS = new Stage(viewport);
+
+        animation = GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("darksouls_menu.gif").read());
 
         table = new Table();
         table.top(); //set the table on the top of the stage
@@ -104,10 +110,6 @@ public class MenuScreen implements Screen, InputProcessor {
 
 
         stageMS.addActor(table);
-
-        sprite = new Sprite(new Texture(Gdx.files.internal("darksouls_menu.jpg")));
-        sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
     }
 
     @Override
@@ -159,9 +161,11 @@ public class MenuScreen implements Screen, InputProcessor {
     @Override
     public void render(float delta) {
 
+        elapsed += Gdx.graphics.getDeltaTime();
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         game.batch.begin();
-        sprite.draw(game.batch);
+        game.batch.draw(animation.getKeyFrame(elapsed), 20.0f, 20.0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         game.batch.end();
 
         stageMS.act(Gdx.graphics.getDeltaTime());
@@ -192,6 +196,7 @@ public class MenuScreen implements Screen, InputProcessor {
 
     @Override
     public void dispose() {
+        game.batch.dispose();
         stageMS.dispose();
     }
 }

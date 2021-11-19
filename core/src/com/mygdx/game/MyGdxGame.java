@@ -6,8 +6,8 @@ import com.mygdx.game.Screens.*;
 
 public class MyGdxGame extends Game {
 
-	public static final int V_WIDTH = 1000;
-	public static final int V_HEIGHT = 500;
+	public static final int V_WIDTH = 960;
+	public static final int V_HEIGHT = 540;
 	//pixel per meter
 	public static final float PPM = 100;
 
@@ -22,8 +22,8 @@ public class MyGdxGame extends Game {
 
 	public SpriteBatch batch;
 
-	public PreferencesScreen preferencesScreen;
 	public MenuScreen menuScreen;
+	public PreferencesScreen preferencesScreen;
 	public PlayScreen playScreen;
 	public PauseScreen pauseScreen;
 	public GameOverScreen goScreen;
