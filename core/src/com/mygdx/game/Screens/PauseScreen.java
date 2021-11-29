@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -13,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Tools.GifDecoder;
 
 import static com.mygdx.game.MyGdxGame.V_WIDTH;
 
@@ -32,6 +35,9 @@ public class PauseScreen implements Screen {
 
     private final Label pauseLabel;
 
+    Animation<TextureRegion> animation;
+    float elapsed;
+
     public PauseScreen(final MyGdxGame game){
 
         this.game = game;
@@ -39,6 +45,8 @@ public class PauseScreen implements Screen {
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
         viewport = new FitViewport(V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport);
+
+        animation = GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("darksouls_cave.gif").read());
 
         table = new Table();
         table.top(); //set the table on the top of the stage
@@ -96,9 +104,12 @@ public class PauseScreen implements Screen {
     @Override
     public void render(float delta) {
         // TODO Auto-generated method stub
+        elapsed += Gdx.graphics.getDeltaTime();
+
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.batch.begin();
+        game.batch.draw(animation.getKeyFrame(elapsed), 20.0f, 20.0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         game.batch.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
@@ -128,6 +139,7 @@ public class PauseScreen implements Screen {
     @Override
     public void dispose() {
         // TODO Auto-generated method stub
+        game.batch.dispose();
         stage.dispose();
     }
 }

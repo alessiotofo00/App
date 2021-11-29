@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 //import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Tools.GifDecoder;
 import sun.awt.image.GifImageDecoder;
 
 import static com.mygdx.game.MyGdxGame.*;
@@ -37,6 +38,9 @@ public class PreferencesScreen implements Screen {
     private final Label musicOnOffLabel;
     private final Label soundOnOffLabel;
 
+    Animation<TextureRegion> animation;
+    float elapsed;
+
     public PreferencesScreen(final MyGdxGame game){
 
         this.game = game;
@@ -44,6 +48,8 @@ public class PreferencesScreen implements Screen {
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
         viewport = new FitViewport(V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport);
+
+        animation = GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("darksouls_menu.gif").read());
 
         table = new Table();
         table.top(); //set the table on the top of the stage
@@ -82,11 +88,11 @@ public class PreferencesScreen implements Screen {
             }
         });
 
-        titleLabel = new Label( "Options", skin );
+        titleLabel = new Label( "OPTIONS", skin );
         musicOnOffLabel = new Label( "Music", skin );
         soundOnOffLabel = new Label( "Sounds", skin );
 
-        table.add(titleLabel).padBottom(150);
+        table.add(titleLabel).padBottom(150).padTop(20);
         table.row();
         table.add(musicOnOffLabel).padBottom(40);
         table.add(musicCheckBox).padBottom(40);
@@ -109,10 +115,12 @@ public class PreferencesScreen implements Screen {
     @Override
     public void render(float delta) {
         // TODO Auto-generated method stub
+        elapsed += Gdx.graphics.getDeltaTime();
+
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.batch.begin();
-
+        game.batch.draw(animation.getKeyFrame(elapsed), 20.0f, 20.0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         game.batch.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
@@ -142,6 +150,7 @@ public class PreferencesScreen implements Screen {
     @Override
     public void dispose() {
         // TODO Auto-generated method stub
+        game.batch.dispose();
         stage.dispose();
     }
 }
