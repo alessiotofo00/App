@@ -35,15 +35,17 @@ public abstract class InteractiveTileObject {
         fdef.shape = shape;
         fixture = body.createFixture(fdef);
     }
-    public abstract void bodyHit();
-public void setCategoryFilter(short filterBit){
-    Filter filter=new Filter();
-    filter.categoryBits=filterBit;
-    fixture.setUserData(this);
 
-}
-public TiledMapTileLayer.Cell getCell(){
-    TiledMapTileLayer layer=(TiledMapTileLayer) map.getLayers().get(3); //numero di graphic
-    return layer.getCell((int)(body.getPosition().x*MyGdxGame.PPM/16),(int)(body.getPosition().y*MyGdxGame.PPM/16));
+    public abstract void bodyHit();
+
+    public void setCategoryFilter(short filterBit){
+        Filter filter=new Filter();
+        filter.categoryBits=filterBit;
+        fixture.setUserData(this);
+    }
+
+    public TiledMapTileLayer.Cell getCell(){
+        TiledMapTileLayer layer=(TiledMapTileLayer) map.getLayers().get(3); //numero di graphic
+        return layer.getCell((int)(body.getPosition().x*MyGdxGame.PPM/16),(int)(body.getPosition().y*MyGdxGame.PPM/16));
     }
 }

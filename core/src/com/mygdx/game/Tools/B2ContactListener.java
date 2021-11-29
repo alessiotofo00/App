@@ -16,10 +16,11 @@ public class B2ContactListener  implements ContactListener {
         //Per messaggio a console per il running, con get.Body posso ottenere le fixture che si sono colpite, salvate in fixA e fixB,
         //con getType stampo il tipo se dinamico o statico in base agli oggetti che si sono colpiti
         if(fixA.getUserData()=="body"||fixB.getUserData()=="body"){
-            Fixture body= (fixA.getUserData() == "body") ? fixA : fixB;
-            Fixture object= (body == fixA) ? fixB : fixA;
-            if(object.getUserData()!=null&& InteractiveTileObject.class.isAssignableFrom(object.getUserData().getClass())) {
-                ((InteractiveTileObject)object.getUserData()).bodyHit();
+            Fixture body = fixA.getUserData() == "body" ? fixA : fixB;
+            Fixture object = body == fixA ? fixB : fixA;
+
+            if(object.getUserData() != null && InteractiveTileObject.class.isAssignableFrom(object.getUserData().getClass())) {
+                ((InteractiveTileObject) object.getUserData()).bodyHit();
                 //devo sapere se quello che ho colpito è un interactive,quale è e attivare di conseguenza il bodyhit corretto
                 //controllo anche che sia una collisione corretta not null
             }

@@ -5,10 +5,14 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
+import com.mygdx.game.Sprites.Skeleton;
 
 public class B2WorldCreator {
+
+    private Array<Skeleton> skeletons = new Array<Skeleton>();
 
     public B2WorldCreator(PlayScreen screen){
         World world = screen.getWorld();
@@ -83,5 +87,15 @@ public class B2WorldCreator {
             fdef.shape = shape;
             body.createFixture(fdef);
         }
+        //skeletons bodies and fixtures
+        for (MapObject obj : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) obj).getRectangle();
+
+            skeletons.add(new Skeleton(screen, rect.getX() / MyGdxGame.PPM, rect.getY() / MyGdxGame.PPM));
+        }
+    }
+
+    public Array<Skeleton> getSkeletons() {
+        return skeletons;
     }
 }

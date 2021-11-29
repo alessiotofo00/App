@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
+import com.mygdx.game.Sprites.Enemy;
 import com.mygdx.game.Sprites.HealthBar;
 import com.mygdx.game.Sprites.Player;
 import com.mygdx.game.Tools.B2ContactListener;
@@ -35,6 +36,7 @@ public class  PlayScreen implements Screen {
 
     private final MyGdxGame game;
     private final TextureAtlas knightAtlas;
+    private final TextureAtlas skeletonWalkAtlas;
     private final TextureAtlas healthBarAtlas;
 
     private final OrthographicCamera gamecam;
@@ -53,10 +55,12 @@ public class  PlayScreen implements Screen {
     //variabili per la creazione del mondo di gioco
     public World world;
     private final Box2DDebugRenderer b2dr;
+    private B2WorldCreator creator;
 
     public PlayScreen(final MyGdxGame game){
 
         knightAtlas = new TextureAtlas("RedKnight.pack");
+        skeletonWalkAtlas = new TextureAtlas("skeletonWalk.pack");
         healthBarAtlas = new TextureAtlas("HealthBar.pack");
         this.game = game;
         Skin skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
@@ -77,16 +81,18 @@ public class  PlayScreen implements Screen {
 
         world = new World(new Vector2(0, -13), true); //il -10 indica la gravità nel mondo di gioco
         b2dr = new Box2DDebugRenderer();
-        B2WorldCreator creator = new B2WorldCreator(this);
+        creator = new B2WorldCreator(this);
         player = new Player(this);
         healthBar = new HealthBar(world, this);
         //listener
-world.setContactListener(new B2ContactListener());
+        world.setContactListener(new B2ContactListener());
     }
 
     public TextureAtlas getKnightAtlas(){
         return knightAtlas;
     }
+
+    public TextureAtlas getSkeletonWalkAtlas() { return skeletonWalkAtlas;}
 
     public TextureAtlas getHealthBarAtlas(){
         return healthBarAtlas;
@@ -135,10 +141,15 @@ world.setContactListener(new B2ContactListener());
     //we will call this method in our render method
     public void update(float dt) {
         handleInput(dt);
+
         healthBar.update(dt);
+
         world.step(1/60f, 6, 2);
         //aggiorno il player
         player.update(dt);
+        //update scheletri
+        for(Enemy enemy : creator.getSkeletons())
+            enemy.update(dt);
         //gamecam che segue il player
         gamecam.position.x = player.b2body.getPosition().x;
         //aggiorno la gamecam
@@ -169,6 +180,8 @@ world.setContactListener(new B2ContactListener());
             }
             player.draw(game.batch);
             healthBar.draw(game.batch);
+            for(Enemy enemy : creator.getSkeletons())
+                enemy.draw(game.batch);
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);

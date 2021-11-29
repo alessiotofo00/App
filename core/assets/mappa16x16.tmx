@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="240" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="44">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="240" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="46">
  <tileset firstgid="1" source="wastelandmountains.tsx"/>
  <tileset firstgid="513" source="wastelandsky.tsx"/>
  <tileset firstgid="1025" source="wasteland.tsx"/>
@@ -237,5 +237,9 @@
   <object id="36" x="144" y="496" width="48" height="16"/>
   <object id="37" x="224" y="496" width="48" height="16"/>
   <object id="38" x="912" y="496" width="240" height="16"/>
+ </objectgroup>
+ <objectgroup id="10" name="skeletons">
+  <object id="44" x="432" y="224" width="16" height="32"/>
+  <object id="45" x="80" y="224" width="16" height="32"/>
  </objectgroup>
 </map>
