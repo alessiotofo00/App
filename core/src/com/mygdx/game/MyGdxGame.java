@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Screens.*;
 
@@ -15,10 +16,10 @@ public class MyGdxGame extends Game {
 	public static final short GROUND_BIT =1;
 	public static final short PLAYER_BIT=2;
 	public static final short COIN_BIT=4;
-	public static final short DESTROYED_BIT=16;
-	public static final short OBJECT_BIT=32;
-	public static final short ENEMY_BIT=64;
-	public static final short ENEMY_HIT_BIT=128;
+	public static final short DESTROYED_BIT=8;
+	public static final short OBJECT_BIT=16;
+	public static final short ENEMY_BIT=32;
+	public static final short ENEMY_HIT_BIT=64;
 
 	public SpriteBatch batch;
 
@@ -41,10 +42,16 @@ public class MyGdxGame extends Game {
 	//(serve al PreferencesScreen per distinguere se è stato chiamato dal MenuScreen o dal PauseScreen)
 	public static int previousScreen;
 	public static int currentScreen;
+	//manager per i suoni e la musica
+	public static AssetManager manager;
+
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+
+		manager = new AssetManager();
+
 		menuScreen = new MenuScreen(this);
 		setScreen(menuScreen);
 	}

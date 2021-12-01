@@ -6,16 +6,17 @@ import com.mygdx.game.Sprites.InteractiveTileObject;
 
 public class B2ContactListener  implements ContactListener {
 
-    private MyGdxGame game;
     @Override
-    public void beginContact(Contact contact) { //comincia il contatto tra due corpi
-        System.out.println("Contact");
-        Fixture fixA= contact.getFixtureA();
-        Fixture fixB= contact.getFixtureB();
-        System.out.println(fixA.getBody().getType()+" ha colpito "+ fixB.getBody().getType());
+    public void beginContact(Contact contact) {//comincia il contatto tra due corpi
+
+        Fixture fixA = contact.getFixtureA();
+        Fixture fixB = contact.getFixtureB();
+
+        int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
+
         //Per messaggio a console per il running, con get.Body posso ottenere le fixture che si sono colpite, salvate in fixA e fixB,
         //con getType stampo il tipo se dinamico o statico in base agli oggetti che si sono colpiti
-        if(fixA.getUserData()=="body"||fixB.getUserData()=="body"){
+        if(fixA.getUserData() == "body" || fixB.getUserData() == "body"){
             Fixture body = fixA.getUserData() == "body" ? fixA : fixB;
             Fixture object = body == fixA ? fixB : fixA;
 
@@ -24,6 +25,12 @@ public class B2ContactListener  implements ContactListener {
                 //devo sapere se quello che ho colpito è un interactive,quale è e attivare di conseguenza il bodyhit corretto
                 //controllo anche che sia una collisione corretta not null
             }
+        }
+
+        switch(cDef){
+            case MyGdxGame.PLAYER_BIT | MyGdxGame.COIN_BIT:
+
+
         }
     }
 

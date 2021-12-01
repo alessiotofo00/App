@@ -39,13 +39,13 @@ public abstract class InteractiveTileObject {
     public abstract void bodyHit();
 
     public void setCategoryFilter(short filterBit){
-        Filter filter=new Filter();
-        filter.categoryBits=filterBit;
-        fixture.setUserData(this);
+        Filter filter = new Filter();
+        filter.categoryBits = filterBit;
+        fixture.setFilterData(filter);
     }
 
     public TiledMapTileLayer.Cell getCell(){
-        TiledMapTileLayer layer=(TiledMapTileLayer) map.getLayers().get(3); //numero di graphic
-        return layer.getCell((int)(body.getPosition().x*MyGdxGame.PPM/16),(int)(body.getPosition().y*MyGdxGame.PPM/16));
+        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(3); //numero di graphic
+        return layer.getCell((int)(body.getPosition().x * MyGdxGame.PPM/16), (int)(body.getPosition().y * MyGdxGame.PPM/16));
     }
 }

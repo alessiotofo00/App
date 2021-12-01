@@ -196,13 +196,6 @@ public class Player extends Sprite {
 
         b2body.createFixture(fdef).setUserData("body");
 
-        //prova di come costruire i contorni di un oggetto davanti al personaggio, si potrebbe implementare un arma tipo lancia
-        //nel caso non si riuscisse a creare uno swing con la spada: carica->contatto->danno, tipo cavaliere
-        //EdgeShape body = new EdgeShape();
-        //body.set(new Vector2(0, -15 / MyGdxGame.PPM), new Vector2(0, 4 / MyGdxGame.PPM));
-        //fdef.shape = body;
-        //fdef.isSensor = true;
-        //b2body.createFixture(fdef).setUserData("body");
     }
 }
 

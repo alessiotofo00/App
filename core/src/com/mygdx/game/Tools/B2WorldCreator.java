@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
+import com.mygdx.game.Sprites.Coin;
 import com.mygdx.game.Sprites.Skeleton;
 
 public class B2WorldCreator {
@@ -61,16 +62,7 @@ public class B2WorldCreator {
         for (MapObject obj : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) obj).getRectangle();
 
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / MyGdxGame.PPM,
-                    (rect.getY() + rect.getHeight() / 2) / MyGdxGame.PPM);
-
-            body = world.createBody(bdef);
-
-            shape.setAsBox((rect.getWidth() / 2) / MyGdxGame.PPM
-                    , (rect.getHeight() / 2) / MyGdxGame.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
+            new Coin(screen, rect);
         }
         //deadly water bodies and fixtures
         for (MapObject obj : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
