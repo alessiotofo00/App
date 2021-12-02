@@ -162,7 +162,8 @@ public class  PlayScreen implements Screen {
         // TODO Auto-generated method stub
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        if(player.hits >= 8){
+        //controllo che il Player abbia ricevuto un numero >= di hit rispetto alla sua vita -> metto GAMEOVER come stato corrente
+        if(Player.hits >= 8){
             player.currentState = Player.State.GAMEOVER;
         }
         if(paused){

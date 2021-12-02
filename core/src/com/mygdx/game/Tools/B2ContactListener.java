@@ -28,10 +28,12 @@ public class B2ContactListener  implements ContactListener {
                 //controllo anche che sia una collisione corretta not null
             }
         }
-
+        //lo switch per ora ha un solo case ma sarà utile anche per gli altri tipi di contatti(es. enemy che va contro un oggetto)
         switch(cDef){
             case MyGdxGame.PLAYER_BIT | MyGdxGame.ENEMY_BIT:
                 Gdx.app.log("Contact", "Enemy");
+                //se si scontrano Player e Enemy chiamo il metodo hitPlayer della classe Enemy
+                //il metodo sarà specializzatp per ogni nemico
                 if(fixA.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT)
                     ((Enemy)fixA.getUserData()).hitPlayer();
                 else

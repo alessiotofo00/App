@@ -34,6 +34,7 @@ public class HealthBar extends Sprite {
 
         //switch case per capire quanti colpi ha subito il player e quindi settare l'immagine corretta della healthBar
         switch(player.hits){
+            //sono multipli di due perchè ogni contatto tra Player ed Enemy lo conta per due(ci sarebbe da capire il motivo ma per ora funziona cosi)
             case 0:
                 healthBar = new TextureRegion(getTexture(), 6, 8, 24, 9);
                 setRegion(healthBar);

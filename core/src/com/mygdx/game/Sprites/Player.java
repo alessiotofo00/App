@@ -175,10 +175,8 @@ public class Player extends Sprite {
     public float getStateTimer(){ return stateTimer; }
 
     public void hitDetect(){
-        /*test di prova per il funzionamento della HealthBar
-        if(Gdx.input.isKeyJustPressed(Input.Keys.H)){
-            setHits(getHits() + 1);
-        }*/
+        //aumento il numero di hit ricevute dal Player
+        //le hit ricevute sono utili nella classe HealthBar per gestire le sprite della vita del Player
         hits++;
     }
 

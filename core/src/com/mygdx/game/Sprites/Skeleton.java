@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
@@ -64,8 +63,8 @@ public class Skeleton extends Enemy {
     }
 
     @Override
-    public boolean hitPlayer() {
+    public void hitPlayer() {
+        //chiamo il metodo hitDetect di Player
         screen.getPlayer().hitDetect();
-        return true;
     }
 }
