@@ -36,6 +36,8 @@ public class Player extends Sprite {
     private boolean runningRight;
     //int per tenere conto del numero di colpi ricevuti dal Player
     public static int hits;
+    //fixture def messa tra le variabili cosi da poter gestire se la shape del player fa contatto o meno
+    FixtureDef fdef;
 
     public Player(PlayScreen screen){
 
@@ -45,7 +47,7 @@ public class Player extends Sprite {
         //setto il mondo di gioco del PlayScreen
         this.world = screen.getWorld();
 
-        setHits(0);
+        hits = 0;
 
         currentState = State.STANDING;
         previousState = State.STANDING;
@@ -86,6 +88,7 @@ public class Player extends Sprite {
         }
         gameover = new Animation<>(0.1f, frames);
         //chiamo la funzione definePlayer() che definisce tutte le caratteristiche del corpo del Player
+        fdef = new FixtureDef();
         definePlayer();
 
         stand = new TextureRegion(getTexture(), 0, 5, 42, 42);
@@ -100,12 +103,20 @@ public class Player extends Sprite {
         setRegion(getFrame(dt));
     }
 
+    public static int getHits() {
+        return hits;
+    }
+
+    public static void setHits(int hits) {
+        Player.hits = hits;
+    }
+
     //metodo per la selezione dei frame corrispondenti allo stato corrente e per l'aggiornamento dello stateTimer
     public TextureRegion getFrame(float dt){
+        TextureRegion region;
         //metto in currentState lo stato che ottengo dal metodo getState
         currentState = getState();
 
-        TextureRegion region;
         switch(currentState){
             case JUMPING:
                 region = jump.getKeyFrame(stateTimer);
@@ -121,6 +132,7 @@ public class Player extends Sprite {
                 region = hit.getKeyFrame(stateTimer, true);
                 break;
             case GAMEOVER:
+                fdef.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.COIN_BIT;
                 region = gameover.getKeyFrame(stateTimer);
                 break;
             case STANDING:
@@ -153,28 +165,21 @@ public class Player extends Sprite {
             return State.JUMPING;
         else if(b2body.getLinearVelocity().y < 0)
             return State.FALLING;
-        else if(b2body.getLinearVelocity().x > 0.05f || b2body.getLinearVelocity().x < -0.05f)
+        else if((b2body.getLinearVelocity().x > 0.05f || b2body.getLinearVelocity().x < -0.05f) && currentState != State.GAMEOVER)
             return State.RUNNING;
-        else if(getHits() == 4)
+        else if(hits >= 8)
             return State.GAMEOVER;
         else return State.STANDING;
     }
 
     public float getStateTimer(){ return stateTimer; }
 
-    public int getHits() {
-        return hits;
-    }
-
-    public void setHits(int hits) {
-        Player.hits = hits;
-    }
-
     public void hitDetect(){
-        //test di prova per il funzionamento della HealthBar
+        /*test di prova per il funzionamento della HealthBar
         if(Gdx.input.isKeyJustPressed(Input.Keys.H)){
             setHits(getHits() + 1);
-        }
+        }*/
+        hits++;
     }
 
     public void definePlayer(){
@@ -183,16 +188,17 @@ public class Player extends Sprite {
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
-        FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(8 / MyGdxGame.PPM, 14 / MyGdxGame.PPM);
         //definisco con collisioni col player
         fdef.filter.categoryBits = MyGdxGame.PLAYER_BIT;
         //definisco le cose che possono collidere col player
-        fdef.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.COIN_BIT;
+        fdef.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.COIN_BIT | MyGdxGame.ENEMY_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
+
+        fdef.isSensor = true;
 
         b2body.createFixture(fdef).setUserData("body");
 

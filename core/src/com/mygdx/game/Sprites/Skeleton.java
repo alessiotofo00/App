@@ -16,6 +16,8 @@ public class Skeleton extends Enemy {
     private float stateTimer;
     private Animation walkAnimation;
     private Array<TextureRegion> frames;
+    private boolean setToDestroy;
+    private boolean destroyed;
 
     public Skeleton(PlayScreen screen, float x, float y) {
         super(screen, x, y);
@@ -50,20 +52,20 @@ public class Skeleton extends Enemy {
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(8 / MyGdxGame.PPM, 14 / MyGdxGame.PPM);
         fdef.shape = shape;
+        fdef.filter.categoryBits = MyGdxGame.ENEMY_BIT;
+        fdef.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.OBJECT_BIT | MyGdxGame.PLAYER_BIT;
+        fdef.restitution = 1;
         b2body.createFixture(fdef).setUserData(this);
     }
 
     public void draw(Batch batch){
-        super.draw(batch);
+        if(!destroyed || stateTimer < 1)
+            super.draw(batch);
     }
 
     @Override
-    public void hitBody(Player player) {
-
-    }
-
-    @Override
-    public void HitByEnemy(Enemy enemy) {
-
+    public boolean hitPlayer() {
+        screen.getPlayer().hitDetect();
+        return true;
     }
 }

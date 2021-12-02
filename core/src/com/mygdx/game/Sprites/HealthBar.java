@@ -31,27 +31,26 @@ public class HealthBar extends Sprite {
     public void update(float dt){
         setPosition(player.b2body.getPosition().x - getWidth() / 2,
                 player.b2body.getPosition().y + getHeight() * 2);
-        //chiamo il metodo di Player per vedere se questo subisce colpi dai nemici
-        player.hitDetect();
+
         //switch case per capire quanti colpi ha subito il player e quindi settare l'immagine corretta della healthBar
-        switch(player.getHits()){
+        switch(player.hits){
             case 0:
                 healthBar = new TextureRegion(getTexture(), 6, 8, 24, 9);
                 setRegion(healthBar);
                 break;
-            case 1:
+            case 2:
                 healthBar = new TextureRegion(healthBar.getTexture(), 39, 8, 24, 9);
                 setRegion(healthBar);
                 break;
-            case 2:
+            case 4:
                 healthBar = new TextureRegion(healthBar.getTexture(), 72, 8, 24, 9);
                 setRegion(healthBar);
                 break;
-            case 3:
+            case 6:
                 healthBar = new TextureRegion(healthBar.getTexture(), 6, 41, 24, 9);
                 setRegion(healthBar);
                 break;
-            case 4:
+            case 8:
                 healthBar = new TextureRegion(healthBar.getTexture(), 39, 41, 24, 9);
                 setRegion(healthBar);
                 break;

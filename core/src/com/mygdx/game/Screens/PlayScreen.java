@@ -119,22 +119,22 @@ public class  PlayScreen implements Screen {
             game.changeScreen(MyGdxGame.PAUSE);
         }
         //tasti per il movimento
-        if(player.b2body.getLinearVelocity().y == 0) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.W))
-                player.b2body.applyLinearImpulse(new Vector2(0, 5f), player.b2body.getWorldCenter(), true);
-        }
+        if(player.currentState != Player.State.GAMEOVER) {
+            if (player.b2body.getLinearVelocity().y == 0) {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.W))
+                    player.b2body.applyLinearImpulse(new Vector2(0, 5f), player.b2body.getWorldCenter(), true);
+            }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.D) && player.b2body.getLinearVelocity().x <= 2) {
-            if(player.currentState == Player.State.HIT){
-                player.b2body.applyLinearImpulse(new Vector2(0.05f, 0), player.b2body.getWorldCenter(), true);
+            if (Gdx.input.isKeyPressed(Input.Keys.D) && player.b2body.getLinearVelocity().x <= 2) {
+                if (player.currentState == Player.State.HIT) {
+                    player.b2body.applyLinearImpulse(new Vector2(0.05f, 0), player.b2body.getWorldCenter(), true);
+                } else player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
             }
-            else player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.A) && player.b2body.getLinearVelocity().x >= -2) {
-            if (player.currentState == Player.State.HIT) {
-                player.b2body.applyLinearImpulse(new Vector2(-0.05f, 0), player.b2body.getWorldCenter(), true);
+            if (Gdx.input.isKeyPressed(Input.Keys.A) && player.b2body.getLinearVelocity().x >= -2) {
+                if (player.currentState == Player.State.HIT) {
+                    player.b2body.applyLinearImpulse(new Vector2(-0.05f, 0), player.b2body.getWorldCenter(), true);
+                } else player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
             }
-            else player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
         }
     }
 

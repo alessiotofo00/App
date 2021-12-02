@@ -1,7 +1,9 @@
 package com.mygdx.game.Tools;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Sprites.Enemy;
 import com.mygdx.game.Sprites.InteractiveTileObject;
 
 public class B2ContactListener  implements ContactListener {
@@ -28,7 +30,13 @@ public class B2ContactListener  implements ContactListener {
         }
 
         switch(cDef){
-            case MyGdxGame.PLAYER_BIT | MyGdxGame.COIN_BIT:
+            case MyGdxGame.PLAYER_BIT | MyGdxGame.ENEMY_BIT:
+                Gdx.app.log("Contact", "Enemy");
+                if(fixA.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT)
+                    ((Enemy)fixA.getUserData()).hitPlayer();
+                else
+                    ((Enemy) fixB.getUserData()).hitPlayer();
+                break;
 
 
         }
