@@ -162,6 +162,9 @@ public class  PlayScreen implements Screen {
         // TODO Auto-generated method stub
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        if(player.hits >= 8){
+            player.currentState = Player.State.GAMEOVER;
+        }
         if(paused){
             Gdx.app.log("paused", "yes");
         }
