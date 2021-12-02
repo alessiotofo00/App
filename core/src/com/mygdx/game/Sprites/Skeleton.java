@@ -1,5 +1,6 @@
 package com.mygdx.game.Sprites;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -23,21 +24,30 @@ public class Skeleton extends Enemy {
 
         frames = new Array<TextureRegion>();
         for(int i = 3; i < 13; i++)
-            frames.add(new TextureRegion(screen.getSkeletonWalkAtlas().findRegion("Skeleton Walk"),
+            frames.add(new TextureRegion(screen.getSkeletonAtlas().findRegion("Skeleton Walk"),
                     i * 22, 0, 21, 34));
         walkAnimation = new Animation(0.1f, frames);
         setBounds(getX(), getY(), 21 / MyGdxGame.PPM, 34 / MyGdxGame.PPM);
         stateTimer = 0;
+        setToDestroy = false;
+        destroyed = false;
     }
 
     @Override
     public void update(float dt) {
         stateTimer += dt;
-
-        b2body.setLinearVelocity(velocity);
-        setPosition(b2body.getPosition().x - getWidth() / 2,
-                b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) walkAnimation.getKeyFrame(stateTimer, true));
+        if(setToDestroy && !destroyed){
+            world.destroyBody(b2body);
+            destroyed = true;
+            setRegion(new TextureRegion(screen.getSkeletonAtlas().findRegion("Skeleton Walk"), 12, 35, 21, 34));
+            stateTimer = 0;
+        }
+        else if(!destroyed) {
+            b2body.setLinearVelocity(velocity);
+            setPosition(b2body.getPosition().x - getWidth() / 2,
+                    b2body.getPosition().y - getHeight() / 2);
+            setRegion((TextureRegion) walkAnimation.getKeyFrame(stateTimer, true));
+        }
     }
 
     @Override
@@ -52,7 +62,7 @@ public class Skeleton extends Enemy {
         shape.setAsBox(8 / MyGdxGame.PPM, 14 / MyGdxGame.PPM);
         fdef.shape = shape;
         fdef.filter.categoryBits = MyGdxGame.ENEMY_BIT;
-        fdef.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.OBJECT_BIT | MyGdxGame.PLAYER_BIT;
+        fdef.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.OBJECT_BIT | MyGdxGame.PLAYER_BIT | MyGdxGame.PLAYER_SWORD_BIT;
         fdef.restitution = 1;
         b2body.createFixture(fdef).setUserData(this);
     }
@@ -66,5 +76,10 @@ public class Skeleton extends Enemy {
     public void hitPlayer() {
         //chiamo il metodo hitDetect di Player
         screen.getPlayer().hitDetect();
+    }
+
+    public void hitByPlayer(){
+        Gdx.app.log("Nemico", "colpito");
+        setToDestroy = true;
     }
 }

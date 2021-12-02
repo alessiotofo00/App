@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
@@ -36,8 +37,7 @@ public class Player extends Sprite {
     private boolean runningRight;
     //int per tenere conto del numero di colpi ricevuti dal Player
     public static int hits;
-    //fixture def messa tra le variabili cosi da poter gestire se la shape del player fa contatto o meno
-    FixtureDef fdef;
+
 
     public Player(PlayScreen screen){
 
@@ -88,7 +88,6 @@ public class Player extends Sprite {
         }
         gameover = new Animation<>(0.1f, frames);
         //chiamo la funzione definePlayer() che definisce tutte le caratteristiche del corpo del Player
-        fdef = new FixtureDef();
         definePlayer();
 
         stand = new TextureRegion(getTexture(), 0, 5, 42, 42);
@@ -132,7 +131,6 @@ public class Player extends Sprite {
                 region = hit.getKeyFrame(stateTimer, true);
                 break;
             case GAMEOVER:
-                fdef.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.COIN_BIT;
                 region = gameover.getKeyFrame(stateTimer);
                 break;
             case STANDING:
@@ -186,6 +184,7 @@ public class Player extends Sprite {
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
+        FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(8 / MyGdxGame.PPM, 14 / MyGdxGame.PPM);
         //definisco con collisioni col player
@@ -200,6 +199,20 @@ public class Player extends Sprite {
 
         b2body.createFixture(fdef).setUserData("body");
 
+        PolygonShape sword = new PolygonShape();
+        Vector2[] vertice = new Vector2[4];
+        vertice[0] = new Vector2(5, 8).scl(1 / MyGdxGame.PPM);
+        vertice[1] = new Vector2(20, 8).scl(1 / MyGdxGame.PPM);
+        vertice[2] = new Vector2(5, 5).scl(1 / MyGdxGame.PPM);
+        vertice[3] = new Vector2(20, 5).scl(1 / MyGdxGame.PPM);
+        sword.set(vertice);
+
+        fdef.shape = sword;
+        fdef.restitution = 2f;
+        fdef.filter.categoryBits = MyGdxGame.PLAYER_SWORD_BIT;
+        fdef.filter.maskBits = MyGdxGame.ENEMY_BIT;
+        fdef.isSensor = true;
+        b2body.createFixture(fdef).setUserData("sword");
     }
 }
 

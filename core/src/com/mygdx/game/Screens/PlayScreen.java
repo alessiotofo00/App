@@ -36,7 +36,7 @@ public class  PlayScreen implements Screen {
 
     private final MyGdxGame game;
     private final TextureAtlas knightAtlas;
-    private final TextureAtlas skeletonWalkAtlas;
+    private final TextureAtlas skeletonAtlas;
     private final TextureAtlas healthBarAtlas;
 
     private final OrthographicCamera gamecam;
@@ -60,7 +60,7 @@ public class  PlayScreen implements Screen {
     public PlayScreen(final MyGdxGame game){
 
         knightAtlas = new TextureAtlas("RedKnight.pack");
-        skeletonWalkAtlas = new TextureAtlas("skeletonWalk.pack");
+        skeletonAtlas = new TextureAtlas("skeletonWalk.pack");
         healthBarAtlas = new TextureAtlas("HealthBar.pack");
         this.game = game;
         Skin skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
@@ -92,7 +92,7 @@ public class  PlayScreen implements Screen {
         return knightAtlas;
     }
 
-    public TextureAtlas getSkeletonWalkAtlas() { return skeletonWalkAtlas;}
+    public TextureAtlas getSkeletonAtlas() { return skeletonAtlas;}
 
     public TextureAtlas getHealthBarAtlas(){
         return healthBarAtlas;
@@ -238,5 +238,4 @@ public class  PlayScreen implements Screen {
         b2dr.dispose();
         hud.dispose();
     }
-
 }

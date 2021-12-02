@@ -24,6 +24,7 @@ public abstract class Enemy extends Sprite {
     public abstract void update(float dt);
 
     public abstract void hitPlayer();
+    public abstract void hitByPlayer();
 
     public void reverseVelocity(boolean x, boolean y){
         if(x)
@@ -31,4 +32,5 @@ public abstract class Enemy extends Sprite {
         if(y)
             velocity.y = -velocity.y;
     }
+
 }

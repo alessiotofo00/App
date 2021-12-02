@@ -33,11 +33,17 @@ public class B2ContactListener  implements ContactListener {
             case MyGdxGame.PLAYER_BIT | MyGdxGame.ENEMY_BIT:
                 Gdx.app.log("Contact", "Enemy");
                 //se si scontrano Player e Enemy chiamo il metodo hitPlayer della classe Enemy
-                //il metodo sarà specializzatp per ogni nemico
+                //il metodo sarà specializzato per ogni nemico
                 if(fixA.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT)
                     ((Enemy)fixA.getUserData()).hitPlayer();
                 else
                     ((Enemy) fixB.getUserData()).hitPlayer();
+                break;
+            case MyGdxGame.PLAYER_SWORD_BIT | MyGdxGame.ENEMY_BIT:
+                if(fixA.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT)
+                    ((Enemy)fixA.getUserData()).hitByPlayer();
+                else
+                    ((Enemy) fixB.getUserData()).hitByPlayer();
                 break;
 
 

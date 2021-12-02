@@ -19,7 +19,7 @@ public class MyGdxGame extends Game {
 	public static final short DESTROYED_BIT=8;
 	public static final short OBJECT_BIT=16;
 	public static final short ENEMY_BIT=32;
-	public static final short ENEMY_HIT_BIT=64;
+	public static final short PLAYER_SWORD_BIT =64;
 
 	public SpriteBatch batch;
 
