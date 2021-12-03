@@ -39,7 +39,7 @@ public class B2ContactListener  implements ContactListener {
                 else
                     ((Enemy) fixB.getUserData()).hitPlayer();
                 break;
-            case MyGdxGame.PLAYER_SWORD_BIT | MyGdxGame.ENEMY_BIT:
+            case MyGdxGame.ATK_PLAYER_BIT | MyGdxGame.ENEMY_BIT:
                 if(fixA.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT)
                     ((Enemy)fixA.getUserData()).hitByPlayer();
                 else

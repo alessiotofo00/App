@@ -14,15 +14,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-//import com.badlogic.gdx.scenes.scene2d.InputEvent;
-//import com.badlogic.gdx.scenes.scene2d.Stage;
-//import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-//import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-//import com.badlogic.gdx.scenes.scene2d.ui.Window;
-//import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-//import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
@@ -55,7 +47,7 @@ public class  PlayScreen implements Screen {
     //variabili per la creazione del mondo di gioco
     public World world;
     private final Box2DDebugRenderer b2dr;
-    private B2WorldCreator creator;
+    private final B2WorldCreator creator;
 
     public PlayScreen(final MyGdxGame game){
 
@@ -63,7 +55,6 @@ public class  PlayScreen implements Screen {
         skeletonAtlas = new TextureAtlas("skeletonWalk.pack");
         healthBarAtlas = new TextureAtlas("HealthBar.pack");
         this.game = game;
-        Skin skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
 
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(MyGdxGame.V_WIDTH / MyGdxGame.PPM,
@@ -108,7 +99,7 @@ public class  PlayScreen implements Screen {
     }
 
     //method useful to catch the keyboard inputs
-    public void handleInput(float dt){
+    public void handleInput(){
         //tasto provvisorio per provare lo shop
         if(Gdx.input.isKeyJustPressed(Input.Keys.S)){
             game.changeScreen(MyGdxGame.SHOP);
@@ -140,7 +131,7 @@ public class  PlayScreen implements Screen {
 
     //we will call this method in our render method
     public void update(float dt) {
-        handleInput(dt);
+        handleInput();
 
         healthBar.update(dt);
 

@@ -62,7 +62,7 @@ public class Skeleton extends Enemy {
         shape.setAsBox(8 / MyGdxGame.PPM, 14 / MyGdxGame.PPM);
         fdef.shape = shape;
         fdef.filter.categoryBits = MyGdxGame.ENEMY_BIT;
-        fdef.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.OBJECT_BIT | MyGdxGame.PLAYER_BIT | MyGdxGame.PLAYER_SWORD_BIT;
+        fdef.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.OBJECT_BIT | MyGdxGame.PLAYER_BIT | MyGdxGame.ATK_PLAYER_BIT;
         fdef.restitution = 1;
         b2body.createFixture(fdef).setUserData(this);
     }

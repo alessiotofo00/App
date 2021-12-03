@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
@@ -37,7 +36,8 @@ public class Player extends Sprite {
     private boolean runningRight;
     //int per tenere conto del numero di colpi ricevuti dal Player
     public static int hits;
-
+    //fdef player
+    FixtureDef fdef;
 
     public Player(PlayScreen screen){
 
@@ -87,6 +87,8 @@ public class Player extends Sprite {
             frames.add(new TextureRegion(getTexture(), i * 43, 5, 42, 42));
         }
         gameover = new Animation<>(0.1f, frames);
+
+        fdef = new FixtureDef();
         //chiamo la funzione definePlayer() che definisce tutte le caratteristiche del corpo del Player
         definePlayer();
 
@@ -157,14 +159,19 @@ public class Player extends Sprite {
 
     //metodo che seleziona lo stato corrente in base alla velocita del Player
     public State getState(){
-        if(Gdx.input.isKeyPressed(Input.Keys.K))
-                return State.HIT;
-        else if(b2body.getLinearVelocity().y > 0)
+        if(Gdx.input.isKeyPressed(Input.Keys.K)) {
+            fdef.filter.categoryBits = MyGdxGame.ATK_PLAYER_BIT;
+            return State.HIT;
+        }
+        else if(b2body.getLinearVelocity().y > 0) {
             return State.JUMPING;
-        else if(b2body.getLinearVelocity().y < 0)
+        }
+        else if(b2body.getLinearVelocity().y < 0) {
             return State.FALLING;
-        else if((b2body.getLinearVelocity().x > 0.05f || b2body.getLinearVelocity().x < -0.05f) && currentState != State.GAMEOVER)
+        }
+        else if((b2body.getLinearVelocity().x > 0.05f || b2body.getLinearVelocity().x < -0.05f) && currentState != State.GAMEOVER) {
             return State.RUNNING;
+        }
         else if(hits >= 8)
             return State.GAMEOVER;
         else return State.STANDING;
@@ -184,7 +191,6 @@ public class Player extends Sprite {
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
-        FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(8 / MyGdxGame.PPM, 14 / MyGdxGame.PPM);
         //definisco con collisioni col player
@@ -198,21 +204,6 @@ public class Player extends Sprite {
         fdef.isSensor = true;
 
         b2body.createFixture(fdef).setUserData("body");
-
-        PolygonShape sword = new PolygonShape();
-        Vector2[] vertice = new Vector2[4];
-        vertice[0] = new Vector2(5, 8).scl(1 / MyGdxGame.PPM);
-        vertice[1] = new Vector2(20, 8).scl(1 / MyGdxGame.PPM);
-        vertice[2] = new Vector2(5, 5).scl(1 / MyGdxGame.PPM);
-        vertice[3] = new Vector2(20, 5).scl(1 / MyGdxGame.PPM);
-        sword.set(vertice);
-
-        fdef.shape = sword;
-        fdef.restitution = 2f;
-        fdef.filter.categoryBits = MyGdxGame.PLAYER_SWORD_BIT;
-        fdef.filter.maskBits = MyGdxGame.ENEMY_BIT;
-        fdef.isSensor = true;
-        b2body.createFixture(fdef).setUserData("sword");
     }
 }
 
