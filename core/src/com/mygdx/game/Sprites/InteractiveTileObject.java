@@ -33,6 +33,8 @@ public abstract class InteractiveTileObject {
         shape.setAsBox((bounds.getWidth() / 2) / MyGdxGame.PPM
                 , (bounds.getHeight() / 2) / MyGdxGame.PPM);
         fdef.shape = shape;
+        fdef.restitution = 0.4f;
+        fdef.friction = 20;
         fixture = body.createFixture(fdef);
     }
 
@@ -45,7 +47,7 @@ public abstract class InteractiveTileObject {
     }
 
     public TiledMapTileLayer.Cell getCell(){
-        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(3); //numero di graphic
+        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(4); //numero di graphic
         return layer.getCell((int)(body.getPosition().x * MyGdxGame.PPM/16), (int)(body.getPosition().y * MyGdxGame.PPM/16));
     }
 }

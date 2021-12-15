@@ -1,28 +1,28 @@
 package com.mygdx.game.Sprites;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Screens.PlayScreen;
 
-public class Coin extends InteractiveTileObject {
+public class DoubleJump extends InteractiveTileObject {
 
-    public Coin(PlayScreen screen, Rectangle bounds) {
+    PlayScreen screen;
+
+    public DoubleJump(PlayScreen screen, Rectangle bounds) {
         super(screen, bounds);
+        this.screen = screen;
         fixture.setUserData(this);
-        setCategoryFilter(MyGdxGame.COIN_BIT);
+        setCategoryFilter(MyGdxGame.DOUBLE_JUMP_BIT);
     }
 
     @Override
     public void bodyHit() {
-        Gdx.app.log("Hit", "Coin");
+        Gdx.app.log("Hit", "DoubleJump");
+        screen.canJump = true;
         setCategoryFilter(MyGdxGame.DESTROYED_BIT);
         getCell().setTile(null);
-        Hud.addCoins();
     }
 
 }

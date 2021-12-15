@@ -5,6 +5,10 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Screens.*;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class MyGdxGame extends Game {
 
 	public static final int V_WIDTH = 960;
@@ -15,11 +19,13 @@ public class MyGdxGame extends Game {
 	//valori BIT per capire che tipo di collisione ho avuto
 	public static final short GROUND_BIT = 1;
 	public static final short PLAYER_BIT = 2;
-	public static final short COIN_BIT = 4;
+	public static final short DOUBLE_JUMP_BIT = 4;
 	public static final short DESTROYED_BIT = 8;
 	public static final short OBJECT_BIT = 16;
 	public static final short ENEMY_BIT = 32;
 	public static final short ATK_PLAYER_BIT = 64;
+	public static final short SPIKES_BIT = 128;
+	public static final short LEVEL_SWITCHER_BIT = 256;
 
 	public SpriteBatch batch;
 
@@ -45,6 +51,8 @@ public class MyGdxGame extends Game {
 	//manager per i suoni e la musica
 	public static AssetManager manager;
 
+	public File levelFile;
+
 
 	@Override
 	public void create () {
@@ -53,6 +61,28 @@ public class MyGdxGame extends Game {
 		manager = new AssetManager();
 
 		menuScreen = new MenuScreen(this);
+
+		try {
+			levelFile = new File("C:/Users/Utente/Documents/My Games/CelesteTry/core/assets/levelHolder.txt");
+			if (levelFile.exists()){
+				System.out.println("file esistente");
+				levelFile.delete();
+				levelFile.createNewFile();
+				FileWriter fw = new FileWriter(levelFile);
+				fw.write("1");
+				fw.close();
+			}
+			else if(levelFile.createNewFile()) {
+				System.out.println("file creato");
+				FileWriter fw = new FileWriter(levelFile);
+				fw.write("1");
+				fw.close();
+			}
+		}
+		catch (IOException e){
+			e.printStackTrace();
+		}
+
 		setScreen(menuScreen);
 	}
 

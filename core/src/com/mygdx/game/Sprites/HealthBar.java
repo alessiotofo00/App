@@ -39,19 +39,19 @@ public class HealthBar extends Sprite {
                 healthBar = new TextureRegion(getTexture(), 6, 8, 24, 9);
                 setRegion(healthBar);
                 break;
-            case 2:
+            case 1:
                 healthBar = new TextureRegion(healthBar.getTexture(), 39, 8, 24, 9);
                 setRegion(healthBar);
                 break;
-            case 4:
+            case 2:
                 healthBar = new TextureRegion(healthBar.getTexture(), 72, 8, 24, 9);
                 setRegion(healthBar);
                 break;
-            case 6:
+            case 3:
                 healthBar = new TextureRegion(healthBar.getTexture(), 6, 41, 24, 9);
                 setRegion(healthBar);
                 break;
-            case 8:
+            case 4:
                 healthBar = new TextureRegion(healthBar.getTexture(), 39, 41, 24, 9);
                 setRegion(healthBar);
                 break;

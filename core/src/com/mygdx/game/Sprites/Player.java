@@ -33,7 +33,7 @@ public class Player extends Sprite {
     //rappresentato dalla corrispondente animazione(vedi il suo utilizzo come parametro nello switch del metodo getFrame)
     private float stateTimer;
     //boolean utile a capire il verso in cui corre il Player e, di conseguenza, ad orientare la sua sprite
-    private boolean runningRight;
+    public boolean runningRight;
     //int per tenere conto del numero di colpi ricevuti dal Player
     public static int hits;
     //fdef player
@@ -172,7 +172,7 @@ public class Player extends Sprite {
         else if((b2body.getLinearVelocity().x > 0.05f || b2body.getLinearVelocity().x < -0.05f) && currentState != State.GAMEOVER) {
             return State.RUNNING;
         }
-        else if(hits >= 8)
+        else if(hits >= 4)
             return State.GAMEOVER;
         else return State.STANDING;
     }
@@ -196,12 +196,14 @@ public class Player extends Sprite {
         //definisco con collisioni col player
         fdef.filter.categoryBits = MyGdxGame.PLAYER_BIT;
         //definisco le cose che possono collidere col player
-        fdef.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.COIN_BIT | MyGdxGame.ENEMY_BIT;
+        fdef.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.DOUBLE_JUMP_BIT | MyGdxGame.ENEMY_BIT | MyGdxGame.SPIKES_BIT
+                                |MyGdxGame.LEVEL_SWITCHER_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
 
         fdef.isSensor = true;
+        fdef.friction = 20;
 
         b2body.createFixture(fdef).setUserData("body");
     }

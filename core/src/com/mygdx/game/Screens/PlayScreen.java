@@ -24,6 +24,11 @@ import com.mygdx.game.Sprites.Player;
 import com.mygdx.game.Tools.B2ContactListener;
 import com.mygdx.game.Tools.B2WorldCreator;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class  PlayScreen implements Screen {
 
     private final MyGdxGame game;
@@ -35,12 +40,15 @@ public class  PlayScreen implements Screen {
     private final Viewport gamePort;
 
     private final Hud hud;
-    private final TiledMap map;
+    private TiledMap map = null;
     private final OrthogonalTiledMapRenderer renderer;
     //player declaration
     private final Player player;
     //boolean per lo stato di gioco(vedi metodo render)
     static boolean paused;
+
+    public boolean canJump;
+    public boolean canDash = true;
 
     private final HealthBar healthBar;
 
@@ -48,6 +56,8 @@ public class  PlayScreen implements Screen {
     public World world;
     private final Box2DDebugRenderer b2dr;
     private final B2WorldCreator creator;
+
+    public int level;
 
     public PlayScreen(final MyGdxGame game){
 
@@ -62,9 +72,24 @@ public class  PlayScreen implements Screen {
                 gamecam);
         hud = new Hud(game.batch, this);
 
+        try {
+            BufferedReader buf = new BufferedReader(new FileReader("C:/Users/Utente/Documents/My Games/CelesteTry/core/assets/levelHolder.txt"));
+            level = Integer.parseInt(buf.readLine());
+            buf.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         //map declarations
         TmxMapLoader mapLoader = new TmxMapLoader();
-        map = mapLoader.load("mappa16x16.tmx");
+        switch (level){
+            case 1:
+                map = mapLoader.load("Level1.tmx");
+                break;
+            case 2:
+                map = mapLoader.load("Level2.tmx");
+                break;
+        }
         renderer = new OrthogonalTiledMapRenderer(map, 1 / MyGdxGame.PPM);
         //gamecam.position necessario per non centrare in posizione 0.0 (il centro della mappa, visto come assi cartesiani)
         //divido quindi per 2 h e l
@@ -72,11 +97,20 @@ public class  PlayScreen implements Screen {
 
         world = new World(new Vector2(0, -13), true); //il -10 indica la gravità nel mondo di gioco
         b2dr = new Box2DDebugRenderer();
+        b2dr.setDrawBodies(false);
         creator = new B2WorldCreator(this);
         player = new Player(this);
         healthBar = new HealthBar(world, this);
         //listener
         world.setContactListener(new B2ContactListener());
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public TextureAtlas getKnightAtlas(){
@@ -111,9 +145,19 @@ public class  PlayScreen implements Screen {
         }
         //tasti per il movimento
         if(player.currentState != Player.State.GAMEOVER) {
-            if (player.b2body.getLinearVelocity().y == 0) {
-                if (Gdx.input.isKeyJustPressed(Input.Keys.W))
-                    player.b2body.applyLinearImpulse(new Vector2(0, 5f), player.b2body.getWorldCenter(), true);
+            if (player.b2body.getLinearVelocity().y == 0 || canJump) {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+                    player.b2body.applyLinearImpulse(new Vector2(0, 4), player.b2body.getWorldCenter(), true);
+                    canJump = false;
+                }
+            }
+            if (canDash){
+                if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT) && player.runningRight){
+                    player.b2body.applyLinearImpulse(new Vector2(1.5f, 1.1f), player.b2body.getWorldCenter(), true);
+                }
+                if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT) && !player.runningRight){
+                    player.b2body.applyLinearImpulse(new Vector2(-1.5f, 1.1f), player.b2body.getWorldCenter(), true);
+                }
             }
 
             if (Gdx.input.isKeyPressed(Input.Keys.D) && player.b2body.getLinearVelocity().x <= 2) {
@@ -154,7 +198,7 @@ public class  PlayScreen implements Screen {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         //controllo che il Player abbia ricevuto un numero >= di hit rispetto alla sua vita -> metto GAMEOVER come stato corrente
-        if(Player.hits >= 8){
+        if(Player.hits >= 4){
             player.currentState = Player.State.GAMEOVER;
         }
         if(paused){

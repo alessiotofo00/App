@@ -8,8 +8,10 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
-import com.mygdx.game.Sprites.Coin;
+import com.mygdx.game.Sprites.DoubleJump;
+import com.mygdx.game.Sprites.LevelSwitcher;
 import com.mygdx.game.Sprites.Skeleton;
+import com.mygdx.game.Sprites.Spikes;
 
 public class B2WorldCreator {
 
@@ -29,21 +31,6 @@ public class B2WorldCreator {
         //i numeri nel for (...'.get(n)'...) sono gli indici degli oggetti nella mappa Tiled
 
         //ground bodies and fixtures
-        for (MapObject obj : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) obj).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / MyGdxGame.PPM,
-                    (rect.getY() + rect.getHeight() / 2) / MyGdxGame.PPM);
-
-            body = world.createBody(bdef);
-
-            shape.setAsBox((rect.getWidth() / 2) / MyGdxGame.PPM
-                    , (rect.getHeight() / 2) / MyGdxGame.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
-        //buildings bodies and fixtures
         for (MapObject obj : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) obj).getRectangle();
 
@@ -58,33 +45,30 @@ public class B2WorldCreator {
             fdef.shape = shape;
             body.createFixture(fdef);
         }
-        //coins bodies and fixtures
+        //spikes bodies and fixtures
         for (MapObject obj : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) obj).getRectangle();
 
-            new Coin(screen, rect);
+            new Spikes(screen, rect);
         }
-        //deadly water bodies and fixtures
+        //level switcher bodies and fixtures
         for (MapObject obj : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) obj).getRectangle();
 
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / MyGdxGame.PPM,
-                    (rect.getY() + rect.getHeight() / 2) / MyGdxGame.PPM);
-
-            body = world.createBody(bdef);
-
-            shape.setAsBox((rect.getWidth() / 2) / MyGdxGame.PPM
-                    , (rect.getHeight() / 2) / MyGdxGame.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
+            new LevelSwitcher(screen, rect);
         }
-        //skeletons bodies and fixtures
+        //doublejumps bodies and fixtures
         for (MapObject obj : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) obj).getRectangle();
 
-            skeletons.add(new Skeleton(screen, rect.getX() / MyGdxGame.PPM, rect.getY() / MyGdxGame.PPM));
+            new DoubleJump(screen, rect);
         }
+        /*//skeletons bodies and fixtures
+        for (MapObject obj : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) obj).getRectangle();
+
+            skeletons.add(new Skeleton(screen, rect.getX() / MyGdxGame.PPM, rect.getY() / MyGdxGame.PPM));
+        }*/
     }
 
     public Array<Skeleton> getSkeletons() {
