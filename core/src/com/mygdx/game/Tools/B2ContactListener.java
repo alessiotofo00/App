@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Sprites.Enemy;
-import com.mygdx.game.Sprites.InteractiveTileObject;
+import com.mygdx.game.Sprites.RectInteractiveTileObject;
 
 public class B2ContactListener  implements ContactListener {
 
@@ -22,8 +22,8 @@ public class B2ContactListener  implements ContactListener {
             Fixture body = fixA.getUserData() == "body" ? fixA : fixB;
             Fixture object = body == fixA ? fixB : fixA;
 
-            if(object.getUserData() != null && InteractiveTileObject.class.isAssignableFrom(object.getUserData().getClass())) {
-                ((InteractiveTileObject) object.getUserData()).bodyHit();
+            if(object.getUserData() != null && (RectInteractiveTileObject.class.isAssignableFrom(object.getUserData().getClass()))) {
+                ((RectInteractiveTileObject) object.getUserData()).bodyHit();
                 //devo sapere se quello che ho colpito è un interactive,quale è e attivare di conseguenza il bodyhit corretto
                 //controllo anche che sia una collisione corretta not null
             }

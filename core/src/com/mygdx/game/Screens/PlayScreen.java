@@ -25,7 +25,6 @@ import com.mygdx.game.Tools.B2ContactListener;
 import com.mygdx.game.Tools.B2WorldCreator;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 

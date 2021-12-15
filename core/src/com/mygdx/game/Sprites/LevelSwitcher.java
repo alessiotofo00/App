@@ -4,19 +4,17 @@ import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class LevelSwitcher extends InteractiveTileObject{
+public class LevelSwitcher extends RectInteractiveTileObject {
 
     PlayScreen screen;
     MyGdxGame game;
 
     public LevelSwitcher(PlayScreen screen, Rectangle bounds){
         super(screen, bounds);
-        super.fixture.setRestitution(0);
         this.screen = screen;
         game = screen.getGame();
         fixture.setUserData(this);

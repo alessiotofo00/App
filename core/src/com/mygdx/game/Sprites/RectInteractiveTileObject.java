@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
 
-public abstract class InteractiveTileObject {
+public abstract class RectInteractiveTileObject {
     protected World world;
     protected TiledMap map;
     protected Rectangle bounds;
@@ -15,7 +15,7 @@ public abstract class InteractiveTileObject {
     protected Fixture fixture;
 
 
-    public InteractiveTileObject(PlayScreen screen, Rectangle bounds) {
+    public RectInteractiveTileObject(PlayScreen screen, Rectangle bounds) {
         this.world = screen.getWorld();
         this.map = screen.getMap();
         this.bounds = bounds;
@@ -33,7 +33,7 @@ public abstract class InteractiveTileObject {
         shape.setAsBox((bounds.getWidth() / 2) / MyGdxGame.PPM
                 , (bounds.getHeight() / 2) / MyGdxGame.PPM);
         fdef.shape = shape;
-        fdef.restitution = 0.4f;
+        fdef.restitution = 0;
         fdef.friction = 20;
         fixture = body.createFixture(fdef);
     }

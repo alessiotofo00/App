@@ -15,7 +15,7 @@ import com.mygdx.game.Sprites.Spikes;
 
 public class B2WorldCreator {
 
-    private Array<Skeleton> skeletons = new Array<Skeleton>();
+    private final Array<Skeleton> skeletons = new Array<Skeleton>();
 
     public B2WorldCreator(PlayScreen screen){
         World world = screen.getWorld();
