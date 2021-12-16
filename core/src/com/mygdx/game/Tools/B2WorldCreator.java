@@ -8,10 +8,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
-import com.mygdx.game.Sprites.DoubleJump;
-import com.mygdx.game.Sprites.LevelSwitcher;
-import com.mygdx.game.Sprites.Skeleton;
-import com.mygdx.game.Sprites.Spikes;
+import com.mygdx.game.Sprites.*;
 
 public class B2WorldCreator {
 
@@ -62,6 +59,12 @@ public class B2WorldCreator {
             Rectangle rect = ((RectangleMapObject) obj).getRectangle();
 
             new DoubleJump(screen, rect);
+        }
+        //infobox bodies and fixtures
+        for (MapObject obj : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) obj).getRectangle();
+
+            new InfoBox(screen, rect);
         }
         /*//skeletons bodies and fixtures
         for (MapObject obj : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {

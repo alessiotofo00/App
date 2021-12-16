@@ -46,7 +46,6 @@ public class B2ContactListener  implements ContactListener {
                     ((Enemy) fixB.getUserData()).hitByPlayer();
                 break;
 
-
         }
     }
 

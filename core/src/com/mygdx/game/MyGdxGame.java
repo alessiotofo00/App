@@ -26,6 +26,7 @@ public class MyGdxGame extends Game {
 	public static final short ATK_PLAYER_BIT = 64;
 	public static final short SPIKES_BIT = 128;
 	public static final short LEVEL_SWITCHER_BIT = 256;
+	public static final short INFOBOX_BIT = 512;
 
 	public SpriteBatch batch;
 
@@ -63,7 +64,7 @@ public class MyGdxGame extends Game {
 		menuScreen = new MenuScreen(this);
 
 		try {
-			levelFile = new File("C:/Users/Utente/Documents/My Games/CelesteTry/core/assets/levelHolder.txt");
+			levelFile = new File(String.valueOf(Gdx.files.internal("levelHolder.txt")));
 			if (levelFile.exists()){
 				System.out.println("file esistente");
 				levelFile.delete();

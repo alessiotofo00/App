@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="35">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="40">
  <tileset firstgid="1" source="JKBACK.tsx"/>
  <tileset firstgid="105" source="JKMIDDLE.tsx"/>
  <tileset firstgid="339" source="JKnear.tsx"/>
@@ -235,7 +235,6 @@
   <object id="2" x="32" y="432" width="64" height="32"/>
   <object id="3" x="64" y="400" width="32" height="32"/>
   <object id="4" x="160" y="400" width="32" height="64"/>
-  <object id="5" x="256" y="400" width="63.6131" height="11.4481"/>
   <object id="6" x="400" y="400" width="16" height="64"/>
   <object id="7" x="480" y="384" width="32" height="80"/>
   <object id="8" x="448" y="368" width="64" height="16"/>
@@ -249,6 +248,9 @@
   <object id="31" x="448" y="224" width="48" height="32"/>
   <object id="32" x="496" y="240" width="16" height="16"/>
   <object id="34" x="496" y="48" width="16" height="138.538"/>
+  <object id="35" x="0" y="0" height="464"/>
+  <object id="36" x="512" y="0" height="48"/>
+  <object id="38" x="256" y="400" width="48" height="8.71693"/>
  </objectgroup>
  <objectgroup id="6" name="spike">
   <object id="14" x="96" y="453.462" width="64" height="10.5377"/>
@@ -261,4 +263,7 @@
   <object id="33" x="496" y="224" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="10" name="doublejump"/>
+ <objectgroup id="14" name="info">
+  <object id="39" x="304" y="400" width="16" height="10.5377"/>
+ </objectgroup>
 </map>
