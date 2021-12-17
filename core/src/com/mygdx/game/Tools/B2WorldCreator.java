@@ -61,7 +61,7 @@ public class B2WorldCreator {
             new DoubleJump(screen, rect);
         }
         //infobox bodies and fixtures
-        for (MapObject obj : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject obj : map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) obj).getRectangle();
 
             new InfoBox(screen, rect);

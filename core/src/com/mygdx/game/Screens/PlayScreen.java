@@ -72,7 +72,7 @@ public class  PlayScreen implements Screen {
         hud = new Hud(game.batch, this);
 
         try {
-            BufferedReader buf = new BufferedReader(new FileReader("C:/Users/Utente/Documents/My Games/CelesteTry/core/assets/levelHolder.txt"));
+            BufferedReader buf = new BufferedReader(new FileReader(String.valueOf(Gdx.files.internal("levelHolder.txt"))));
             level = Integer.parseInt(buf.readLine());
             buf.close();
         } catch (IOException e) {

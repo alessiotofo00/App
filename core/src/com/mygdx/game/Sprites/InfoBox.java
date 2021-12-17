@@ -1,5 +1,6 @@
 package com.mygdx.game.Sprites;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
@@ -18,6 +19,6 @@ public class InfoBox extends RectInteractiveTileObject{
 
     @Override
     public void bodyHit() {
-
+        Gdx.app.log("infobox", "hit");
     }
 }
