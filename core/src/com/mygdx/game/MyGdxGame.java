@@ -26,7 +26,6 @@ public class MyGdxGame extends Game {
 	public static final short ATK_PLAYER_BIT = 64;
 	public static final short SPIKES_BIT = 128;
 	public static final short LEVEL_SWITCHER_BIT = 256;
-	public static final short INFOBOX_BIT = 512;
 
 	public SpriteBatch batch;
 
@@ -36,6 +35,7 @@ public class MyGdxGame extends Game {
 	public PauseScreen pauseScreen;
 	public GameOverScreen goScreen;
 	public ShopScreen shopScreen;
+	public CommandInfoScreen infoScreen;
 
 
 	//variabili per lo switch case dei vari screen
@@ -45,6 +45,7 @@ public class MyGdxGame extends Game {
 	public final static int PAUSE = 3;
 	public final static int GAMEOVER = 4;
 	public final static int SHOP = 5;
+	public final static int INFO = 6;
 	//salvo lo schermo precedente a quello attuale e lo schermo attuale
 	//(serve al PreferencesScreen per distinguere se è stato chiamato dal MenuScreen o dal PauseScreen)
 	public static int previousScreen;
@@ -130,6 +131,11 @@ public class MyGdxGame extends Game {
 				currentScreen = SHOP;
 				if(shopScreen == null) shopScreen = new ShopScreen(this);
 				this.setScreen(shopScreen);
+				break;
+			case INFO:
+				currentScreen = INFO;
+				if(infoScreen == null) infoScreen = new CommandInfoScreen(this);
+				this.setScreen(infoScreen);
 				break;
 		}
 	}
