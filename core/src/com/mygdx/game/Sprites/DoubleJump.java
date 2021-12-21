@@ -11,7 +11,7 @@ public class DoubleJump extends RectInteractiveTileObject {
 
     public DoubleJump(PlayScreen screen, Rectangle bounds) {
         super(screen, bounds);
-        super.fixture.setRestitution(1.5f);
+        super.fixture.setRestitution(1.3f);
         this.screen = screen;
         fixture.setUserData(this);
         setCategoryFilter(MyGdxGame.DOUBLE_JUMP_BIT);

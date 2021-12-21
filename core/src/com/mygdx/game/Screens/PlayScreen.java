@@ -88,11 +88,14 @@ public class  PlayScreen implements Screen {
             case 2:
                 map = mapLoader.load("Level2.tmx");
                 break;
+            case 3:
+                map = mapLoader.load("Level3.tmx");
+                break;
         }
         renderer = new OrthogonalTiledMapRenderer(map, 1 / MyGdxGame.PPM);
         //gamecam.position necessario per non centrare in posizione 0.0 (il centro della mappa, visto come assi cartesiani)
         //divido quindi per 2 h e l
-        gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
+        gamecam.position.set(gamePort.getWorldWidth() / 2 - (224 / MyGdxGame.PPM), gamePort.getWorldHeight() / 2, 0);
 
         world = new World(new Vector2(0, -13), true); //il -10 indica la gravità nel mondo di gioco
         b2dr = new Box2DDebugRenderer();
@@ -144,17 +147,17 @@ public class  PlayScreen implements Screen {
         }
         //tasti per il movimento
         if(player.currentState != Player.State.GAMEOVER) {
-            if (player.b2body.getLinearVelocity().y == 0 || canJump) {
+            //if (player.b2body.getLinearVelocity().y == 0 || canJump) {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
                     player.b2body.applyLinearImpulse(new Vector2(0, 4), player.b2body.getWorldCenter(), true);
                     canJump = false;
                 }
-            }
+            //}
             if (canDash){
-                if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT) && player.runningRight){
+                if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT) /*&& Gdx.input.isKeyPressed(Input.Keys.D)*/ && player.runningRight) {
                     player.b2body.applyLinearImpulse(new Vector2(1.5f, 1.1f), player.b2body.getWorldCenter(), true);
                 }
-                if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT) && !player.runningRight){
+                if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.A) && !player.runningRight){
                     player.b2body.applyLinearImpulse(new Vector2(-1.5f, 1.1f), player.b2body.getWorldCenter(), true);
                 }
             }
@@ -188,7 +191,7 @@ public class  PlayScreen implements Screen {
         for(Enemy enemy : creator.getBullets())
             enemy.update(dt);
         //gamecam che segue il player
-        gamecam.position.x = player.b2body.getPosition().x;
+        //gamecam.position.x = player.b2body.getPosition().x;
         //aggiorno la gamecam
         gamecam.update();
         renderer.setView(gamecam);
