@@ -13,6 +13,7 @@ import com.mygdx.game.Sprites.*;
 public class B2WorldCreator {
 
     private final Array<Skeleton> skeletons = new Array<Skeleton>();
+    private final Array<Bullet> bullets = new Array<Bullet>();
 
     public B2WorldCreator(PlayScreen screen){
         World world = screen.getWorld();
@@ -60,6 +61,12 @@ public class B2WorldCreator {
 
             new DoubleJump(screen, rect);
         }
+        //bullets bodies and fixtures
+        for (MapObject obj : map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) obj).getRectangle();
+
+            bullets.add(new Bullet(screen, rect.getX() / MyGdxGame.PPM, rect.getY() / MyGdxGame.PPM));
+        }
         /*//skeletons bodies and fixtures
         for (MapObject obj : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) obj).getRectangle();
@@ -70,5 +77,8 @@ public class B2WorldCreator {
 
     public Array<Skeleton> getSkeletons() {
         return skeletons;
+    }
+    public Array<Bullet> getBullets() {
+        return bullets;
     }
 }

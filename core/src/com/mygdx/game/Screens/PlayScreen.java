@@ -96,7 +96,7 @@ public class  PlayScreen implements Screen {
 
         world = new World(new Vector2(0, -13), true); //il -10 indica la gravità nel mondo di gioco
         b2dr = new Box2DDebugRenderer();
-        b2dr.setDrawBodies(false);
+        //b2dr.setDrawBodies(false);
         creator = new B2WorldCreator(this);
         player = new Player(this);
         healthBar = new HealthBar(world, this);
@@ -184,6 +184,9 @@ public class  PlayScreen implements Screen {
         //update scheletri
         for(Enemy enemy : creator.getSkeletons())
             enemy.update(dt);
+        //update bullets
+        for(Enemy enemy : creator.getBullets())
+            enemy.update(dt);
         //gamecam che segue il player
         gamecam.position.x = player.b2body.getPosition().x;
         //aggiorno la gamecam
@@ -219,6 +222,8 @@ public class  PlayScreen implements Screen {
             player.draw(game.batch);
             healthBar.draw(game.batch);
             for(Enemy enemy : creator.getSkeletons())
+                enemy.draw(game.batch);
+            for(Enemy enemy : creator.getBullets())
                 enemy.draw(game.batch);
         game.batch.end();
 

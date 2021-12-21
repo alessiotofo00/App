@@ -1,52 +1,46 @@
 package com.mygdx.game.Sprites;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
 
-public class Skeleton extends Enemy {
+public class Bullet extends Enemy {
 
-    private float stateTimer;
-    private Animation walkAnimation;
-    private Array<TextureRegion> frames;
     private boolean setToDestroy;
     private boolean destroyed;
 
-    public Skeleton(PlayScreen screen, float x, float y) {
+    private Texture texture;
+
+    public Bullet(PlayScreen screen, float x, float y){
         super(screen, x, y);
 
-        frames = new Array<TextureRegion>();
-        for(int i = 3; i < 13; i++)
-            frames.add(new TextureRegion(screen.getSkeletonAtlas().findRegion("Skeleton Walk"),
-                    i * 22, 0, 21, 34));
-        walkAnimation = new Animation(0.1f, frames);
-        setBounds(getX(), getY(), 21 / MyGdxGame.PPM, 34 / MyGdxGame.PPM);
-        stateTimer = 0;
+        texture = new Texture(Gdx.files.internal("bullet.png"));
+        setSize(16 / MyGdxGame.PPM, 16 / MyGdxGame.PPM);
+
+        setBounds(getX(), getY(), 16 / MyGdxGame.PPM, 16 / MyGdxGame.PPM);
+
         setToDestroy = false;
         destroyed = false;
     }
 
-    @Override
-    public void update(float dt) {
-        stateTimer += dt;
+    public void update(float dt){
         if(setToDestroy && !destroyed){
             world.destroyBody(b2body);
             destroyed = true;
-            setRegion(new TextureRegion(screen.getSkeletonAtlas().findRegion("Skeleton Walk"), 12, 35, 21, 34));
-            stateTimer = 0;
         }
         else if(!destroyed) {
-            b2body.setLinearVelocity(velocityX);
+            b2body.setLinearVelocity(velocityY);
             setPosition(b2body.getPosition().x - getWidth() / 2,
                     b2body.getPosition().y - getHeight() / 2);
-            setRegion((TextureRegion) walkAnimation.getKeyFrame(stateTimer, true));
+            setRegion(texture);
         }
     }
 
@@ -59,27 +53,28 @@ public class Skeleton extends Enemy {
 
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(8 / MyGdxGame.PPM, 14 / MyGdxGame.PPM);
+        shape.setAsBox(7 / MyGdxGame.PPM, 7 / MyGdxGame.PPM);
         fdef.shape = shape;
         fdef.filter.categoryBits = MyGdxGame.ENEMY_BIT;
-        fdef.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.OBJECT_BIT | MyGdxGame.PLAYER_BIT | MyGdxGame.ATK_PLAYER_BIT;
-        fdef.restitution = 1;
+        fdef.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.OBJECT_BIT | MyGdxGame.PLAYER_BIT;
         b2body.createFixture(fdef).setUserData(this);
     }
 
     public void draw(Batch batch){
-        if(!destroyed || stateTimer < 1)
+        if(!destroyed)
             super.draw(batch);
     }
 
     @Override
     public void hitPlayer() {
-        //chiamo il metodo hitDetect di Player
         screen.getPlayer().hitDetect();
-    }
-
-    public void hitByPlayer(){
-        Gdx.app.log("Nemico", "colpito");
         setToDestroy = true;
     }
+
+    @Override
+    public void hitByPlayer() {
+
+    }
+
+
 }
