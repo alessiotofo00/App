@@ -26,6 +26,7 @@ public class MyGdxGame extends Game {
 	public static final short ATK_PLAYER_BIT = 64;
 	public static final short SPIKES_BIT = 128;
 	public static final short LEVEL_SWITCHER_BIT = 256;
+	public static final short BULLET_BIT = 512;
 
 	public SpriteBatch batch;
 

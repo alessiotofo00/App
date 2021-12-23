@@ -28,7 +28,7 @@ public class B2ContactListener  implements ContactListener {
                 //controllo anche che sia una collisione corretta not null
             }
         }
-        //lo switch per ora ha un solo case ma sarà utile anche per gli altri tipi di contatti(es. enemy che va contro un oggetto)
+
         switch(cDef){
             case MyGdxGame.PLAYER_BIT | MyGdxGame.ENEMY_BIT:
                 Gdx.app.log("Contact", "Enemy");
@@ -45,7 +45,13 @@ public class B2ContactListener  implements ContactListener {
                 else
                     ((Enemy) fixB.getUserData()).hitByPlayer();
                 break;
-
+            case MyGdxGame.BULLET_BIT | MyGdxGame.OBJECT_BIT:
+            case MyGdxGame.BULLET_BIT | MyGdxGame.GROUND_BIT:
+                if(fixA.getFilterData().categoryBits == MyGdxGame.BULLET_BIT)
+                    ((Enemy)fixA.getUserData()).reverseVelocity(false, true);
+                else
+                    ((Enemy) fixB.getUserData()).reverseVelocity(false, true);
+                break;
         }
     }
 

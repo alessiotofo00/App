@@ -21,7 +21,6 @@ public class Bullet extends Enemy {
 
     public Bullet(PlayScreen screen, float x, float y){
         super(screen, x, y);
-
         texture = new Texture(Gdx.files.internal("bullet.png"));
         setSize(16 / MyGdxGame.PPM, 16 / MyGdxGame.PPM);
 
@@ -32,6 +31,8 @@ public class Bullet extends Enemy {
     }
 
     public void update(float dt){
+        if(b2body.getPosition().y >= MyGdxGame.V_HEIGHT)
+            setToDestroy = true;
         if(setToDestroy && !destroyed){
             world.destroyBody(b2body);
             destroyed = true;
@@ -55,7 +56,8 @@ public class Bullet extends Enemy {
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(7 / MyGdxGame.PPM, 7 / MyGdxGame.PPM);
         fdef.shape = shape;
-        fdef.filter.categoryBits = MyGdxGame.ENEMY_BIT;
+        fdef.restitution = 0.5f;
+        fdef.filter.categoryBits = MyGdxGame.BULLET_BIT;
         fdef.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.OBJECT_BIT | MyGdxGame.PLAYER_BIT;
         b2body.createFixture(fdef).setUserData(this);
     }

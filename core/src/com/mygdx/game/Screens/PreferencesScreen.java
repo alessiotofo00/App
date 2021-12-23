@@ -99,6 +99,15 @@ public class PreferencesScreen implements Screen {
                 return false;
             }
         });
+        final Slider soundSlider=new Slider(0f,1f,0.1f,false,skin);
+        soundSlider.setValue(pref.getSoundVolume(soundSlider.getValue()));
+        soundSlider.addListener(new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                pref.getMusicVolume(soundSlider.getValue());
+                return false;
+            }
+        });
 
         table.add(titleLabel).padBottom(150).padTop(20);
         table.row();
@@ -108,6 +117,7 @@ public class PreferencesScreen implements Screen {
         table.row();
         table.add(soundOnOffLabel).padBottom(40);
         table.add(soundsCheckBox).padBottom(40);
+        table.add(soundSlider);
         table.row();
         table.add(backButton).padTop(120);
 
