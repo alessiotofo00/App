@@ -84,6 +84,7 @@ public class MyGdxGame extends Game {
 		}
 		catch (IOException e){
 			e.printStackTrace();
+			throw (new RuntimeException());
 		}
 
 		setScreen(menuScreen);
