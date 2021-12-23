@@ -15,6 +15,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.MyGdxGame;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+
 import static com.mygdx.game.MyGdxGame.APPLICATION;
 import static com.mygdx.game.MyGdxGame.V_WIDTH;
 
@@ -40,9 +44,8 @@ public class CommandInfoScreen implements Screen {
 
     private TextButton nextButton;
 
-    public CommandInfoScreen(final MyGdxGame game){
+    public CommandInfoScreen(final MyGdxGame game)  {
         this.game = game;
-
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
         viewport = new FitViewport(V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport);
@@ -63,6 +66,12 @@ public class CommandInfoScreen implements Screen {
         nextButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                try {
+                    Desktop.getDesktop().open(new File(String.valueOf(Gdx.files.internal("TestVideo.mp4"))));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    throw (new RuntimeException());
+                }
                 game.changeScreen(APPLICATION);
             }
         });
