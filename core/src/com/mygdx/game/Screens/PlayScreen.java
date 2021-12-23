@@ -77,6 +77,7 @@ public class  PlayScreen implements Screen {
             buf.close();
         } catch (IOException e) {
             e.printStackTrace();
+            throw (new RuntimeException());
         }
 
         //map declarations
