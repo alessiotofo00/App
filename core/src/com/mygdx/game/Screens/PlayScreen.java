@@ -191,8 +191,9 @@ public class  PlayScreen implements Screen {
         for(Enemy enemy : creator.getSkeletons())
             enemy.update(dt);
         //update bullets
-        for(Enemy enemy : creator.getBullets())
+        for(Enemy enemy : creator.getBullets()) {
             enemy.update(dt);
+        }
         //gamecam che segue il player
         //gamecam.position.x = player.b2body.getPosition().x;
         //aggiorno la gamecam
@@ -205,6 +206,7 @@ public class  PlayScreen implements Screen {
         // TODO Auto-generated method stub
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         //controllo che il Player abbia ricevuto un numero >= di hit rispetto alla sua vita -> metto GAMEOVER come stato corrente
         if(Player.hits >= 4){
             player.currentState = Player.State.GAMEOVER;
