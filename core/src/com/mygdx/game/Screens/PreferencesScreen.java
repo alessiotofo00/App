@@ -6,18 +6,16 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 //import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 //import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 //import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.AppPreferences;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Tools.GifDecoder;
-import sun.awt.image.GifImageDecoder;
 
 import static com.mygdx.game.MyGdxGame.*;
 
@@ -91,11 +89,22 @@ public class PreferencesScreen implements Screen {
         titleLabel = new Label( "OPTIONS", skin );
         musicOnOffLabel = new Label( "Music", skin );
         soundOnOffLabel = new Label( "Sounds", skin );
+        final AppPreferences pref=new AppPreferences();
+        final Slider volumeMusicSlider=new Slider(0f,1f,0.1f,false,skin);
+        volumeMusicSlider.setValue(pref.getMusicVolume(volumeMusicSlider.getValue()));
+        volumeMusicSlider.addListener(new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                pref.getMusicVolume(volumeMusicSlider.getValue());
+                return false;
+            }
+        });
 
         table.add(titleLabel).padBottom(150).padTop(20);
         table.row();
         table.add(musicOnOffLabel).padBottom(40);
         table.add(musicCheckBox).padBottom(40);
+        table.add(volumeMusicSlider);
         table.row();
         table.add(soundOnOffLabel).padBottom(40);
         table.add(soundsCheckBox).padBottom(40);
