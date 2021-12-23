@@ -15,6 +15,15 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.MyGdxGame;
 
 public class GameOverScreen implements Screen {
+public static int played=0;
+
+    public static int getPlayed() {
+        return played;
+    }
+
+    public static void setPlayed(int played) {
+        GameOverScreen.played = played;
+    }
 
     private final MyGdxGame game;
 
@@ -48,8 +57,10 @@ public class GameOverScreen implements Screen {
         playAgainButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                setPlayed(getPlayed()+1);
                 game.playScreen = new PlayScreen(game);
                 game.changeScreen(MyGdxGame.APPLICATION);
+
             }
         });
 

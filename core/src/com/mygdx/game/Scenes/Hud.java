@@ -21,6 +21,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
 import com.mygdx.game.Sprites.Player;
+
+import static com.mygdx.game.Screens.GameOverScreen.played;
 //import com.mygdx.game.MyGdxGame;
 
 public class Hud extends Sprite implements Disposable{
@@ -32,6 +34,7 @@ public class Hud extends Sprite implements Disposable{
     Label levelLabel;
     static Label  scoreLabel;
     static Label coinsLabel;
+    static Label playedLabel;
     int level = 1;
     public static int numCoins = 0;
 
@@ -48,10 +51,12 @@ public class Hud extends Sprite implements Disposable{
         levelLabel = new Label(String.format("LEVEL %d", level), skin);
         scoreLabel = new Label(String.format("SCORE %d", score), skin);
         coinsLabel = new Label(String.format("COINS x%d", numCoins), skin);
+        playedLabel = new Label(String.format("MORTI x%d", played), skin);
 
         table.add(levelLabel).expandX();
         table.add(scoreLabel).expandX();
         table.add(coinsLabel).expandX();
+        table.add(playedLabel).expandX();
         table.row();
 
         stage.addActor(table);
