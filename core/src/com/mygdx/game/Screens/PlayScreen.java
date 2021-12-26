@@ -60,12 +60,12 @@ public class  PlayScreen implements Screen {
     public boolean isChangeLevel=false;
 
     public static int level;
-    public int getLevel() {
+    public static int getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public static void setLevel(int level) {
+        PlayScreen.level = level;
     }
 
     public PlayScreen(final MyGdxGame game){
