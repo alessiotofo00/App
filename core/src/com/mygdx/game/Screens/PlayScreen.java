@@ -28,6 +28,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import static com.mygdx.game.Scenes.Hud.addScore;
+
 public class  PlayScreen implements Screen {
 
     private final MyGdxGame game;
@@ -55,8 +57,16 @@ public class  PlayScreen implements Screen {
     public World world;
     private final Box2DDebugRenderer b2dr;
     private final B2WorldCreator creator;
+    public boolean isChangeLevel=false;
 
-    public int level;
+    public static int level;
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
     public PlayScreen(final MyGdxGame game){
 
@@ -77,26 +87,31 @@ public class  PlayScreen implements Screen {
             buf.close();
         } catch (IOException e) {
             e.printStackTrace();
-            throw (new RuntimeException());
         }
+
 
         //map declarations
         TmxMapLoader mapLoader = new TmxMapLoader();
         switch (level){
             case 1:
                 map = mapLoader.load("Level1.tmx");
+                setLevel(1);
                 break;
             case 2:
                 map = mapLoader.load("Level2.tmx");
+                setLevel(2);
                 break;
             case 3:
                 map = mapLoader.load("Level3.tmx");
+                setLevel(3);
                 break;
             case 4:
                 map = mapLoader.load("Level4.tmx");
+                setLevel(4);
                 break;
             case 5:
                 map = mapLoader.load("Level5.tmx");
+                setLevel(5);
                 break;
         }
         renderer = new OrthogonalTiledMapRenderer(map, 1 / MyGdxGame.PPM);
@@ -114,13 +129,7 @@ public class  PlayScreen implements Screen {
         world.setContactListener(new B2ContactListener());
     }
 
-    public int getLevel() {
-        return level;
-    }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
 
     public TextureAtlas getKnightAtlas(){
         return knightAtlas;
@@ -135,6 +144,14 @@ public class  PlayScreen implements Screen {
     public Player getPlayer() { return player;}
 
     public MyGdxGame getGame() { return game;}
+
+    public boolean isChangeLevel() {
+        return isChangeLevel;
+    }
+
+    public void setChangeLevel(boolean changeLevel) {
+        isChangeLevel = changeLevel;
+    }
 
     @Override
     public void show() {
@@ -155,10 +172,10 @@ public class  PlayScreen implements Screen {
         //tasti per il movimento
         if(player.currentState != Player.State.GAMEOVER) {
             //if (player.b2body.getLinearVelocity().y == 0 || canJump) {
-                if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-                    player.b2body.applyLinearImpulse(new Vector2(0, 4), player.b2body.getWorldCenter(), true);
-                    canJump = false;
-                }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+                player.b2body.applyLinearImpulse(new Vector2(0, 4), player.b2body.getWorldCenter(), true);
+                canJump = false;
+            }
             //}
             if (canDash){
                 if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT) /*&& Gdx.input.isKeyPressed(Input.Keys.D)*/ && player.runningRight) {
@@ -227,16 +244,16 @@ public class  PlayScreen implements Screen {
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
-            if(paused){
-                Sprite sprite = new Sprite(new Texture(Gdx.files.internal("pause2.png")));
-                sprite.draw(game.batch);
-            }
-            player.draw(game.batch);
-            healthBar.draw(game.batch);
-            for(Enemy enemy : creator.getSkeletons())
-                enemy.draw(game.batch);
-            for(Enemy enemy : creator.getBullets())
-                enemy.draw(game.batch);
+        if(paused){
+            Sprite sprite = new Sprite(new Texture(Gdx.files.internal("pause2.png")));
+            sprite.draw(game.batch);
+        }
+        player.draw(game.batch);
+        healthBar.draw(game.batch);
+        for(Enemy enemy : creator.getSkeletons())
+            enemy.draw(game.batch);
+        for(Enemy enemy : creator.getBullets())
+            enemy.draw(game.batch);
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);

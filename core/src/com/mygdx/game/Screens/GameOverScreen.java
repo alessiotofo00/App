@@ -14,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.MyGdxGame;
 
+import static com.mygdx.game.Scenes.Hud.addScore;
+
 public class GameOverScreen implements Screen {
 public static int played=0;
 
@@ -58,6 +60,7 @@ public static int played=0;
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 setPlayed(getPlayed()+1);
+                addScore(-10);
                 game.playScreen = new PlayScreen(game);
                 game.changeScreen(MyGdxGame.APPLICATION);
 

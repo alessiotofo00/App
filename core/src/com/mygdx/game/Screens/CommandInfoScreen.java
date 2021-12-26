@@ -66,12 +66,13 @@ public class CommandInfoScreen implements Screen {
         nextButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+          /*
                 try {
                     Desktop.getDesktop().open(new File(String.valueOf(Gdx.files.internal("TestVideo.mp4"))));
                 } catch (IOException e) {
                     e.printStackTrace();
-
                 }
+                */
                 game.changeScreen(APPLICATION);
             }
         });
@@ -101,7 +102,7 @@ public class CommandInfoScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.batch.begin();
-            game.batch.draw(background, 0, 0, V_WIDTH / MyGdxGame.PPM, MyGdxGame.V_HEIGHT / MyGdxGame.PPM);
+        game.batch.draw(background, 0, 0, V_WIDTH / MyGdxGame.PPM, MyGdxGame.V_HEIGHT / MyGdxGame.PPM);
         game.batch.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
