@@ -70,7 +70,7 @@ public class CommandInfoScreen implements Screen {
                     Desktop.getDesktop().open(new File(String.valueOf(Gdx.files.internal("TestVideo.mp4"))));
                 } catch (IOException e) {
                     e.printStackTrace();
-                    throw (new RuntimeException());
+
                 }
                 game.changeScreen(APPLICATION);
             }

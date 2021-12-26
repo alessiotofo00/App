@@ -36,7 +36,7 @@ public class LevelSwitcher extends RectInteractiveTileObject {
         }
         catch (IOException e){
             e.printStackTrace();
-            throw (new RuntimeException());
+
         }
         game.playScreen = new PlayScreen(game);
         game.changeScreen(MyGdxGame.APPLICATION);
