@@ -23,14 +23,14 @@ public class LevelSwitcher extends RectInteractiveTileObject {
 
     @Override
     public void bodyHit() {
-        screen.setLevel(screen.getLevel() + 1);
+        PlayScreen.setLevel(PlayScreen.getLevel() + 1);
         try{
             System.out.println("file creato");
            // game.levelFile.delete();
            // game.levelFile.createNewFile();
             FileWriter fw = new FileWriter(game.levelFile);
             PrintWriter pw = new PrintWriter(fw);
-            int level = screen.getLevel();
+            int level = PlayScreen.getLevel();
             pw.printf("%d", level);
             fw.close();
         }

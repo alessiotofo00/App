@@ -57,9 +57,8 @@ public class  PlayScreen implements Screen {
     public World world;
     private final Box2DDebugRenderer b2dr;
     private final B2WorldCreator creator;
-    public boolean isChangeLevel=false;
 
-    public static int level;
+    public static int level=1;
     public static int getLevel() {
         return level;
     }
@@ -95,7 +94,6 @@ public class  PlayScreen implements Screen {
         switch (level){
             case 1:
                 map = mapLoader.load("Level1.tmx");
-                setLevel(1);
                 break;
             case 2:
                 map = mapLoader.load("Level2.tmx");
@@ -145,13 +143,6 @@ public class  PlayScreen implements Screen {
 
     public MyGdxGame getGame() { return game;}
 
-    public boolean isChangeLevel() {
-        return isChangeLevel;
-    }
-
-    public void setChangeLevel(boolean changeLevel) {
-        isChangeLevel = changeLevel;
-    }
 
     @Override
     public void show() {
