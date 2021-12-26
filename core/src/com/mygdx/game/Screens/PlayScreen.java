@@ -95,6 +95,9 @@ public class  PlayScreen implements Screen {
             case 4:
                 map = mapLoader.load("Level4.tmx");
                 break;
+            case 5:
+                map = mapLoader.load("Level5.tmx");
+                break;
         }
         renderer = new OrthogonalTiledMapRenderer(map, 1 / MyGdxGame.PPM);
         //gamecam.position necessario per non centrare in posizione 0.0 (il centro della mappa, visto come assi cartesiani)
