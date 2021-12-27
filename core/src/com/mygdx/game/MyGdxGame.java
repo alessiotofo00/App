@@ -54,8 +54,9 @@ public class MyGdxGame extends Game {
 	//manager per i suoni e la musica
 	public static AssetManager manager;
 
-	public File levelFile;
+	public static File levelFile;
 
+	public boolean hardMode = false;
 
 	@Override
 	public void create () {

@@ -14,6 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.MyGdxGame;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import static com.mygdx.game.MyGdxGame.levelFile;
 import static com.mygdx.game.Scenes.Hud.addScore;
 
 public class GameOverScreen implements Screen {
@@ -59,11 +64,37 @@ public static int played=0;
         playAgainButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                setPlayed(getPlayed()+1);
-                addScore(-10);
-                game.playScreen = new PlayScreen(game);
-                game.changeScreen(MyGdxGame.APPLICATION);
-
+                if(game.hardMode){
+                    try {
+                        levelFile = new File(String.valueOf(Gdx.files.internal("levelHolder.txt")));
+                        if (levelFile.exists()){
+                            System.out.println("file esistente");
+                            levelFile.delete();
+                            levelFile.createNewFile();
+                            FileWriter fw = new FileWriter(levelFile);
+                            fw.write("1");
+                            fw.close();
+                        }
+                        else if(levelFile.createNewFile()) {
+                            System.out.println("file creato");
+                            FileWriter fw = new FileWriter(levelFile);
+                            fw.write("1");
+                            fw.close();
+                        }
+                    }
+                    catch (IOException e){
+                        e.printStackTrace();
+                        throw (new RuntimeException());
+                    }
+                    game.playScreen = new PlayScreen(game);
+                    game.changeScreen(MyGdxGame.APPLICATION);
+                }
+                else {
+                    setPlayed(getPlayed() + 1);
+                    addScore(-10);
+                    game.playScreen = new PlayScreen(game);
+                    game.changeScreen(MyGdxGame.APPLICATION);
+                }
             }
         });
 

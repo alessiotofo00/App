@@ -23,8 +23,11 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Tools.GifDecoder;
 
-import static com.mygdx.game.MyGdxGame.MENU;
-import static com.mygdx.game.MyGdxGame.V_WIDTH;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import static com.mygdx.game.MyGdxGame.*;
 
 public class MenuScreen implements Screen, InputProcessor {
  //aggiunto final per evitare errori e warning
@@ -42,6 +45,7 @@ public class MenuScreen implements Screen, InputProcessor {
 
     private final Table table;
     private final TextButton startButton;
+    private final TextButton continueButton;
     private final TextButton quitButton;
     private final TextButton optionsButton;
 
@@ -64,6 +68,7 @@ public class MenuScreen implements Screen, InputProcessor {
         table.setFillParent(true); //now the table's size is the same of the stage's size
 
         startButton = new TextButton("New Game", skin);
+        continueButton = new TextButton("Continue", skin);
         quitButton = new TextButton("Quit Game", skin);
         optionsButton = new TextButton("Options", skin);
 
@@ -75,7 +80,37 @@ public class MenuScreen implements Screen, InputProcessor {
                 Gdx.app.log("ClickedNewGame", "yes");
                 MyGdxGame.previousScreen = MyGdxGame.MENU;
                 PlayScreen.paused = false;
+                try {
+                    levelFile = new File(String.valueOf(Gdx.files.internal("levelHolder.txt")));
+                    if (levelFile.exists()){
+                        System.out.println("file esistente");
+                        levelFile.delete();
+                        levelFile.createNewFile();
+                        FileWriter fw = new FileWriter(levelFile);
+                        fw.write("1");
+                        fw.close();
+                    }
+                    else if(levelFile.createNewFile()) {
+                        System.out.println("file creato");
+                        FileWriter fw = new FileWriter(levelFile);
+                        fw.write("1");
+                        fw.close();
+                    }
+                }
+                catch (IOException e){
+                    e.printStackTrace();
+                    throw (new RuntimeException());
+                }
+
                 game.changeScreen(MyGdxGame.INFO);
+            }
+        });
+        continueButton.addListener(new ClickListener(){
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.log("ClickedContinue", "yes");
+                PlayScreen.paused = false;
+                MyGdxGame.previousScreen = MENU;
+                game.changeScreen(MyGdxGame.APPLICATION);
             }
         });
         optionsButton.addListener(new ClickListener(){
@@ -103,6 +138,8 @@ public class MenuScreen implements Screen, InputProcessor {
         table.add(titleLabel).padBottom(150);
         table.row();
         table.add(startButton).padBottom(40);
+        table.row();
+        table.add(continueButton).padBottom(40);
         table.row();
         table.add(optionsButton).padBottom(40);
         table.row();

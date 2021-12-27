@@ -41,8 +41,10 @@ public class CommandInfoScreen implements Screen {
     private Label rightLabel;
     private Label jumpLabel;
     private Label dashLabel;
+    private Label difficultyLabel;
 
-    private TextButton nextButton;
+    private TextButton normalButton;
+    private TextButton hardButton;
 
     public CommandInfoScreen(final MyGdxGame game)  {
         this.game = game;
@@ -60,10 +62,12 @@ public class CommandInfoScreen implements Screen {
         rightLabel = new Label("RIGHT  -  D", skin);
         jumpLabel = new Label("JUMP  -  W", skin);
         dashLabel = new Label("DASH  -  MOUSE R", skin);
+        difficultyLabel = new Label("SELECT DIFFICULTY", skin);
 
-        nextButton = new TextButton("  GO!  ", skin);
+        normalButton = new TextButton("NORMAL", skin);
+        hardButton = new TextButton("HARD", skin);
 
-        nextButton.addListener(new ClickListener(){
+        normalButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
           /*
@@ -73,9 +77,27 @@ public class CommandInfoScreen implements Screen {
                     e.printStackTrace();
                 }
                 */
+                game.hardMode = false;
+                game.playScreen = new PlayScreen(game);
                 game.changeScreen(APPLICATION);
             }
         });
+        hardButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+          /*
+                try {
+                    Desktop.getDesktop().open(new File(String.valueOf(Gdx.files.internal("TestVideo.mp4"))));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                */
+                game.hardMode = true;
+                game.playScreen = new PlayScreen(game);
+                game.changeScreen(APPLICATION);
+            }
+        });
+
 
         table.add(titleLabel).expandX().padTop(20);
         table.row();
@@ -87,7 +109,11 @@ public class CommandInfoScreen implements Screen {
         table.row();
         table.add(dashLabel).padTop(20);
         table.row();
-        table.add(nextButton).padTop(150);
+        table.add(difficultyLabel).padTop(50);
+        table.row();
+        table.add(normalButton).padTop(20);
+        table.row();
+        table.add(hardButton).padTop(20);
 
         stage.addActor(table);
     }

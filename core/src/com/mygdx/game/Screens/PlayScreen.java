@@ -163,7 +163,7 @@ public class  PlayScreen implements Screen {
         //tasti per il movimento
         if(player.currentState != Player.State.GAMEOVER) {
             //if (player.b2body.getLinearVelocity().y == 0 || canJump) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.W)&&(player.b2body.getLinearVelocity().y==0)) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
                 player.b2body.applyLinearImpulse(new Vector2(0, 4), player.b2body.getWorldCenter(), true);
                 canJump = false;
             }

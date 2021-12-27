@@ -197,7 +197,7 @@ public class Player extends Sprite {
         fdef.filter.categoryBits = MyGdxGame.PLAYER_BIT;
         //definisco le cose che possono collidere col player
         fdef.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.DOUBLE_JUMP_BIT | MyGdxGame.ENEMY_BIT | MyGdxGame.SPIKES_BIT
-                                | MyGdxGame.LEVEL_SWITCHER_BIT;
+                                | MyGdxGame.LEVEL_SWITCHER_BIT | MyGdxGame.BULLET_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
