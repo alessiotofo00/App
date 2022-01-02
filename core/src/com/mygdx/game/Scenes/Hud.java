@@ -51,9 +51,9 @@ int levelPrecedente=1;
         levelLabel = new Label(String.format("LEVEL %d", level), skin);
         scoreLabel = new Label(String.format("SCORE %d", score), skin);
         coinsLabel = new Label(String.format("COINS x%d", numCoins), skin);
-        playedLabel = new Label(String.format("MORTI x%d", played), skin);
+        playedLabel = new Label(String.format("DEATHS x%d", played), skin);
 
-        countdownLabel = new Label(String.format("Time: %02d", worldTimer),skin);
+        countdownLabel = new Label(String.format("TIME: %02d", worldTimer),skin);
 
         table.add(levelLabel).expandX();
         table.add(scoreLabel).expandX();

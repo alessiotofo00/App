@@ -57,6 +57,7 @@ public class MyGdxGame extends Game {
 	public static AssetManager manager;
 
 	public static File levelFile;
+	public static File continueLevelFile;
 
 	public boolean hardMode = false;
 
@@ -84,6 +85,22 @@ public class MyGdxGame extends Game {
 			else if(levelFile.createNewFile()) {
 				System.out.println("file creato");
 				FileWriter fw = new FileWriter(levelFile);
+				fw.write("1");
+				fw.close();
+			}
+		}
+		catch (IOException e){
+			e.printStackTrace();
+			throw (new RuntimeException());
+		}
+		try {
+			continueLevelFile = new File(String.valueOf(Gdx.files.internal("ContinueLevelHolder.txt")));
+			if (levelFile.exists()){
+				System.out.println("file esistente");
+			}
+			else if(continueLevelFile.createNewFile()) {
+				System.out.println("file creato");
+				FileWriter fw = new FileWriter(continueLevelFile);
 				fw.write("1");
 				fw.close();
 			}

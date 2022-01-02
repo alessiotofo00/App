@@ -26,8 +26,8 @@ public class LevelSwitcher extends RectInteractiveTileObject {
         PlayScreen.setLevel(PlayScreen.getLevel() + 1);
         try{
             System.out.println("file creato");
-           // game.levelFile.delete();
-           // game.levelFile.createNewFile();
+            game.levelFile.delete();
+            game.levelFile.createNewFile();
             FileWriter fw = new FileWriter(game.levelFile);
             PrintWriter pw = new PrintWriter(fw);
             int level = PlayScreen.getLevel();
@@ -37,6 +37,17 @@ public class LevelSwitcher extends RectInteractiveTileObject {
         catch (IOException e){
             e.printStackTrace();
 
+        }
+        try{
+            System.out.println("file creato");
+            FileWriter fw = new FileWriter(game.continueLevelFile);
+            PrintWriter pw = new PrintWriter(fw);
+            int level = PlayScreen.getLevel();
+            pw.printf("%d", level);
+            fw.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
         }
         game.playScreen = new PlayScreen(game);
         game.changeScreen(MyGdxGame.APPLICATION);

@@ -118,6 +118,7 @@ public class MenuScreen implements Screen, InputProcessor {
                 Gdx.app.log("ClickedContinue", "yes");
                 PlayScreen.paused = false;
                 MyGdxGame.previousScreen = MENU;
+                PlayScreen.continueClicked = true;
                 game.changeScreen(MyGdxGame.APPLICATION);
                 music.stop();
             }

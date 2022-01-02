@@ -59,7 +59,10 @@ public class  PlayScreen implements Screen {
     private final Box2DDebugRenderer b2dr;
     private final B2WorldCreator creator;
 
-    public static int level=1;
+    public static int level = 1;
+    public static int continueLevel = 1;
+    public static boolean continueClicked = false;
+
     public static int getLevel() {
         return level;
     }
@@ -93,6 +96,18 @@ public class  PlayScreen implements Screen {
             e.printStackTrace();
         }
 
+        try {
+            BufferedReader buf = new BufferedReader(new FileReader(String.valueOf(Gdx.files.internal("continueLevelHolder.txt"))));
+            continueLevel = Integer.parseInt(buf.readLine());
+            buf.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if(continueClicked){
+            level = continueLevel;
+            continueClicked = false;
+        }
 
         //map declarations
         TmxMapLoader mapLoader = new TmxMapLoader();
