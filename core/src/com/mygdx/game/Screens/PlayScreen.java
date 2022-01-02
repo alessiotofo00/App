@@ -128,7 +128,7 @@ public class  PlayScreen implements Screen {
                 setLevel(9);
                 break;
             case 10:
-                map = mapLoader.load("Level9.tmx");
+                map = mapLoader.load("Level10.tmx");
                 setLevel(10);
                 break;
         }
@@ -213,7 +213,7 @@ public class  PlayScreen implements Screen {
     //we will call this method in our render method
     public void update(float dt) {
         handleInput();
-
+        hud.update(dt);
         healthBar.update(dt);
 
         world.step(1/60f, 6, 2);

@@ -31,7 +31,7 @@ import java.io.IOException;
 import static com.mygdx.game.MyGdxGame.*;
 
 public class MenuScreen implements Screen, InputProcessor {
- //aggiunto final per evitare errori e warning
+    //aggiunto final per evitare errori e warning
     //final: è un modifier che si mette su una classe per evitare che sia ereditata/modificata. Significato praticamente letterale,
     //si usa per classi "finali",che non si possono estendere(extends) o modificare.
     private final MyGdxGame game;
@@ -199,7 +199,7 @@ public class MenuScreen implements Screen, InputProcessor {
     //riceve eventi input da tastiera e mouse
     @Override
     public void show() {
-       Gdx.input.setInputProcessor(stageMS);
+        Gdx.input.setInputProcessor(stageMS);
     }
 
     @Override

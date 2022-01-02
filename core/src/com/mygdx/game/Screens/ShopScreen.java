@@ -83,7 +83,7 @@ public class ShopScreen implements Screen {
         armorLabel = new Label("Armor", skin);
         armorCostLabel = new Label("x1 COIN", skin);
 
-        bossButton = new TextButton("GO TO THE BOSS!", skin);
+      //  bossButton = new TextButton("GO TO THE BOSS!", skin);
         exitButton = new TextButton("Back to Menu", skin);
 
         heartsButton.addListener(new ClickListener(){
@@ -145,7 +145,7 @@ public class ShopScreen implements Screen {
         table.add(armorLabel).expandX().padTop(40);
         table.add(armorCostLabel).expandX().padTop(40);
         table.row();
-        table.add(bossButton).expandX().padTop(120);
+       // table.add(bossButton).expandX().padTop(120);
         table.add(exitButton).expandX().padTop(120);
 
         stage.addActor(table);

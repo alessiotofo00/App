@@ -31,9 +31,14 @@ public class Hud extends Sprite implements Disposable{
     static Label coinsLabel;
     static Label playedLabel;
 
+    Label countdownLabel;
+    private Integer worldTimer;
+    private float timeCount;
     public static int numCoins = 0;
-
+int levelPrecedente=1;
     public Hud(SpriteBatch sb, PlayScreen screen){
+        worldTimer = 60;
+        timeCount = 0;
 
         viewport = new ScreenViewport();
         stage = new Stage(viewport, sb);
@@ -48,9 +53,13 @@ public class Hud extends Sprite implements Disposable{
         coinsLabel = new Label(String.format("COINS x%d", numCoins), skin);
         playedLabel = new Label(String.format("MORTI x%d", played), skin);
 
+        countdownLabel = new Label(String.format("Time: %02d", worldTimer),skin);
+
         table.add(levelLabel).expandX();
         table.add(scoreLabel).expandX();
         table.add(coinsLabel).expandX();
+
+        table.add(countdownLabel).expandX();
         table.add(playedLabel).expandX();
         table.row();
 
@@ -66,8 +75,21 @@ public class Hud extends Sprite implements Disposable{
         numCoins++;
         coinsLabel.setText(String.format("COINS x%d", numCoins));
     }
+    public void update(float dt){
+        timeCount += dt;
+        if(timeCount >= 1){
+            worldTimer--;
+            countdownLabel.setText((String.format("Time: %02d", worldTimer)));
+            timeCount = 0;
+        }
+        if(levelPrecedente<PlayScreen.getLevel()){
+            worldTimer=60;
+            levelPrecedente=PlayScreen.getLevel();
+        }
+    }
     @Override
     public void dispose() {
         stage.dispose();
     }
+
 }
