@@ -123,6 +123,14 @@ public class  PlayScreen implements Screen {
                 map = mapLoader.load("Level8.tmx");
                 setLevel(8);
                 break;
+            case 9:
+                map = mapLoader.load("Level9.tmx");
+                setLevel(9);
+                break;
+            case 10:
+                map = mapLoader.load("Level9.tmx");
+                setLevel(10);
+                break;
         }
         renderer = new OrthogonalTiledMapRenderer(map, 1 / MyGdxGame.PPM);
         //gamecam.position necessario per non centrare in posizione 0.0 (il centro della mappa, visto come assi cartesiani)
