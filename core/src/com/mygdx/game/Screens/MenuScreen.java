@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 //import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -53,6 +54,8 @@ public class MenuScreen implements Screen, InputProcessor {
 
     Animation<TextureRegion> animation;
     float elapsed;
+
+    private Music music;
 
     public MenuScreen(final MyGdxGame game){
         this.game = game;
@@ -147,6 +150,10 @@ public class MenuScreen implements Screen, InputProcessor {
 
 
         stageMS.addActor(table);
+
+        music = manager.get("audio/menu-music.mp3", Music.class);
+        music.setLooping(true);
+        music.play();
     }
 
     @Override

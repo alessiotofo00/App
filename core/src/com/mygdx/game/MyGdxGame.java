@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Screens.*;
 
@@ -63,8 +64,9 @@ public class MyGdxGame extends Game {
 		batch = new SpriteBatch();
 
 		manager = new AssetManager();
+		manager.load("audio/menu-music.mp3", Music.class);
 
-		menuScreen = new MenuScreen(this);
+		manager.finishLoading();
 
 		try {
 			levelFile = new File(String.valueOf(Gdx.files.internal("levelHolder.txt")));
@@ -87,6 +89,7 @@ public class MyGdxGame extends Game {
 			e.printStackTrace();
 			throw (new RuntimeException());
 		}
+		menuScreen = new MenuScreen(this);
 
 		setScreen(menuScreen);
 	}
@@ -94,6 +97,7 @@ public class MyGdxGame extends Game {
 	@Override
 	public void dispose() {
 		super.dispose();
+		manager.dispose();
 		batch.dispose();
 	}
 
