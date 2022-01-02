@@ -81,6 +81,9 @@ int levelPrecedente=1;
             worldTimer--;
             countdownLabel.setText((String.format("Time: %02d", worldTimer)));
             timeCount = 0;
+            if(worldTimer<=0){
+                Player.setHits(4);
+            }
         }
         if(levelPrecedente<PlayScreen.getLevel()){
             worldTimer=60;
