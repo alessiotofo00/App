@@ -9,4 +9,13 @@
    <frame tileid="4911" duration="100"/>
   </animation>
  </tile>
+ <tile id="3554">
+  <animation>
+   <frame tileid="3561" duration="100"/>
+   <frame tileid="3560" duration="100"/>
+   <frame tileid="3559" duration="100"/>
+   <frame tileid="3558" duration="100"/>
+   <frame tileid="3432" duration="100"/>
+  </animation>
+ </tile>
 </tileset>
