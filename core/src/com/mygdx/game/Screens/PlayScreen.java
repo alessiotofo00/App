@@ -3,6 +3,7 @@ package com.mygdx.game.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -67,6 +68,8 @@ public class  PlayScreen implements Screen {
         PlayScreen.level = level;
     }
 
+    private Sound jumpSound;
+
     public PlayScreen(final MyGdxGame game){
 
         knightAtlas = new TextureAtlas("RedKnight.pack");
@@ -79,6 +82,8 @@ public class  PlayScreen implements Screen {
                 MyGdxGame.V_HEIGHT / MyGdxGame.PPM,
                 gamecam);
         hud = new Hud(game.batch, this);
+
+        jumpSound = MyGdxGame.manager.get("audio/jump.wav", Sound.class);
 
         try {
             BufferedReader buf = new BufferedReader(new FileReader(String.valueOf(Gdx.files.internal("levelHolder.txt"))));
@@ -185,6 +190,7 @@ public class  PlayScreen implements Screen {
             //if (player.b2body.getLinearVelocity().y == 0 || canJump) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
                 player.b2body.applyLinearImpulse(new Vector2(0, 4), player.b2body.getWorldCenter(), true);
+                jumpSound.setVolume(jumpSound.play(), 0.3f);
                 canJump = false;
             }
             //}
@@ -272,6 +278,7 @@ public class  PlayScreen implements Screen {
 
         if(gameOver()){
             game.changeScreen(MyGdxGame.GAMEOVER);
+
         }
     }
 

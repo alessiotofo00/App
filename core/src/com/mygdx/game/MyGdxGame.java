@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Screens.*;
 
@@ -65,6 +66,8 @@ public class MyGdxGame extends Game {
 
 		manager = new AssetManager();
 		manager.load("audio/menu-music.mp3", Music.class);
+		manager.load("audio/jump.wav", Sound.class);
+		//manager.load("audio/doublejump.wav", Sound.class);
 
 		manager.finishLoading();
 
@@ -111,7 +114,7 @@ public class MyGdxGame extends Game {
 		switch(screen){
 			case MENU:
 				currentScreen = MENU;
-				if(menuScreen == null) menuScreen = new MenuScreen(this);
+				menuScreen = new MenuScreen(this);
 				this.setScreen(menuScreen);
 				break;
 			case PREFERENCES:

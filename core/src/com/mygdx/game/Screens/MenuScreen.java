@@ -77,6 +77,10 @@ public class MenuScreen implements Screen, InputProcessor {
 
         titleLabel = new Label("GAME TITLE", skin);
 
+        music = manager.get("audio/menu-music.mp3", Music.class);
+        music.setLooping(true);
+        music.play();
+
         startButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -106,6 +110,7 @@ public class MenuScreen implements Screen, InputProcessor {
                 }
 
                 game.changeScreen(MyGdxGame.INFO);
+                music.stop();
             }
         });
         continueButton.addListener(new ClickListener(){
@@ -114,6 +119,7 @@ public class MenuScreen implements Screen, InputProcessor {
                 PlayScreen.paused = false;
                 MyGdxGame.previousScreen = MENU;
                 game.changeScreen(MyGdxGame.APPLICATION);
+                music.stop();
             }
         });
         optionsButton.addListener(new ClickListener(){
@@ -150,10 +156,6 @@ public class MenuScreen implements Screen, InputProcessor {
 
 
         stageMS.addActor(table);
-
-        music = manager.get("audio/menu-music.mp3", Music.class);
-        music.setLooping(true);
-        music.play();
     }
 
     @Override
