@@ -148,7 +148,7 @@ public class GameOverScreen implements Screen {
         table.row();
         table.add(nameToSave);
         table.row();
-        table.add(saveGame);
+        table.add(saveGame).padTop(10);
         table.row();
         table.add(playAgainButton).padTop(60);
         table.row();
