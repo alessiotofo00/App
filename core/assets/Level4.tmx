@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="63">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="67">
  <tileset firstgid="1" source="plattoon.tsx"/>
  <tileset firstgid="4097" source="clouds.tsx"/>
  <tileset firstgid="4339" source="wasteland.tsx"/>
@@ -243,6 +243,10 @@
   <object id="53" x="80" y="416" width="32" height="32"/>
   <object id="56" x="112" y="496" width="304" height="16"/>
   <object id="60" x="496" y="64" width="16" height="48"/>
+  <object id="63" x="0.3125" y="0.3125" width="335.313" height="0.5625"/>
+  <object id="64" x="432.563" y="0.625" width="78.8125" height="0.4375"/>
+  <object id="65" x="510.688" y="1.4375" width="0.5625" height="46"/>
+  <object id="66" x="511.563" y="237.313" width="0.25" height="50.4375"/>
  </objectgroup>
  <objectgroup id="11" name="spikes">
   <object id="11" x="112" y="512" width="304"/>

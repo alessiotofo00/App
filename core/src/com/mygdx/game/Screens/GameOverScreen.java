@@ -6,24 +6,27 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Scenes.Hud;
 
+import javax.swing.text.LabelView;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 import static com.mygdx.game.MyGdxGame.levelFile;
 import static com.mygdx.game.Scenes.Hud.addScore;
+import static com.mygdx.game.Screens.PlayScreen.level;
 
 public class GameOverScreen implements Screen {
-public static int played=0;
-
+    public static int played=0;
+    protected Label saveRercordLabel;
+    private Label endScoreLabel;
+    public TextField nameToSave;
+    private TextButton saveGame;
     public static int getPlayed() {
         return played;
     }
@@ -59,6 +62,10 @@ public static int played=0;
 
         gameOverLabel = new Label("GAME OVER", skin);
         playAgainButton = new TextButton("Play Again", skin);
+        endScoreLabel=new Label(String.format("Final score: %d", Hud.score), skin);
+        saveRercordLabel=new Label("Your name: ",skin);
+        nameToSave=new TextField("name ",skin);
+        saveGame=new TextButton("Save your record!",skin);
         exitButton = new TextButton("Exit to Menu", skin);
 
         playAgainButton.addListener(new ClickListener(){
@@ -97,7 +104,7 @@ public static int played=0;
                 }
             }
         });
-
+//saveGame.addListener(new ClickListener()) { }
         exitButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -108,7 +115,15 @@ public static int played=0;
 
         table.add(gameOverLabel).expandX();
         table.row();
-        table.add(playAgainButton).padTop(200);
+        table.add(endScoreLabel).padTop(70);
+        table.row();
+        table.add(saveRercordLabel).padTop(50);
+        table.row();
+        table.add(nameToSave);
+        table.row();
+        table.add(saveGame);
+        table.row();
+        table.add(playAgainButton).padTop(60);
         table.row();
         table.add(exitButton).padTop(60);
 

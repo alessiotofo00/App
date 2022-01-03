@@ -25,7 +25,7 @@ public class Hud extends Sprite implements Disposable{
     public Stage stage;
     private Viewport viewport;
     private Skin skin;
-    private static Integer score = 0;
+    public static Integer score = 0;
     Label levelLabel;
     static Label  scoreLabel;
     static Label coinsLabel;
@@ -53,7 +53,7 @@ int levelPrecedente=1;
         coinsLabel = new Label(String.format("COINS x%d", numCoins), skin);
         playedLabel = new Label(String.format("DEATHS x%d", played), skin);
 
-        countdownLabel = new Label(String.format("TIME: %02d", worldTimer),skin);
+        countdownLabel = new Label(String.format("Time: %02d", worldTimer),skin);
 
         table.add(levelLabel).expandX();
         table.add(scoreLabel).expandX();
@@ -86,7 +86,8 @@ int levelPrecedente=1;
             }
         }
         if(levelPrecedente<PlayScreen.getLevel()){
-            worldTimer=60;
+            worldTimer+=15;
+            countdownLabel.setText((String.format("TIME: +15!!")));
             levelPrecedente=PlayScreen.getLevel();
         }
     }
