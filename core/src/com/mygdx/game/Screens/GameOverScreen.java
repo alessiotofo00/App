@@ -19,6 +19,7 @@ import java.io.IOException;
 
 import static com.mygdx.game.MyGdxGame.levelFile;
 import static com.mygdx.game.Scenes.Hud.addScore;
+import static com.mygdx.game.Scenes.Hud.score;
 import static com.mygdx.game.Screens.PlayScreen.level;
 
 public class GameOverScreen implements Screen {
@@ -27,6 +28,7 @@ public class GameOverScreen implements Screen {
     private Label endScoreLabel;
     public TextField nameToSave;
     private TextButton saveGame;
+ private File recordFile;
     public static int getPlayed() {
         return played;
     }
@@ -91,6 +93,7 @@ public class GameOverScreen implements Screen {
                     }
                     catch (IOException e){
                         e.printStackTrace();
+                        System.out.println("Errore nella scrittura del record");
                         throw (new RuntimeException());
                     }
                     game.playScreen = new PlayScreen(game);
@@ -104,7 +107,31 @@ public class GameOverScreen implements Screen {
                 }
             }
         });
-//saveGame.addListener(new ClickListener()) { }
+        saveGame.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y){
+                Gdx.app.log("ClickedSave", "yes");
+                try{recordFile = new File(String.valueOf(Gdx.files.internal("Records.txt")));
+                    if (recordFile.exists()){
+                        System.out.println("file record esistente");
+
+                        FileWriter fw = new FileWriter(recordFile);
+                      //  fw.append(Hud.score);
+                        fw.close();
+                    }
+                    else if(recordFile.createNewFile()) {
+                        System.out.println("file records creato");
+                        FileWriter fw = new FileWriter(recordFile);
+                       // fw.write("%d");
+                        fw.close();
+                        System.out.println("Scrittura record corretta");
+                    }
+                }
+                catch (IOException e){
+                    e.printStackTrace();
+                    throw (new RuntimeException());
+                }
+            }
+        });
         exitButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
