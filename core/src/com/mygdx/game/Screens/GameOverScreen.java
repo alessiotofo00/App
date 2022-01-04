@@ -13,9 +13,7 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
 
 import javax.swing.text.LabelView;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 import static com.mygdx.game.MyGdxGame.levelFile;
 import static com.mygdx.game.Scenes.Hud.addScore;
@@ -24,11 +22,11 @@ import static com.mygdx.game.Screens.PlayScreen.level;
 
 public class GameOverScreen implements Screen {
     public static int played=0;
-    protected Label saveRercordLabel;
+    protected Label recordScoreLabel;
     private Label endScoreLabel;
-    public TextField nameToSave;
-    private TextButton saveGame;
- private File recordFile;
+
+    private Label newRecLabel;
+    private File recordFile;
     public static int getPlayed() {
         return played;
     }
@@ -49,12 +47,10 @@ public class GameOverScreen implements Screen {
     private Label gameOverLabel;
     private TextButton playAgainButton;
     private TextButton exitButton;
+    private Integer recordScore=0;
+    boolean newRec=false;
 
-    public String getText() {
-        return nameToSave.getText();
-    }
-
-    public GameOverScreen(final MyGdxGame game){
+    public GameOverScreen(final MyGdxGame game) {
 
         this.game = game;
         this.skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
@@ -68,43 +64,100 @@ public class GameOverScreen implements Screen {
 
         gameOverLabel = new Label("GAME OVER", skin);
         playAgainButton = new TextButton("Play Again", skin);
-        endScoreLabel=new Label(String.format("Final score: %d", Hud.score), skin);
-        saveRercordLabel=new Label("Your name: ",skin);
-        nameToSave=new TextField("name ",skin);
-        final String name=nameToSave.getText();
-        saveGame=new TextButton("Save your record!",skin);
-        exitButton = new TextButton("Exit to Menu", skin);
+        endScoreLabel = new Label(String.format("Final score: %d", Hud.score), skin);
 
-        playAgainButton.addListener(new ClickListener(){
+
+        exitButton = new TextButton("Exit to Menu", skin);
+/*
+//prima volta
+        try {
+            recordFile = new File(String.valueOf(Gdx.files.internal("Records.txt")));
+            if (recordFile.exists()) {
+                System.out.println("file record esistente");
+                //non faccio nulla
+
+            } else if (recordFile.createNewFile()) {
+                System.out.println("file records creato");
+                FileWriter fw = new FileWriter(recordFile);
+                fw.write(score);
+                fw.close();
+                System.out.println("Scrittura record corretta");
+            }
+        } catch (IOException e) {
+            System.out.println("Errore nel salvataggio record");
+            e.printStackTrace();
+
+            throw (new RuntimeException());
+        }
+        //voglio sapere il vecchio record
+        if (recordFile.exists()) {
+            try {
+                BufferedReader buf = new BufferedReader(new FileReader(String.valueOf(Gdx.files.internal("Records.txt"))));
+                recordScore = Integer.parseInt(buf.readLine());
+                buf.close();
+                System.out.println("Lettura record corretta");
+            } catch (IOException e) {
+                System.out.println("Errore nel reperire il record");
+                e.printStackTrace();
+            }
+        }
+        //ho un nuovo record
+        if ( score >= recordScore) {
+            newRec = true;
+            {
+                try {
+                    recordFile = new File(String.valueOf(Gdx.files.internal("Records.txt")));
+                    if (recordFile.exists()) {
+                        System.out.println("file record esistente");
+                        recordFile.delete();
+                        recordFile.createNewFile();
+                        FileWriter fw = new FileWriter(recordFile);
+                        int s = Hud.score.intValue();
+                        fw.write(s);
+                        fw.close();
+                    } else if (recordFile.createNewFile()) {
+                        System.out.println("file record creato");
+                        FileWriter fw = new FileWriter(recordFile);
+                        int s = Hud.score.intValue();
+                        fw.write(s);
+                        fw.close();
+                    }
+                } catch (IOException e) {
+                    System.out.println("Scrittura nuovo record sbagliata");
+                    e.printStackTrace();
+                    throw (new RuntimeException());
+                }
+            }
+        }
+
+ */
+        playAgainButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if(game.hardMode){
+                if (game.hardMode) {
                     try {
                         levelFile = new File(String.valueOf(Gdx.files.internal("levelHolder.txt")));
-                        if (levelFile.exists()){
+                        if (levelFile.exists()) {
                             System.out.println("file esistente");
                             levelFile.delete();
                             levelFile.createNewFile();
                             FileWriter fw = new FileWriter(levelFile);
                             fw.write("1");
                             fw.close();
-                        }
-                        else if(levelFile.createNewFile()) {
+                        } else if (levelFile.createNewFile()) {
                             System.out.println("file creato");
                             FileWriter fw = new FileWriter(levelFile);
                             fw.write("1");
                             fw.close();
                         }
-                    }
-                    catch (IOException e){
+                    } catch (IOException e) {
                         e.printStackTrace();
                         System.out.println("Errore nel playagain");
                         throw (new RuntimeException());
                     }
                     game.playScreen = new PlayScreen(game);
                     game.changeScreen(MyGdxGame.APPLICATION);
-                }
-                else {
+                } else {
                     setPlayed(getPlayed() + 1);
                     addScore(-10);
                     game.playScreen = new PlayScreen(game);
@@ -113,55 +166,36 @@ public class GameOverScreen implements Screen {
             }
         });
 
-        saveGame.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y){
-                Gdx.app.log("ClickedSave", "yes");
-                try{recordFile = new File(String.valueOf(Gdx.files.internal("Records.txt")));
-                    if (recordFile.exists()){
-                        System.out.println("file record esistente");
-
-                        FileWriter fw = new FileWriter(recordFile);
-                       fw.write(name+" "+score);
-                        fw.close();
-                    }
-                    else if(recordFile.createNewFile()) {
-                        System.out.println("file records creato");
-                        FileWriter fw = new FileWriter(recordFile);
-                        fw.write(name+" "+score);
-                        fw.close();
-                        System.out.println("Scrittura record corretta");
-                    }
+            exitButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    game.playScreen = new PlayScreen(game);
+                    game.changeScreen(MyGdxGame.MENU);
                 }
-                catch (IOException e){
-                    e.printStackTrace();
-                    throw (new RuntimeException());
-                }
-            }
-        });
-        exitButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                game.playScreen = new PlayScreen(game);
-                game.changeScreen(MyGdxGame.MENU);
-            }
-        });
+            });
+            recordScoreLabel = new Label(String.format("Record: " + recordScore), skin);
+            newRecLabel = new Label(String.format("NUOVO RECORD: " + score), skin);
 
-        table.add(gameOverLabel).expandX();
-        table.row();
-        table.add(endScoreLabel).padTop(70);
-        table.row();
-        table.add(saveRercordLabel).padTop(50);
-        table.row();
-        table.add(nameToSave);
-        table.row();
-        table.add(saveGame).padTop(10);
-        table.row();
-        table.add(playAgainButton).padTop(60);
-        table.row();
-        table.add(exitButton).padTop(60);
+            table.add(gameOverLabel).expandX();
+            table.row();
+            table.add(endScoreLabel).padTop(70);
+            table.row();
+            if (!newRec) {
+                table.add(recordScoreLabel).padTop(50);
+                table.row();
+            }
+            if (newRec) {
+                table.add(newRecLabel).expandX().padTop(30);
+                table.row();
+                newRec = false;
+            }
 
-        stage.addActor(table);
-    }
+            table.add(playAgainButton).padTop(60);
+            table.row();
+            table.add(exitButton).padTop(60);
+
+            stage.addActor(table);
+        }
 
     @Override
     public void show() {
