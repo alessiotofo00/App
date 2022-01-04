@@ -50,6 +50,10 @@ public class GameOverScreen implements Screen {
     private TextButton playAgainButton;
     private TextButton exitButton;
 
+    public String getText() {
+        return nameToSave.getText();
+    }
+
     public GameOverScreen(final MyGdxGame game){
 
         this.game = game;
@@ -67,6 +71,7 @@ public class GameOverScreen implements Screen {
         endScoreLabel=new Label(String.format("Final score: %d", Hud.score), skin);
         saveRercordLabel=new Label("Your name: ",skin);
         nameToSave=new TextField("name ",skin);
+        final String name=nameToSave.getText();
         saveGame=new TextButton("Save your record!",skin);
         exitButton = new TextButton("Exit to Menu", skin);
 
@@ -93,7 +98,7 @@ public class GameOverScreen implements Screen {
                     }
                     catch (IOException e){
                         e.printStackTrace();
-                        System.out.println("Errore nella scrittura del record");
+                        System.out.println("Errore nel playagain");
                         throw (new RuntimeException());
                     }
                     game.playScreen = new PlayScreen(game);
@@ -107,6 +112,7 @@ public class GameOverScreen implements Screen {
                 }
             }
         });
+
         saveGame.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y){
                 Gdx.app.log("ClickedSave", "yes");
@@ -115,13 +121,13 @@ public class GameOverScreen implements Screen {
                         System.out.println("file record esistente");
 
                         FileWriter fw = new FileWriter(recordFile);
-                      //  fw.append(Hud.score);
+                       fw.write(name+" "+score);
                         fw.close();
                     }
                     else if(recordFile.createNewFile()) {
                         System.out.println("file records creato");
                         FileWriter fw = new FileWriter(recordFile);
-                       // fw.write("%d");
+                        fw.write(name+" "+score);
                         fw.close();
                         System.out.println("Scrittura record corretta");
                     }
