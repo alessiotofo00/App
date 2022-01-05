@@ -239,6 +239,8 @@
   <object id="63" x="240" y="159.875" width="64.625" height="16.125"/>
   <object id="64" x="128" y="432" width="32" height="16"/>
   <object id="65" x="224" y="384" width="32" height="16"/>
+  <object id="66" x="1" y="1.25" width="510.25" height="1.25"/>
+  <object id="67" x="510.25" y="2.25" width="0.5" height="45.25"/>
  </objectgroup>
  <objectgroup id="4" name="spikes">
   <object id="11" x="80" y="496" width="16" height="16"/>
@@ -252,8 +254,6 @@
  </objectgroup>
  <objectgroup id="9" name="levelEnd">
   <object id="8" x="496" y="224.75" width="16" height="15.25"/>
-  <object id="66" x="1" y="1.25" width="510.25" height="1.25"/>
-  <object id="67" x="510.25" y="2.25" width="0.5" height="45.25"/>
  </objectgroup>
  <objectgroup id="5" name="doublejump">
   <object id="58" x="368.182" y="256" width="16.1818" height="16.1818"/>
