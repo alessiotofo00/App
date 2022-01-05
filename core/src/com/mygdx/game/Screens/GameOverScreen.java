@@ -21,19 +21,8 @@ import static com.mygdx.game.Scenes.Hud.score;
 import static com.mygdx.game.Screens.PlayScreen.level;
 
 public class GameOverScreen implements Screen {
-    public static int played=0;
-    protected Label recordScoreLabel;
-    private Label endScoreLabel;
 
-    private Label newRecLabel;
     private File recordFile;
-    public static int getPlayed() {
-        return played;
-    }
-
-    public static void setPlayed(int played) {
-        GameOverScreen.played = played;
-    }
 
     private final MyGdxGame game;
 
@@ -47,6 +36,11 @@ public class GameOverScreen implements Screen {
     private Label gameOverLabel;
     private TextButton playAgainButton;
     private TextButton exitButton;
+    protected Label recordScoreLabel;
+    private Label endScoreLabel;
+    private Label newRecLabel;
+
+    public static int played=0;
     private Integer recordScore=0;
     boolean newRec=false;
 
@@ -65,7 +59,6 @@ public class GameOverScreen implements Screen {
         gameOverLabel = new Label("GAME OVER", skin);
         playAgainButton = new TextButton("Play Again", skin);
         endScoreLabel = new Label(String.format("Final score: %d", Hud.score), skin);
-
 
         exitButton = new TextButton("Exit to Menu", skin);
 /*
@@ -196,6 +189,14 @@ public class GameOverScreen implements Screen {
 
             stage.addActor(table);
         }
+
+    public static int getPlayed() {
+        return played;
+    }
+
+    public static void setPlayed(int played) {
+        GameOverScreen.played = played;
+    }
 
     @Override
     public void show() {

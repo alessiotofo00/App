@@ -39,6 +39,7 @@ public class MyGdxGame extends Game {
 	public GameOverScreen goScreen;
 	public ShopScreen shopScreen;
 	public CommandInfoScreen infoScreen;
+	public LevelDeathScreen levelDeathScreen;
 
 
 	//variabili per lo switch case dei vari screen
@@ -49,6 +50,7 @@ public class MyGdxGame extends Game {
 	public final static int GAMEOVER = 4;
 	public final static int SHOP = 5;
 	public final static int INFO = 6;
+	public final static int LEVELDEATH = 7;
 	//salvo lo schermo precedente a quello attuale e lo schermo attuale
 	//(serve al PreferencesScreen per distinguere se è stato chiamato dal MenuScreen o dal PauseScreen)
 	public static int previousScreen;
@@ -162,6 +164,11 @@ public class MyGdxGame extends Game {
 			case INFO:
 				currentScreen = INFO;
 				if(infoScreen == null) infoScreen = new CommandInfoScreen(this);
+				this.setScreen(infoScreen);
+				break;
+			case LEVELDEATH:
+				currentScreen = LEVELDEATH;
+				if(levelDeathScreen == null) levelDeathScreen = new LevelDeathScreen(this);
 				this.setScreen(infoScreen);
 				break;
 		}
