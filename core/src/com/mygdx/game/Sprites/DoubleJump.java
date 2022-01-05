@@ -14,6 +14,7 @@ public class DoubleJump extends RectInteractiveTileObject {
     public DoubleJump(PlayScreen screen, Rectangle bounds) {
         super(screen, bounds);
         super.body.setAwake(true);
+        super.fixture.setRestitution(1.2f);
         this.screen = screen;
         fixture.setUserData(this);
         setCategoryFilter(MyGdxGame.DOUBLE_JUMP_BIT);
@@ -22,8 +23,6 @@ public class DoubleJump extends RectInteractiveTileObject {
     @Override
     public void bodyHit() {
         Gdx.app.log("Hit", "DoubleJump");
-        screen.getPlayer().b2body.applyLinearImpulse(new Vector2(0, 5f),
-                                                    screen.getPlayer().b2body.getWorldCenter(), true);
        // MyGdxGame.manager.get("audio/doublejump.wav", Sound.class);
     }
 

@@ -47,7 +47,7 @@ public class ShopScreen implements Screen {
     private Label armorLabel;
     private Label armorCostLabel;
 
-    private TextButton bossButton;
+    private TextButton resumeButton;
     private TextButton exitButton;
 
     Animation<TextureRegion> animation;
@@ -83,7 +83,7 @@ public class ShopScreen implements Screen {
         armorLabel = new Label("Armor", skin);
         armorCostLabel = new Label("x1 COIN", skin);
 
-      //  bossButton = new TextButton("GO TO THE BOSS!", skin);
+        resumeButton = new TextButton("Resume", skin);
         exitButton = new TextButton("Back to Menu", skin);
 
         heartsButton.addListener(new ClickListener(){
@@ -123,7 +123,7 @@ public class ShopScreen implements Screen {
         });
         //provvisorio: cliccando GO TO THE BOSS! torno al playscreen
         //una volta implementato il BossScreen switcherà su di lui
-        bossButton.addListener(new ClickListener(){
+        resumeButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.changeScreen(MyGdxGame.APPLICATION);
@@ -145,7 +145,7 @@ public class ShopScreen implements Screen {
         table.add(armorLabel).expandX().padTop(40);
         table.add(armorCostLabel).expandX().padTop(40);
         table.row();
-       // table.add(bossButton).expandX().padTop(120);
+        table.add(resumeButton).expandX().padTop(120);
         table.add(exitButton).expandX().padTop(120);
 
         stage.addActor(table);

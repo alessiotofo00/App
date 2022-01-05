@@ -37,7 +37,7 @@ public class Hud extends Sprite implements Disposable{
     public static int numCoins = 0;
 int levelPrecedente=1;
     public Hud(SpriteBatch sb, PlayScreen screen){
-        worldTimer = 60;
+        worldTimer = 25;
         timeCount = 0;
 
         viewport = new ScreenViewport();
@@ -53,7 +53,7 @@ int levelPrecedente=1;
         coinsLabel = new Label(String.format("COINS x%d", numCoins), skin);
         playedLabel = new Label(String.format("DEATHS x%d", played), skin);
 
-        countdownLabel = new Label(String.format("Time: %02d", worldTimer),skin);
+        countdownLabel = new Label(String.format("TIME: %02d", worldTimer),skin);
 
         table.add(levelLabel).expandX();
         table.add(scoreLabel).expandX();
@@ -68,7 +68,7 @@ int levelPrecedente=1;
 
     public static void addScore(int value){
         score+=value;
-        scoreLabel.setText(String.format("%d",score));
+        scoreLabel.setText(String.format("SCORE %d",score));
     }
 
     public static void addCoins(){
@@ -79,7 +79,7 @@ int levelPrecedente=1;
         timeCount += dt;
         if(timeCount >= 1){
             worldTimer--;
-            countdownLabel.setText((String.format("Time: %02d", worldTimer)));
+            countdownLabel.setText((String.format("TIME: %02d", worldTimer)));
             timeCount = 0;
             if(worldTimer<=0){
                 Player.setHits(4);

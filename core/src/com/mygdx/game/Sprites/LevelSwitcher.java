@@ -2,6 +2,7 @@ package com.mygdx.game.Sprites;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Screens.PlayScreen;
 
 import java.io.FileWriter;
@@ -52,5 +53,6 @@ public class LevelSwitcher extends RectInteractiveTileObject {
         game.playScreen = new PlayScreen(game);
         game.changeScreen(MyGdxGame.APPLICATION);
 
+        Hud.addScore(50);
     }
 }

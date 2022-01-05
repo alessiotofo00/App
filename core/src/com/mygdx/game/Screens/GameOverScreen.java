@@ -173,7 +173,7 @@ public class GameOverScreen implements Screen {
                     game.changeScreen(MyGdxGame.MENU);
                 }
             });
-            recordScoreLabel = new Label(String.format("Record: " + recordScore), skin);
+            recordScoreLabel = new Label(String.format("RECORD: " + recordScore), skin);
             newRecLabel = new Label(String.format("NUOVO RECORD: " + score), skin);
 
             table.add(gameOverLabel).expandX();
