@@ -14,6 +14,7 @@ public class B2WorldCreator {
 
     private final Array<Skeleton> skeletons = new Array<Skeleton>();
     private final Array<Bullet> bullets = new Array<Bullet>();
+private final Array<Coin> coins=new Array<Coin>();
 
     public B2WorldCreator(PlayScreen screen){
         World world = screen.getWorld();
@@ -67,6 +68,13 @@ public class B2WorldCreator {
 
             bullets.add(new Bullet(screen, rect.getX() / MyGdxGame.PPM, rect.getY() / MyGdxGame.PPM));
         }
+        //player and coins
+        for (MapObject obj : map.getLayers().get(11).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) obj).getRectangle();
+
+            new Coin(screen, rect);
+        }
+
         /*//skeletons bodies and fixtures
         for (MapObject obj : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) obj).getRectangle();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="71">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="71">
  <tileset firstgid="1" source="plattoon.tsx"/>
  <tileset firstgid="4097" source="clouds.tsx"/>
  <tileset firstgid="4339" source="wasteland.tsx"/>
@@ -268,4 +268,5 @@
   <object id="66" x="240" y="480" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="12" name="bullets"/>
+ <objectgroup id="13" name="coin"/>
 </map>

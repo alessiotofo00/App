@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="24" nextobjectid="108">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="25" nextobjectid="108">
  <tileset firstgid="1" source="wastelandsky.tsx"/>
  <tileset firstgid="513" source="wasteland.tsx"/>
  <tileset firstgid="1025" source="dungeon 16x16.tsx"/>
@@ -279,4 +279,5 @@
   <object id="106" x="352" y="175.667" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="12" name="bullets"/>
+ <objectgroup id="24" name="coin"/>
 </map>

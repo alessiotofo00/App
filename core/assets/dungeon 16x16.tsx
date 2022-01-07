@@ -9,6 +9,29 @@
    <frame tileid="4911" duration="100"/>
   </animation>
  </tile>
+ <tile id="166">
+  <animation>
+   <frame tileid="168" duration="100"/>
+   <frame tileid="166" duration="100"/>
+   <frame tileid="164" duration="100"/>
+   <frame tileid="162" duration="100"/>
+   <frame tileid="160" duration="140"/>
+  </animation>
+ </tile>
+ <tile id="168">
+  <animation>
+   <frame tileid="168" duration="100"/>
+   <frame tileid="166" duration="100"/>
+   <frame tileid="164" duration="100"/>
+   <frame tileid="162" duration="100"/>
+   <frame tileid="160" duration="100"/>
+   <frame tileid="160" duration="100"/>
+   <frame tileid="162" duration="100"/>
+   <frame tileid="164" duration="100"/>
+   <frame tileid="166" duration="100"/>
+   <frame tileid="168" duration="100"/>
+  </animation>
+ </tile>
  <tile id="3554">
   <animation>
    <frame tileid="3561" duration="100"/>
