@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 //import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 //import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.mygdx.game.AppPreferences;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Sound;
 import com.mygdx.game.Tools.GifDecoder;
