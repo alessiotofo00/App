@@ -61,7 +61,7 @@ public class GameOverScreen implements Screen {
         endScoreLabel = new Label(String.format("Final score: %d", Hud.score), skin);
 
         exitButton = new TextButton("Exit to Menu", skin);
-/*
+
 //prima volta
         try {
             recordFile = new File(String.valueOf(Gdx.files.internal("Records.txt")));
@@ -81,18 +81,6 @@ public class GameOverScreen implements Screen {
             e.printStackTrace();
 
             throw (new RuntimeException());
-        }
-        //voglio sapere il vecchio record
-        if (recordFile.exists()) {
-            try {
-                BufferedReader buf = new BufferedReader(new FileReader(String.valueOf(Gdx.files.internal("Records.txt"))));
-                recordScore = Integer.parseInt(buf.readLine());
-                buf.close();
-                System.out.println("Lettura record corretta");
-            } catch (IOException e) {
-                System.out.println("Errore nel reperire il record");
-                e.printStackTrace();
-            }
         }
         //ho un nuovo record
         if ( score >= recordScore) {
@@ -122,8 +110,19 @@ public class GameOverScreen implements Screen {
                 }
             }
         }
+        //voglio sapere il vecchio record
+        if (recordFile.exists()) {
+            try {
+                BufferedReader buf = new BufferedReader(new FileReader(String.valueOf(Gdx.files.internal("Records.txt"))));
+                recordScore = Integer.parseInt(buf.readLine());
+                buf.close();
+                System.out.println("Lettura record corretta");
+            } catch (IOException e) {
+                System.out.println("Errore nel reperire il record");
+                e.printStackTrace();
+            }
+        }
 
- */
         playAgainButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
