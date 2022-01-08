@@ -151,6 +151,34 @@ public class  PlayScreen implements Screen {
                 map = mapLoader.load("Level10.tmx");
                 setLevel(10);
                 break;
+            case 11:
+                map = mapLoader.load("Level11.tmx");
+                setLevel(11);
+                break;
+            case 12:
+                map = mapLoader.load("Level12.tmx");
+                setLevel(12);
+                break;
+            case 13:
+                map = mapLoader.load("Level13.tmx");
+                setLevel(13);
+                break;
+            case 14:
+                map = mapLoader.load("Level14.tmx");
+                setLevel(14);
+                break;
+            case 15:
+                map = mapLoader.load("Level15.tmx");
+                setLevel(15);
+                break;
+            case 16:
+                map = mapLoader.load("Level16.tmx");
+                setLevel(16);
+                break;
+            case 17:
+                map = mapLoader.load("Level17.tmx");
+                setLevel(17);
+                break;
         }
         renderer = new OrthogonalTiledMapRenderer(map, 1 / MyGdxGame.PPM);
         //gamecam.position necessario per non centrare in posizione 0.0 (il centro della mappa, visto come assi cartesiani)
