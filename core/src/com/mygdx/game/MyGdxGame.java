@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -58,23 +59,30 @@ public class MyGdxGame extends Game {
 	public static int currentScreen;
 	//manager per i suoni e la musica
 	public static AssetManager manager;
+	public static Music musicMenu;
+	public static Music soundJump;
 
 	public static File levelFile;
 	public static File continueLevelFile;
 
 	public boolean hardMode = false;
-
+	//descrittore del file per la chiamata del load e dell'assegnamento
+	private final AssetDescriptor<Music> menuMusicDescriptor = new AssetDescriptor<>("audio/menu-music.mp3", Music.class);
+	private final AssetDescriptor<Music> soundJumpDescriptor = new AssetDescriptor<>("audio/jump.wav", Music.class);
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-
+//carico dall'asset
 		manager = new AssetManager();
-		manager.load("audio/menu-music.mp3", Music.class);
-		manager.load("audio/jump.wav", Sound.class);
+		manager.load(menuMusicDescriptor);
+		manager.load(soundJumpDescriptor);
 		//manager.load("audio/doublejump.wav", Sound.class);
 
-		manager.finishLoading();
+		manager.finishLoading(); //finisco il caricamento
 
+		//assegno il file ad una variabile che può essere chiamata all'interno del programma
+		musicMenu=manager.get(menuMusicDescriptor);
+		soundJump=manager.get(soundJumpDescriptor);
 		try {
 			levelFile = new File(String.valueOf(Gdx.files.internal("levelHolder.txt")));
 			if (levelFile.exists()){

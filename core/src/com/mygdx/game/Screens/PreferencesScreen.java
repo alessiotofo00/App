@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 //import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.AppPreferences;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Sound;
 import com.mygdx.game.Tools.GifDecoder;
 
 import static com.mygdx.game.MyGdxGame.*;
@@ -53,24 +54,24 @@ public class PreferencesScreen implements Screen {
         table.top(); //set the table on the top of the stage
         table.setFillParent(true); //now the table's size is the same of the stage's size
 
+//CheckBox per la musica
         final CheckBox musicCheckBox = new CheckBox(null, skin);
-        musicCheckBox.setChecked(true);
-        musicCheckBox.addListener(new InputListener(){
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-
-            }
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                return true;
+        musicCheckBox.setChecked(Sound.musicEnabled);
+        musicCheckBox.addListener(new EventListener() {
+            public boolean handle(Event event) {
+                Sound.setMusicEnabled(musicCheckBox.isChecked());
+                return false;
             }
         });
-        final CheckBox soundsCheckBox = new CheckBox(null, skin);
-        soundsCheckBox.setChecked(true);
-        soundsCheckBox.addListener(new InputListener(){
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 
-            }
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                return true;
+        //checkbox per il sound
+        final CheckBox soundsCheckBox = new CheckBox(null, skin);
+        soundsCheckBox.setChecked(Sound.soundEnabled);
+        soundsCheckBox.addListener(new EventListener(){
+            @Override
+            public boolean handle(Event event) {
+                Sound.setSoundEnabled(soundsCheckBox.isChecked());
+                return false;
             }
         });
 
@@ -89,22 +90,30 @@ public class PreferencesScreen implements Screen {
         titleLabel = new Label( "OPTIONS", skin );
         musicOnOffLabel = new Label( "Music", skin );
         soundOnOffLabel = new Label( "Sounds", skin );
-        final AppPreferences pref=new AppPreferences();
+        //Attualmente inutile. Non salviamo le preferenze, lo impostiamo sempre al maxValue
+
+       // final AppPreferences pref=new AppPreferences();
+
+        //Slider per la musica
         final Slider volumeMusicSlider=new Slider(0f,1f,0.1f,false,skin);
-        volumeMusicSlider.setValue(pref.getMusicVolume(volumeMusicSlider.getValue()));
+        volumeMusicSlider.setValue(volumeMusicSlider.getMaxValue());
+
         volumeMusicSlider.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
-                pref.getMusicVolume(volumeMusicSlider.getValue());
+                Sound.changeMusicVolume(volumeMusicSlider.getValue());
                 return false;
             }
         });
+
+        //slider suoni
         final Slider soundSlider=new Slider(0f,1f,0.1f,false,skin);
-        soundSlider.setValue(pref.getSoundVolume(soundSlider.getValue()));
+        soundSlider.setValue(soundSlider.getMaxValue());
+
         soundSlider.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
-                pref.getMusicVolume(soundSlider.getValue());
+                Sound.changeSoundVolume(soundSlider.getValue());
                 return false;
             }
         });
