@@ -39,14 +39,6 @@ public class ShopScreen implements Screen {
     private Label heartsLabel;
     private Label heartsCostLabel;
 
-    private TextButton atkBoostButton;
-    private Label atkBoostLabel;
-    private Label atkBoostCostLabel;
-
-    private TextButton armorButton;
-    private Label armorLabel;
-    private Label armorCostLabel;
-
     private TextButton resumeButton;
     private TextButton exitButton;
 
@@ -75,14 +67,6 @@ public class ShopScreen implements Screen {
         heartsLabel = new Label("+1 Heart", skin);
         heartsCostLabel = new Label("x1 COIN", skin);
 
-        atkBoostButton = new TextButton("Buy", skin);
-        atkBoostLabel = new Label("ATK Boost", skin);
-        atkBoostCostLabel = new Label("x1 COIN", skin);
-
-        armorButton = new TextButton("Buy", skin);
-        armorLabel = new Label("Armor", skin);
-        armorCostLabel = new Label("x1 COIN", skin);
-
         resumeButton = new TextButton("Resume", skin);
         exitButton = new TextButton("Back to Menu", skin);
 
@@ -93,24 +77,6 @@ public class ShopScreen implements Screen {
                 if(Hud.numCoins > 0 && Player.hits > 0) {
                     updateCoins();
                     Player.hits--;
-                }
-            }
-        });
-        atkBoostButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                //permetto il funzionamento del bottone solo se i coins sono > 0
-                if(Hud.numCoins > 0) {
-                    updateCoins();
-                }
-            }
-        });
-        armorButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                //permetto il funzionamento del bottone solo se i coins sono > 0
-                if(Hud.numCoins > 0) {
-                    updateCoins();
                 }
             }
         });
@@ -136,14 +102,6 @@ public class ShopScreen implements Screen {
         table.add(heartsButton).expandX().padTop(120);
         table.add(heartsLabel).expandX().padTop(120);
         table.add(heartsCostLabel).expandX().padTop(120);
-        table.row();
-        table.add(atkBoostButton).expandX().padTop(40);
-        table.add(atkBoostLabel).expandX().padTop(40);
-        table.add(atkBoostCostLabel).expandX().padTop(40);
-        table.row();
-        table.add(armorButton).expandX().padTop(40);
-        table.add(armorLabel).expandX().padTop(40);
-        table.add(armorCostLabel).expandX().padTop(40);
         table.row();
         table.add(resumeButton).expandX().padTop(120);
         table.add(exitButton).expandX().padTop(120);
