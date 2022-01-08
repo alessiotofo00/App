@@ -89,4 +89,7 @@ private final Array<Coin> coins=new Array<Coin>();
     public Array<Bullet> getBullets() {
         return bullets;
     }
+    public Array<Coin> getCoins() {
+        return coins;
+    }
 }
