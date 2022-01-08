@@ -3,6 +3,7 @@ package com.mygdx.game.Tools;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Sprites.Coin;
 import com.mygdx.game.Sprites.Enemy;
 import com.mygdx.game.Sprites.RectInteractiveTileObject;
 
@@ -58,6 +59,16 @@ public class B2ContactListener  implements ContactListener {
                 else
                     ((Enemy) fixB.getUserData()).hitPlayer();
                 break;
+
+            /*
+            case MyGdxGame.PLAYER_BIT | MyGdxGame.COIN_BIT:
+                if(fixA.getFilterData().categoryBits == MyGdxGame.COIN_BIT)
+                    ((RectInteractiveTileObject)fixA.getUserData()).hitPlayer();
+                else
+                    ((RectInteractiveTileObject) fixB.getUserData()).hitPlayer();
+                break;
+
+               */
         }
     }
 

@@ -11,6 +11,7 @@ import com.mygdx.game.Screens.PlayScreen;
 
         public Coin(PlayScreen screen, Rectangle bounds) {
             super(screen, bounds);
+       //     tileSet = map.getTileSets().getTileSet("various");
             fixture.setUserData(this);
             setCategoryFilter(MyGdxGame.COIN_BIT);
         }
