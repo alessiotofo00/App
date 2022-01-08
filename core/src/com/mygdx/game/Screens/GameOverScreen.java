@@ -72,7 +72,8 @@ public class GameOverScreen implements Screen {
             } else if (recordFile.createNewFile()) {
                 System.out.println("file records creato");
                 FileWriter fw = new FileWriter(recordFile);
-                fw.write(score);
+                PrintWriter pw = new PrintWriter(fw);
+                pw.printf("%d", score);
                 fw.close();
                 System.out.println("Scrittura record corretta");
             }
@@ -93,14 +94,16 @@ public class GameOverScreen implements Screen {
                         recordFile.delete();
                         recordFile.createNewFile();
                         FileWriter fw = new FileWriter(recordFile);
+                        PrintWriter pw = new PrintWriter(fw);
                         int s = Hud.score.intValue();
-                        fw.write(s);
+                        pw.printf("%d", s);
                         fw.close();
                     } else if (recordFile.createNewFile()) {
                         System.out.println("file record creato");
                         FileWriter fw = new FileWriter(recordFile);
+                        PrintWriter pw = new PrintWriter(fw);
                         int s = Hud.score.intValue();
-                        fw.write(s);
+                        pw.printf("%d", s);
                         fw.close();
                     }
                 } catch (IOException e) {

@@ -154,7 +154,7 @@ public class MyGdxGame extends Game {
 				break;
 			case GAMEOVER:
 				currentScreen = GAMEOVER;
-				if(goScreen == null) goScreen = new GameOverScreen(this);
+				goScreen = new GameOverScreen(this);
 				this.setScreen(goScreen);
 				break;
 			case SHOP:
