@@ -233,6 +233,7 @@ public class  PlayScreen implements Screen {
         if(player.currentState != Player.State.GAMEOVER) {
             //if (player.b2body.getLinearVelocity().y == 0 || canJump) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+                soundJump.stop();
                 soundJump.play();
                 player.b2body.applyLinearImpulse(new Vector2(0, 4), player.b2body.getWorldCenter(), true);
                 canJump = false;
