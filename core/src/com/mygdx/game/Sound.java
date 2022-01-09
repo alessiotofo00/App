@@ -57,4 +57,11 @@ public class Sound {
         this.musicVolume = musicVolume;
 
     }
+
+    public static void playJumpSound() {
+        if (soundEnabled) {
+            soundJump.stop();
+            soundJump.play();
+        }
+    }
 }

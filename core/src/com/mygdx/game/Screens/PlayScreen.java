@@ -29,6 +29,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import static com.mygdx.game.MyGdxGame.soundJump;
 import static com.mygdx.game.Scenes.Hud.addScore;
 
 public class  PlayScreen implements Screen {
@@ -71,7 +72,7 @@ public class  PlayScreen implements Screen {
         PlayScreen.level = level;
     }
 
-    private Sound jumpSound;
+
 
     public PlayScreen(final MyGdxGame game){
 
@@ -86,7 +87,7 @@ public class  PlayScreen implements Screen {
                 gamecam);
         hud = new Hud(game.batch, this);
 
-        jumpSound = MyGdxGame.manager.get("audio/jump.wav", Sound.class);
+
 
         try {
             BufferedReader buf = new BufferedReader(new FileReader(String.valueOf(Gdx.files.internal("levelHolder.txt"))));
@@ -232,8 +233,8 @@ public class  PlayScreen implements Screen {
         if(player.currentState != Player.State.GAMEOVER) {
             //if (player.b2body.getLinearVelocity().y == 0 || canJump) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+                soundJump.play();
                 player.b2body.applyLinearImpulse(new Vector2(0, 4), player.b2body.getWorldCenter(), true);
-                jumpSound.setVolume(jumpSound.play(), 0.3f);
                 canJump = false;
             }
             //}
