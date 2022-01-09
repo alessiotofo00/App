@@ -1,11 +1,11 @@
 package com.mygdx.game.Sprites;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
+import com.mygdx.game.Sound;
 
 public class DoubleJump extends RectInteractiveTileObject {
 
@@ -23,7 +23,8 @@ public class DoubleJump extends RectInteractiveTileObject {
     @Override
     public void bodyHit() {
         Gdx.app.log("Hit", "DoubleJump");
-       // MyGdxGame.manager.get("audio/doublejump.wav", Sound.class);
+        Sound.playDoubleJumpS();
+
     }
 
 }

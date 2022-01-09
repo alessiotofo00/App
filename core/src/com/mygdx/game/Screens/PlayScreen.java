@@ -3,7 +3,6 @@ package com.mygdx.game.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
+import com.mygdx.game.Sound;
 import com.mygdx.game.Sprites.Enemy;
 import com.mygdx.game.Sprites.HealthBar;
 import com.mygdx.game.Sprites.Player;
@@ -233,8 +233,7 @@ public class  PlayScreen implements Screen {
         if(player.currentState != Player.State.GAMEOVER) {
             //if (player.b2body.getLinearVelocity().y == 0 || canJump) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-                soundJump.stop();
-                soundJump.play();
+                Sound.playJumpSound();
                 player.b2body.applyLinearImpulse(new Vector2(0, 4), player.b2body.getWorldCenter(), true);
                 canJump = false;
             }
