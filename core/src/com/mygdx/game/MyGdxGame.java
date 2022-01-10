@@ -74,8 +74,8 @@ public class MyGdxGame extends Game {
 	private final AssetDescriptor<Music> menuMusicDescriptor = new AssetDescriptor<>("audio/menu-music.mp3", Music.class);
 	private final AssetDescriptor<Music> soundJumpDescriptor = new AssetDescriptor<>("audio/jump.wav", Music.class);
 	private final AssetDescriptor<Music>soundDoubleJumpDescriptor=new AssetDescriptor<>("audio/doublejump.mp3", Music.class);
-	private final AssetDescriptor<Music>soundCoinDescriptor=new AssetDescriptor<>("audio/doublejump.mp3", Music.class);
-	private final AssetDescriptor<Music>soundDeathDescriptor=new AssetDescriptor<>("audio/doublejump.mp3", Music.class);
+	private final AssetDescriptor<Music>soundCoinDescriptor=new AssetDescriptor<>("audio/coin.mp3", Music.class);
+	private final AssetDescriptor<Music>soundDeathDescriptor=new AssetDescriptor<>("audio/bump.mp3", Music.class);
 	private final AssetDescriptor<Music>soundButtonDescriptor=new AssetDescriptor<>("audio/ButtonSound.mp3", Music.class);
 	@Override
 	public void create () {
