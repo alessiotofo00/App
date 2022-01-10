@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="25" nextobjectid="80">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="25" nextobjectid="81">
  <tileset firstgid="1" source="wastelandsky.tsx"/>
  <tileset firstgid="513" source="wasteland.tsx"/>
  <tileset firstgid="1025" source="dungeon 16x16.tsx"/>
@@ -187,7 +187,7 @@
 0,0,0,0,0,0,0,0,0,0,5843,0,0,0,0,5716,5716,0,0,0,0,0,0,0,5715,5715,5849,5849,0,0,5849,5716,
 0,0,0,0,0,0,0,0,0,0,5843,0,0,0,0,5716,5716,0,0,0,0,0,0,0,0,5715,5715,5844,0,0,5716,5716,
 0,0,0,0,0,0,0,0,0,0,5843,0,0,0,0,5716,5716,0,0,0,0,0,0,0,0,5715,5715,5844,0,0,5716,5849,
-0,0,0,0,5843,5843,0,0,0,5843,5843,0,0,0,0,5716,5716,0,0,5715,0,0,0,0,0,5715,5715,5844,0,0,5716,5716,
+0,0,0,0,5843,5843,0,0,0,5843,5843,0,0,0,0,5716,5716,7616,0,5715,0,0,0,0,0,5715,5715,5844,0,0,5716,5716,
 5846,5846,5848,5848,5843,5843,4579,4579,4579,5723,5723,4579,4579,4579,4579,5723,5716,5723,5723,5716,4579,4579,4579,4579,4579,5715,5715,5844,4579,4579,5716,5844
 </data>
  </layer>
@@ -262,5 +262,7 @@
   <object id="56" x="319.636" y="303.818" width="17.6364" height="15.6364"/>
  </objectgroup>
  <objectgroup id="12" name="bullets"/>
- <objectgroup id="24" name="coin"/>
+ <objectgroup id="24" name="coin">
+  <object id="80" x="272" y="480" width="16" height="16"/>
+ </objectgroup>
 </map>
