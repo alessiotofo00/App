@@ -36,7 +36,7 @@ public class ShopScreen implements Screen {
     private Label coinsLabel;
 
     private TextButton heartsButton;
-    private Label heartsLabel;
+   // private Label heartsLabel;
     private Label heartsCostLabel;
 
     private TextButton resumeButton;
@@ -44,7 +44,8 @@ public class ShopScreen implements Screen {
 
     Animation<TextureRegion> animation;
     float elapsed;
-
+    private TextButton buyTime;
+    private Label timeForCoin;
 
     public ShopScreen(final MyGdxGame game){
 
@@ -63,10 +64,11 @@ public class ShopScreen implements Screen {
         shopLabel = new Label("SHOP", skin);
         coinsLabel = new Label(String.format("COINS x%d", Hud.numCoins), skin);
 
-        heartsButton = new TextButton("Buy", skin);
-        heartsLabel = new Label("+1 Heart", skin);
+        heartsButton = new TextButton("Buy +1 Heart", skin);
+       // heartsLabel = new Label("+1 Heart", skin);
         heartsCostLabel = new Label("x1 COIN", skin);
-
+        buyTime=new TextButton("Buy +15 seconds",skin);
+        timeForCoin=new Label("x3 COIN",skin);
         resumeButton = new TextButton("Resume", skin);
         exitButton = new TextButton("Back to Menu", skin);
 
@@ -80,7 +82,17 @@ public class ShopScreen implements Screen {
                 }
             }
         });
-
+        //scalo 3 dal denaro per il buytime e aggiungo 15
+        buyTime.addListener(new ClickListener(){
+            public void clicked (InputEvent event,float x,float y){
+                if(Hud.numCoins>=3){
+                    for(int i=1;i<3;i++){
+                        updateCoins();
+                    }
+                    Hud.addTime();
+                }
+            }
+        });
         exitButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -100,8 +112,11 @@ public class ShopScreen implements Screen {
         table.add(coinsLabel).expandX().padTop(20);
         table.row();
         table.add(heartsButton).expandX().padTop(120);
-        table.add(heartsLabel).expandX().padTop(120);
+       // table.add(heartsLabel).expandX().padTop(120);
         table.add(heartsCostLabel).expandX().padTop(120);
+        table.row();
+        table.add(buyTime).expandX().padTop(100);
+        table.add(timeForCoin).expandX().padTop(100);
         table.row();
         table.add(resumeButton).expandX().padTop(120);
         table.add(exitButton).expandX().padTop(120);
@@ -126,7 +141,7 @@ public class ShopScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.batch.begin();
-            game.batch.draw(animation.getKeyFrame(elapsed), 20.0f, 20.0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        game.batch.draw(animation.getKeyFrame(elapsed), 20.0f, 20.0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         game.batch.end();
 
         stage.act(Gdx.graphics.getDeltaTime());

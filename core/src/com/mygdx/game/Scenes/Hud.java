@@ -31,8 +31,8 @@ public class Hud extends Sprite implements Disposable{
     static Label coinsLabel;
     static Label playedLabel;
 
-    Label countdownLabel;
-    private Integer worldTimer;
+    static Label countdownLabel;
+    private static Integer worldTimer;
     private float timeCount;
     public static int numCoins = 0;
 int levelPrecedente=1;
@@ -86,10 +86,13 @@ int levelPrecedente=1;
             }
         }
         if(levelPrecedente<PlayScreen.getLevel()){
-            worldTimer+=15;
-            countdownLabel.setText((String.format("TIME: +15!!")));
+           addTime();
             levelPrecedente=PlayScreen.getLevel();
         }
+    }
+    public static void addTime(){
+        worldTimer+=15;
+        countdownLabel.setText((String.format("TIME: +15!!")));
     }
     @Override
     public void dispose() {

@@ -49,7 +49,7 @@ public class Sound {
     public static void changeSoundVolume(float volume) {
         soundVolume = volume;
         soundJump.setVolume(volume); //suono salto
-     //   soundDoubleJump.setVolume(volume);
+        soundDoubleJump.setVolume(volume);
     }
 
 
@@ -59,12 +59,12 @@ public class Sound {
             soundJump.play();
         }
     }
-   /* public static void playDoubleJumpS(){
+   public static void playDoubleJumpS(){
         if(soundEnabled){
             soundDoubleJump.stop();
             soundDoubleJump.play();
         }
     }
 
-    */
+
 }

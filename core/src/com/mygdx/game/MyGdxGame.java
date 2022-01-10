@@ -61,7 +61,7 @@ public class MyGdxGame extends Game {
 	public static AssetManager manager;
 	public static Music musicMenu;
 	public static Music soundJump;
-public static Music soundDoubleJump;
+	public static Music soundDoubleJump;
 	public static File levelFile;
 	public static File continueLevelFile;
 
@@ -69,7 +69,7 @@ public static Music soundDoubleJump;
 	//descrittore del file per la chiamata del load e dell'assegnamento
 	private final AssetDescriptor<Music> menuMusicDescriptor = new AssetDescriptor<>("audio/menu-music.mp3", Music.class);
 	private final AssetDescriptor<Music> soundJumpDescriptor = new AssetDescriptor<>("audio/jump.wav", Music.class);
-	//private final AssetDescriptor<Music>soundDoubleJumpDescriptor=new AssetDescriptor<>("audio/doublejump.wav", Music.class);
+	private final AssetDescriptor<Music>soundDoubleJumpDescriptor=new AssetDescriptor<>("audio/doublejump.mp3", Music.class);
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -77,7 +77,7 @@ public static Music soundDoubleJump;
 		manager = new AssetManager();
 		manager.load(menuMusicDescriptor);
 		manager.load(soundJumpDescriptor);
-		// manager.load(soundDoubleJumpDescriptor);
+		manager.load(soundDoubleJumpDescriptor);
 		//manager.load("audio/doublejump.wav", Sound.class);
 
 		manager.finishLoading(); //finisco il caricamento
@@ -85,14 +85,14 @@ public static Music soundDoubleJump;
 		//assegno il file ad una variabile che può essere chiamata all'interno del programma
 		musicMenu=manager.get(menuMusicDescriptor);
 		soundJump=manager.get(soundJumpDescriptor);
-		//soundDoubleJump=manager.get(soundDoubleJumpDescriptor);
+		soundDoubleJump=manager.get(soundDoubleJumpDescriptor);
 
 		try {
 			levelFile = new File(String.valueOf(Gdx.files.internal("levelHolder.txt")));
 			if (levelFile.exists()){
 				System.out.println("file esistente");
-				levelFile.delete();
-				levelFile.createNewFile();
+				//	levelFile.delete();
+				//	levelFile.createNewFile();
 				FileWriter fw = new FileWriter(levelFile);
 				fw.write("1");
 				fw.close();
