@@ -75,6 +75,10 @@ int levelPrecedente=1;
         numCoins++;
         coinsLabel.setText(String.format("COINS x%d", numCoins));
     }
+    public static void subCoins(){
+        numCoins--;
+        coinsLabel.setText(String.format("COINS x%d",numCoins));
+    }
     public void update(float dt){
         timeCount += dt;
         if(timeCount >= 1){

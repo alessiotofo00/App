@@ -41,7 +41,7 @@ public class GameOverScreen implements Screen {
     private Label newRecLabel;
 
     public static int played=0;
-    private Integer recordScore=0;
+    private Integer recordScore;
     boolean newRec=false;
 
     public GameOverScreen(final MyGdxGame game) {
@@ -63,7 +63,7 @@ public class GameOverScreen implements Screen {
         exitButton = new TextButton("Exit to Menu", skin);
 
 //prima volta
-        try {
+     /*   try {
             recordFile = new File(String.valueOf(Gdx.files.internal("Records.txt")));
             if (recordFile.exists()) {
                 System.out.println("file record esistente");
@@ -83,36 +83,8 @@ public class GameOverScreen implements Screen {
 
             throw (new RuntimeException());
         }
-        //ho un nuovo record
-        if ( score >= recordScore) {
-            newRec = true;
-            {
-                try {
-                    recordFile = new File(String.valueOf(Gdx.files.internal("Records.txt")));
-                    if (recordFile.exists()) {
-                        System.out.println("file record esistente");
-                        recordFile.delete();
-                        recordFile.createNewFile();
-                        FileWriter fw = new FileWriter(recordFile);
-                        PrintWriter pw = new PrintWriter(fw);
-                        int s = Hud.score.intValue();
-                        pw.printf("%d", s);
-                        fw.close();
-                    } else if (recordFile.createNewFile()) {
-                        System.out.println("file record creato");
-                        FileWriter fw = new FileWriter(recordFile);
-                        PrintWriter pw = new PrintWriter(fw);
-                        int s = Hud.score.intValue();
-                        pw.printf("%d", s);
-                        fw.close();
-                    }
-                } catch (IOException e) {
-                    System.out.println("Scrittura nuovo record sbagliata");
-                    e.printStackTrace();
-                    throw (new RuntimeException());
-                }
-            }
-        }
+
+
         //voglio sapere il vecchio record
         if (recordFile.exists()) {
             try {
@@ -123,6 +95,41 @@ public class GameOverScreen implements Screen {
             } catch (IOException e) {
                 System.out.println("Errore nel reperire il record");
                 e.printStackTrace();
+            }
+        }
+*/
+        recordScore=0;
+        //ho un nuovo record
+        if ( score >= recordScore) {
+            newRec = true;
+            {
+                try {
+                    recordFile = new File(String.valueOf(Gdx.files.internal("Records.txt")));
+                    if (recordFile.exists()) {
+                        System.out.println("file record esistente");
+                       // recordFile.delete();
+                       // recordFile.createNewFile();
+                        FileWriter fw = new FileWriter(recordFile);
+                        PrintWriter pw = new PrintWriter(fw);
+                        int s = Hud.score.intValue();
+                        pw.printf("%d", s);
+                        recordScore= score;
+                        fw.close();
+                    } else if (recordFile.createNewFile()) {
+                        System.out.println("file record creato");
+                        FileWriter fw = new FileWriter(recordFile);
+                        PrintWriter pw = new PrintWriter(fw);
+                        int s = Hud.score.intValue();
+                        pw.printf("%d", s);
+                        recordScore= Hud.score;
+                        System.out.println("aggiornamento nuovo record corretto");
+                        fw.close();
+                    }
+                } catch (IOException e) {
+                    System.out.println("Scrittura nuovo record sbagliata");
+                    e.printStackTrace();
+                    throw (new RuntimeException());
+                }
             }
         }
 

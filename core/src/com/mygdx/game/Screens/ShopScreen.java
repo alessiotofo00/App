@@ -77,7 +77,7 @@ public class ShopScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 //permetto il funzionamento del bottone solo se i coins sono > 0 e se la vita non è piena (hit subite dal player > 0)
                 if(Hud.numCoins > 0 && Player.hits > 0) {
-                    updateCoins();
+                    Hud.subCoins();
                     Player.hits--;
                 }
             }
@@ -86,9 +86,9 @@ public class ShopScreen implements Screen {
         buyTime.addListener(new ClickListener(){
             public void clicked (InputEvent event,float x,float y){
                 if(Hud.numCoins>=3){
-                    for(int i=1;i<3;i++){
-                        updateCoins();
-                    }
+                    Hud.numCoins-=2;
+                        Hud.subCoins();
+                    coinsLabel = new Label(String.format("COINS x%d", Hud.numCoins), skin);
                     Hud.addTime();
                 }
             }
@@ -109,7 +109,7 @@ public class ShopScreen implements Screen {
         });
 
         table.add(shopLabel).expandX().padTop(20);
-        table.add(coinsLabel).expandX().padTop(20);
+        //table.add(coinsLabel).expandX().padTop(20);
         table.row();
         table.add(heartsButton).expandX().padTop(120);
        // table.add(heartsLabel).expandX().padTop(120);
