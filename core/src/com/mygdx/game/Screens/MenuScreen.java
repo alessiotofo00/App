@@ -51,6 +51,8 @@ public class MenuScreen implements Screen, InputProcessor {
     private final TextButton optionsButton;
 
     private final Label titleLabel;
+    private final Label titleLabel2;
+    private final Label titleLabel3;
 
     Animation<TextureRegion> animation;
     float elapsed;
@@ -75,7 +77,9 @@ public class MenuScreen implements Screen, InputProcessor {
         quitButton = new TextButton("Quit Game", skin);
         optionsButton = new TextButton("Options", skin);
 
-        titleLabel = new Label("GAME TITLE", skin);
+        titleLabel = new Label("THE", skin);
+        titleLabel2 = new Label("+ SCARED +", skin);
+        titleLabel3 = new Label("KNIGHT", skin);
 
         music = manager.get("audio/menu-music.mp3", Music.class);
         music.setLooping(true);
@@ -145,7 +149,11 @@ public class MenuScreen implements Screen, InputProcessor {
         float width = startButton.getWidth() * scale;
        */
         table.padTop(20);
-        table.add(titleLabel).padBottom(150);
+        table.add(titleLabel);
+        table.row();
+        table.add(titleLabel2);
+        table.row();
+        table.add(titleLabel3).padBottom(150);
         table.row();
         table.add(startButton).padBottom(40);
         table.row();

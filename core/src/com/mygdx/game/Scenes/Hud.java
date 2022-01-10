@@ -91,8 +91,8 @@ int levelPrecedente=1;
         }
     }
     public static void addTime(){
-        worldTimer+=15;
-        countdownLabel.setText((String.format("TIME: +15!")));
+        worldTimer+=10;
+        countdownLabel.setText((String.format("TIME: +10!")));
     }
     @Override
     public void dispose() {
