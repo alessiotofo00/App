@@ -102,7 +102,6 @@ public class ShopScreen implements Screen {
                 Sound.playButtonSound();
                 game.changeScreen(MyGdxGame.MENU);
             }
-
         });
         //provvisorio: cliccando GO TO THE BOSS! torno al playscreen
         //una volta implementato il BossScreen switcherà su di lui
