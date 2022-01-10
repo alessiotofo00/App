@@ -35,6 +35,7 @@ public class CommandInfoScreen implements Screen {
 
     private final Label titleLabel;
 
+    private final Label storyLabel;
     private final Label leftLabel;
     private final Label rightLabel;
     private final Label jumpLabel;
@@ -57,6 +58,7 @@ public class CommandInfoScreen implements Screen {
         table.setFillParent(true); //now the table's size is the same of the stage's size
 
         titleLabel = new Label("HOW TO PLAY...", skin);
+        storyLabel = new Label("Help the poor Scared Knight to survive!", skin);
         leftLabel = new Label("LEFT  -  A", skin);
         rightLabel = new Label("RIGHT  -  D", skin);
         jumpLabel = new Label("JUMP  -  W", skin);
@@ -105,7 +107,9 @@ public class CommandInfoScreen implements Screen {
 
         table.add(titleLabel).expandX().padTop(20);
         table.row();
-        table.add(leftLabel).padTop(120);
+        table.add(storyLabel).padTop(100);
+        table.row();
+        table.add(leftLabel).padTop(20);
         table.row();
         table.add(rightLabel).padTop(20);
         table.row();
