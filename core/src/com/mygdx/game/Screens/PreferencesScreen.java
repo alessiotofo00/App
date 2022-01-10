@@ -118,7 +118,7 @@ public class PreferencesScreen implements Screen {
             }
         });
 
-        table.add(titleLabel).padBottom(150).padTop(20);
+        table.add(titleLabel).padBottom(150).padTop(20).center();
         table.row();
         table.add(musicOnOffLabel).padBottom(40);
         table.add(musicCheckBox).padBottom(40);
