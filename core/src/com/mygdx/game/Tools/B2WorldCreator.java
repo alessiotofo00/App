@@ -75,12 +75,12 @@ private final Array<Coin> coins=new Array<Coin>();
             new Coin(screen, rect);
         }
 
-        /*//skeletons bodies and fixtures
-        for (MapObject obj : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
+        //skeletons bodies and fixtures
+        for (MapObject obj : map.getLayers().get(12).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) obj).getRectangle();
 
             skeletons.add(new Skeleton(screen, rect.getX() / MyGdxGame.PPM, rect.getY() / MyGdxGame.PPM));
-        }*/
+        }
     }
 
     public Array<Skeleton> getSkeletons() {

@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class MyGdxGame extends Game {
+public class MyGdxGame<SKELETON_BIT> extends Game {
 
 	public static final int V_WIDTH = 960;
 	public static final int V_HEIGHT = 540;
@@ -26,13 +26,13 @@ public class MyGdxGame extends Game {
 	public static final short DESTROYED_BIT = 8;
 	public static final short OBJECT_BIT = 16;
 	public static final short ENEMY_BIT = 32;
-	public static final short ATK_PLAYER_BIT = 64;
+	public static final short SKELETON_BIT = 64;
 	public static final short SPIKES_BIT = 128;
 	public static final short LEVEL_SWITCHER_BIT = 256;
 	public static final short BULLET_BIT = 512;
 	public static final short COIN_BIT = 1024;
 
-	public SpriteBatch batch;
+    public SpriteBatch batch;
 
 	public MenuScreen menuScreen;
 	public PreferencesScreen preferencesScreen;

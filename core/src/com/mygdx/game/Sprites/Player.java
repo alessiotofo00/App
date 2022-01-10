@@ -160,7 +160,6 @@ public class Player extends Sprite {
     //metodo che seleziona lo stato corrente in base alla velocita del Player
     public State getState(){
         if(Gdx.input.isKeyPressed(Input.Keys.K)) {
-            fdef.filter.categoryBits = MyGdxGame.ATK_PLAYER_BIT;
             return State.HIT;
         }
         else if(b2body.getLinearVelocity().y > 0) {

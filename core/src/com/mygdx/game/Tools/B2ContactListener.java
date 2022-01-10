@@ -40,12 +40,6 @@ public class B2ContactListener  implements ContactListener {
                 else
                     ((Enemy) fixB.getUserData()).hitPlayer();
                 break;
-            case MyGdxGame.ATK_PLAYER_BIT | MyGdxGame.ENEMY_BIT:
-                if(fixA.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT)
-                    ((Enemy)fixA.getUserData()).hitByPlayer();
-                else
-                    ((Enemy) fixB.getUserData()).hitByPlayer();
-                break;
             case MyGdxGame.BULLET_BIT | MyGdxGame.OBJECT_BIT:
             case MyGdxGame.BULLET_BIT | MyGdxGame.GROUND_BIT:
                 if(fixA.getFilterData().categoryBits == MyGdxGame.BULLET_BIT)
@@ -58,6 +52,13 @@ public class B2ContactListener  implements ContactListener {
                     ((Enemy)fixA.getUserData()).hitPlayer();
                 else
                     ((Enemy) fixB.getUserData()).hitPlayer();
+                break;
+            case MyGdxGame.SKELETON_BIT | MyGdxGame.GROUND_BIT:
+            case MyGdxGame.SKELETON_BIT | MyGdxGame.OBJECT_BIT:
+                if(fixA.getFilterData().categoryBits == MyGdxGame.SKELETON_BIT)
+                    ((Enemy)fixA.getUserData()).reverseVelocity(true, false);
+                else
+                    ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 break;
         }
     }
