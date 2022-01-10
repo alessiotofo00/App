@@ -16,10 +16,7 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Sound;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 import static com.mygdx.game.MyGdxGame.levelFile;
 import static com.mygdx.game.Scenes.Hud.*;
@@ -107,18 +104,22 @@ public class GameOverScreen implements Screen {
                     recordFile = new File(String.valueOf(Gdx.files.internal("Records.txt")));
                     if (recordFile.exists()) {
                         System.out.println("file record esistente");
+                        BufferedReader buf = new BufferedReader(new FileReader(String.valueOf(Gdx.files.internal("Records.txt"))));
+                        recordScore = Integer.parseInt(buf.readLine());
+                        buf.close();
+                        System.out.println("Lettura record corretta");
                        // recordFile.delete();
                        // recordFile.createNewFile();
-                        FileWriter fw = new FileWriter(recordFile);
-                        PrintWriter pw = new PrintWriter(fw);
-                        int s = Hud.score;
-                        pw.printf("%d", s);
                         if ( score >= recordScore) {
+                            FileWriter fw = new FileWriter(recordFile);
+                            PrintWriter pw = new PrintWriter(fw);
+                            int s = Hud.score;
+                            pw.printf("%d", s);
                             newRec = true;
                             recordScore = score;
+                            fw.close();
                             System.out.println("Aggiorno record con nuovo record");
                         }
-                        fw.close();
                     } else if (recordFile.createNewFile()) {
                         System.out.println("file record creato");
                         FileWriter fw = new FileWriter(recordFile);
