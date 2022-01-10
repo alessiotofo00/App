@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Sound;
 import com.mygdx.game.Tools.GifDecoder;
 
 import static com.mygdx.game.MyGdxGame.V_WIDTH;
@@ -61,6 +62,7 @@ public class PauseScreen implements Screen {
         resumeButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                Sound.playButtonSound();
                 Gdx.app.log("ClickedResume", "yes");
                 game.changeScreen(MyGdxGame.APPLICATION);
                 PlayScreen.paused = false;
@@ -69,6 +71,7 @@ public class PauseScreen implements Screen {
         optionsButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                Sound.playButtonSound();
                 Gdx.app.log("ClickedOptions", "yes");
                 game.changeScreen(MyGdxGame.PREFERENCES);
                 MyGdxGame.previousScreen = MyGdxGame.PAUSE;
@@ -76,6 +79,7 @@ public class PauseScreen implements Screen {
         });
         exitButton.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
+                Sound.playButtonSound();
                 Gdx.app.log("ClickedExit", "yes");
                 game.playScreen = new PlayScreen(game);
                 game.changeScreen(MyGdxGame.MENU);

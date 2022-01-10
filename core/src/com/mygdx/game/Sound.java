@@ -50,9 +50,28 @@ public class Sound {
         soundVolume = volume;
         soundJump.setVolume(volume); //suono salto
         soundDoubleJump.setVolume(volume);
+        soundCoin.setVolume(volume);
+        soundDeath.setVolume(volume);
+        soundButton.setVolume(volume);
     }
-
-
+    public static void playButtonSound(){
+        if(soundEnabled){
+            soundButton.stop();
+            soundButton.play();
+        }
+    }
+public static void playDeathSound(){
+        if(soundEnabled){
+            soundDeath.stop();
+            soundDeath.play();
+        }
+}
+    public static void playCoinSound(){
+        if(soundEnabled){
+            soundCoin.stop();
+            soundCoin.play();
+        }
+    }
     public static void playJumpSound() {
         if (soundEnabled) {
             soundJump.stop();

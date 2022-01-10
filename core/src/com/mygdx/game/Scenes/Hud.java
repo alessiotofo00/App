@@ -16,6 +16,10 @@ import com.mygdx.game.Screens.GameOverScreen;
 import com.mygdx.game.Screens.PlayScreen;
 import com.mygdx.game.Sprites.Player;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import static com.mygdx.game.Screens.GameOverScreen.played;
 import static com.mygdx.game.Screens.PlayScreen.level;
 
@@ -26,6 +30,7 @@ public class Hud extends Sprite implements Disposable{
     private Viewport viewport;
     private Skin skin;
     public static Integer score = 0;
+    public static Integer recordScore=0;
     Label levelLabel;
     static Label  scoreLabel;
     static Label coinsLabel;
@@ -65,7 +70,20 @@ int levelPrecedente=1;
 
         stage.addActor(table);
     }
-
+    /*
+if (recordFile.exists()) {
+        try {
+            BufferedReader buf = new BufferedReader(new FileReader(String.valueOf(Gdx.files.internal("Records.txt"))));
+            recordScore = Integer.parseInt(buf.readLine());
+            buf.close();
+            System.out.println("Lettura record corretta");
+        } catch (IOException e) {
+            System.out.println("Errore nel reperire il record");
+            e.printStackTrace();
+        }
+    }
+    
+     */
     public static void addScore(int value){
         score+=value;
         scoreLabel.setText(String.format("SCORE %d",score));

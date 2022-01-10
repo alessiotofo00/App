@@ -79,6 +79,7 @@ public class PreferencesScreen implements Screen {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                Sound.playButtonSound();
                 if(MyGdxGame.previousScreen == MENU)
                     game.changeScreen(MyGdxGame.MENU);
                 if(MyGdxGame.previousScreen == PAUSE)

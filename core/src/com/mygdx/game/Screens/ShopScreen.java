@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
+import com.mygdx.game.Sound;
 import com.mygdx.game.Sprites.Player;
 import com.mygdx.game.Tools.GifDecoder;
 
@@ -75,6 +76,7 @@ public class ShopScreen implements Screen {
         heartsButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                Sound.playButtonSound();
                 //permetto il funzionamento del bottone solo se i coins sono > 0 e se la vita non è piena (hit subite dal player > 0)
                 if(Hud.numCoins > 0 && Player.hits > 0) {
                     Hud.subCoins();
@@ -85,6 +87,7 @@ public class ShopScreen implements Screen {
         //scalo 3 dal denaro per il buytime e aggiungo 15
         buyTime.addListener(new ClickListener(){
             public void clicked (InputEvent event,float x,float y){
+                Sound.playButtonSound();
                 if(Hud.numCoins>=3){
                     Hud.numCoins-=2;
                         Hud.subCoins();
@@ -96,6 +99,7 @@ public class ShopScreen implements Screen {
         exitButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                Sound.playButtonSound();
                 game.changeScreen(MyGdxGame.MENU);
             }
         });
@@ -104,6 +108,7 @@ public class ShopScreen implements Screen {
         resumeButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                Sound.playButtonSound();
                 game.changeScreen(MyGdxGame.APPLICATION);
             }
         });
@@ -129,10 +134,12 @@ public class ShopScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
     }
 
-    public void updateCoins(){
+   /* public void updateCoins(){
         Hud.numCoins--;
         coinsLabel.setText((String.format("COINS x%d", Hud.numCoins)));
     }
+
+    */
 
     @Override
     public void render(float delta) {

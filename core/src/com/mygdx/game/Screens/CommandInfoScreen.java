@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Sound;
 
 import java.awt.*;
 import java.io.File;
@@ -77,6 +78,7 @@ public class CommandInfoScreen implements Screen {
                     e.printStackTrace();
                 }
                 */
+                Sound.playButtonSound();
                 game.hardMode = false;
                 game.playScreen = new PlayScreen(game);
                 game.changeScreen(APPLICATION);
@@ -92,6 +94,7 @@ public class CommandInfoScreen implements Screen {
                     e.printStackTrace();
                 }
                 */
+                Sound.playButtonSound();
                 game.hardMode = true;
                 game.playScreen = new PlayScreen(game);
                 game.changeScreen(APPLICATION);

@@ -11,18 +11,18 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
+import com.mygdx.game.Sound;
 
 import javax.swing.text.LabelView;
 import java.io.*;
 
 import static com.mygdx.game.MyGdxGame.levelFile;
-import static com.mygdx.game.Scenes.Hud.addScore;
-import static com.mygdx.game.Scenes.Hud.score;
+import static com.mygdx.game.Scenes.Hud.*;
 import static com.mygdx.game.Screens.PlayScreen.level;
 
 public class GameOverScreen implements Screen {
 
-    private File recordFile;
+    public File recordFile;
 
     private final MyGdxGame game;
 
@@ -41,7 +41,7 @@ public class GameOverScreen implements Screen {
     private Label newRecLabel;
 
     public static int played=0;
-    private Integer recordScore;
+   // private Integer recordScore;
     boolean newRec=false;
 
     public GameOverScreen(final MyGdxGame game) {
@@ -98,10 +98,8 @@ public class GameOverScreen implements Screen {
             }
         }
 */
-        recordScore=0;
+
         //ho un nuovo record
-        if ( score >= recordScore) {
-            newRec = true;
             {
                 try {
                     recordFile = new File(String.valueOf(Gdx.files.internal("Records.txt")));
@@ -111,18 +109,25 @@ public class GameOverScreen implements Screen {
                        // recordFile.createNewFile();
                         FileWriter fw = new FileWriter(recordFile);
                         PrintWriter pw = new PrintWriter(fw);
-                        int s = Hud.score.intValue();
+                        int s = Hud.score;
                         pw.printf("%d", s);
-                        recordScore= score;
+                        if ( score >= recordScore) {
+                            newRec = true;
+                            recordScore = score;
+                            System.out.println("Aggiorno record con nuovo record");
+                        }
                         fw.close();
                     } else if (recordFile.createNewFile()) {
                         System.out.println("file record creato");
                         FileWriter fw = new FileWriter(recordFile);
                         PrintWriter pw = new PrintWriter(fw);
-                        int s = Hud.score.intValue();
+                        int s = Hud.score;
                         pw.printf("%d", s);
-                        recordScore= Hud.score;
-                        System.out.println("aggiornamento nuovo record corretto");
+
+                            newRec = true;
+                            recordScore=score;
+
+                        System.out.println("aggiornamento primo record");
                         fw.close();
                     }
                 } catch (IOException e) {
@@ -131,11 +136,12 @@ public class GameOverScreen implements Screen {
                     throw (new RuntimeException());
                 }
             }
-        }
+
 
         playAgainButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                Sound.playButtonSound();
                 if (game.hardMode) {
                     try {
                         levelFile = new File(String.valueOf(Gdx.files.internal("levelHolder.txt")));
@@ -161,6 +167,10 @@ public class GameOverScreen implements Screen {
                     game.changeScreen(MyGdxGame.APPLICATION);
                 } else {
                     setPlayed(getPlayed() + 1);
+                    if(newRec){
+                        System.out.println("Aggiorno record da playagain");
+                        recordScore= score;
+                    }
                     addScore(-10);
                     game.playScreen = new PlayScreen(game);
                     game.changeScreen(MyGdxGame.APPLICATION);
@@ -171,12 +181,13 @@ public class GameOverScreen implements Screen {
             exitButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    Sound.playButtonSound();
                     game.playScreen = new PlayScreen(game);
                     game.changeScreen(MyGdxGame.MENU);
                 }
             });
-            recordScoreLabel = new Label(String.format("RECORD: " + recordScore), skin);
-            newRecLabel = new Label(String.format("NUOVO RECORD: " + score), skin);
+            recordScoreLabel = new Label(String.format("Not this time! Old Record: " + recordScore), skin);
+            newRecLabel = new Label(String.format("WOW NEW RECORD: " + score), skin);
 
             table.add(gameOverLabel).expandX();
             table.row();

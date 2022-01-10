@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Sound;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -57,6 +58,7 @@ public class LevelDeathScreen implements Screen {
         playAgainButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                Sound.playButtonSound();
                 if (game.hardMode) {
                     try {
                         levelFile = new File(String.valueOf(Gdx.files.internal("levelHolder.txt")));
@@ -92,6 +94,7 @@ public class LevelDeathScreen implements Screen {
         exitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                Sound.playButtonSound();
                 game.playScreen = new PlayScreen(game);
                 game.changeScreen(MyGdxGame.MENU);
             }

@@ -62,6 +62,10 @@ public class MyGdxGame extends Game {
 	public static Music musicMenu;
 	public static Music soundJump;
 	public static Music soundDoubleJump;
+	public static Music soundCoin;
+	public static Music soundDeath;
+	public static Music soundButton;
+
 	public static File levelFile;
 	public static File continueLevelFile;
 
@@ -70,6 +74,9 @@ public class MyGdxGame extends Game {
 	private final AssetDescriptor<Music> menuMusicDescriptor = new AssetDescriptor<>("audio/menu-music.mp3", Music.class);
 	private final AssetDescriptor<Music> soundJumpDescriptor = new AssetDescriptor<>("audio/jump.wav", Music.class);
 	private final AssetDescriptor<Music>soundDoubleJumpDescriptor=new AssetDescriptor<>("audio/doublejump.mp3", Music.class);
+	private final AssetDescriptor<Music>soundCoinDescriptor=new AssetDescriptor<>("audio/doublejump.mp3", Music.class);
+	private final AssetDescriptor<Music>soundDeathDescriptor=new AssetDescriptor<>("audio/doublejump.mp3", Music.class);
+	private final AssetDescriptor<Music>soundButtonDescriptor=new AssetDescriptor<>("audio/ButtonSound.mp3", Music.class);
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -78,7 +85,10 @@ public class MyGdxGame extends Game {
 		manager.load(menuMusicDescriptor);
 		manager.load(soundJumpDescriptor);
 		manager.load(soundDoubleJumpDescriptor);
-		//manager.load("audio/doublejump.wav", Sound.class);
+		manager.load(soundCoinDescriptor);
+		manager.load(soundDeathDescriptor);
+		manager.load(soundButtonDescriptor);
+
 
 		manager.finishLoading(); //finisco il caricamento
 
@@ -86,6 +96,9 @@ public class MyGdxGame extends Game {
 		musicMenu=manager.get(menuMusicDescriptor);
 		soundJump=manager.get(soundJumpDescriptor);
 		soundDoubleJump=manager.get(soundDoubleJumpDescriptor);
+		soundCoin=manager.get(soundCoinDescriptor);
+		soundDeath=manager.get(soundDeathDescriptor);
+		soundButton=manager.get(soundButtonDescriptor);
 
 		try {
 			levelFile = new File(String.valueOf(Gdx.files.internal("levelHolder.txt")));

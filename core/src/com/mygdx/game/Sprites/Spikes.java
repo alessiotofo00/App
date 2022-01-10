@@ -3,6 +3,7 @@ package com.mygdx.game.Sprites;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
+import com.mygdx.game.Sound;
 
 public class Spikes extends RectInteractiveTileObject {
 
@@ -18,5 +19,6 @@ public class Spikes extends RectInteractiveTileObject {
     @Override
     public void bodyHit() {
         Player.setHits(4);
+        Sound.playDeathSound();
     }
 }

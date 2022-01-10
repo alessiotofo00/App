@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 //import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Sound;
 import com.mygdx.game.Tools.GifDecoder;
 
 import java.io.File;
@@ -85,6 +86,7 @@ public class MenuScreen implements Screen, InputProcessor {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("ClickedNewGame", "yes");
+                Sound.playButtonSound();
                 MyGdxGame.previousScreen = MyGdxGame.MENU;
                 PlayScreen.paused = false;
                 try {
@@ -115,6 +117,7 @@ public class MenuScreen implements Screen, InputProcessor {
         });
         continueButton.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
+                Sound.playButtonSound();
                 Gdx.app.log("ClickedContinue", "yes");
                 PlayScreen.paused = false;
                 MyGdxGame.previousScreen = MENU;
@@ -126,6 +129,7 @@ public class MenuScreen implements Screen, InputProcessor {
         optionsButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                Sound.playButtonSound();
                 Gdx.app.log("ClickedOptions", "yes");
                 game.changeScreen(MyGdxGame.PREFERENCES);
                 MyGdxGame.previousScreen = MENU;
@@ -134,6 +138,7 @@ public class MenuScreen implements Screen, InputProcessor {
         quitButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                Sound.playButtonSound();
                 Gdx.app.exit();
             }
         });
