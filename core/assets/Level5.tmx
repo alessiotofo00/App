@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="54">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="56">
  <tileset firstgid="1" source="plattoon.tsx"/>
  <tileset firstgid="4097" source="clouds.tsx"/>
  <tileset firstgid="4339" source="wasteland.tsx"/>
@@ -267,15 +267,15 @@
  </objectgroup>
  <objectgroup id="10" name="spikes"/>
  <objectgroup id="8" name="levelEnd">
-  <object id="52" x="496" y="288.438" width="16" height="15.5625"/>
+  <object id="54" x="496" y="288" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="9" name="doublejump"/>
  <objectgroup id="11" name="bullets">
-  <object id="42" x="112" y="261.986" width="8.71693" height="9.62731"/>
-  <object id="44" x="192" y="224" width="8.71693" height="9.62731"/>
-  <object id="45" x="272" y="263.807" width="7.80654" height="7.80654"/>
-  <object id="46" x="352" y="224" width="7.80654" height="8.71693"/>
-  <object id="47" x="433.821" y="263.807" width="9.62731" height="8.71693"/>
+  <object id="42" x="112" y="259.255" width="10.5377" height="12.3585"/>
+  <object id="44" x="192" y="221.269" width="10.5377" height="12.3585"/>
+  <object id="45" x="272" y="259.255" width="11.4481" height="12.3585"/>
+  <object id="46" x="352" y="221.269" width="11.4481" height="11.4481"/>
+  <object id="47" x="433.821" y="260.165" width="10.5377" height="12.3585"/>
  </objectgroup>
  <objectgroup id="12" name="coin">
   <object id="53" x="176" y="192" width="16" height="16"/>

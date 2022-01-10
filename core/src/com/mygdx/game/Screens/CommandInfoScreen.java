@@ -39,6 +39,7 @@ public class CommandInfoScreen implements Screen {
     private final Label rightLabel;
     private final Label jumpLabel;
     private final Label dashLabel;
+    private final Label shopLabel;
     private final Label difficultyLabel;
 
     private final TextButton normalButton;
@@ -60,6 +61,7 @@ public class CommandInfoScreen implements Screen {
         rightLabel = new Label("RIGHT  -  D", skin);
         jumpLabel = new Label("JUMP  -  W", skin);
         dashLabel = new Label("DASH  -  MOUSE R", skin);
+        shopLabel = new Label("SHOP  -  S", skin);
         difficultyLabel = new Label("SELECT DIFFICULTY", skin);
 
         normalButton = new TextButton("NORMAL", skin);
@@ -77,8 +79,8 @@ public class CommandInfoScreen implements Screen {
                 */
                 Sound.playButtonSound();
                 game.hardMode = false;
-                game.playScreen = new PlayScreen(game);
                 Hud.score = 0;
+                game.playScreen = new PlayScreen(game);
                 game.changeScreen(APPLICATION);
             }
         });
@@ -94,8 +96,8 @@ public class CommandInfoScreen implements Screen {
                 */
                 Sound.playButtonSound();
                 game.hardMode = true;
-                game.playScreen = new PlayScreen(game);
                 Hud.score = 0;
+                game.playScreen = new PlayScreen(game);
                 game.changeScreen(APPLICATION);
             }
         });
@@ -110,6 +112,8 @@ public class CommandInfoScreen implements Screen {
         table.add(jumpLabel).padTop(20);
         table.row();
         table.add(dashLabel).padTop(20);
+        table.row();
+        table.add(shopLabel).padTop(20);
         table.row();
         table.add(difficultyLabel).padTop(50);
         table.row();

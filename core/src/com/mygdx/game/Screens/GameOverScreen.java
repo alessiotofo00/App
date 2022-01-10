@@ -165,8 +165,8 @@ public class GameOverScreen implements Screen {
                         System.out.println("Errore nel playagain");
                         throw (new RuntimeException());
                     }
-                    game.playScreen = new PlayScreen(game);
                     score = 0;
+                    game.playScreen = new PlayScreen(game);
                     game.changeScreen(MyGdxGame.APPLICATION);
                 } else {
                     setPlayed(getPlayed() + 1);
