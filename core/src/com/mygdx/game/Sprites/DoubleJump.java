@@ -23,7 +23,7 @@ public class DoubleJump extends RectInteractiveTileObject {
     @Override
     public void bodyHit() {
         Gdx.app.log("Hit", "DoubleJump");
-        Sound.playDoubleJumpS();
+        //Sound.playDoubleJumpS();
 
     }
 
