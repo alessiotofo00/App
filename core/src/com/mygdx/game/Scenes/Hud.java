@@ -26,11 +26,12 @@ import static com.mygdx.game.Screens.PlayScreen.level;
 
 public class Hud extends Sprite implements Disposable{
 
+    private final PlayScreen screen;
     public Stage stage;
     private Viewport viewport;
     private Skin skin;
     public static Integer score = 0;
-    public static Integer recordScore=0;
+    public static Integer recordScore = 0;
     Label levelLabel;
     static Label  scoreLabel;
     static Label coinsLabel;
@@ -40,10 +41,13 @@ public class Hud extends Sprite implements Disposable{
     private static Integer worldTimer;
     private float timeCount;
     public static int numCoins = 0;
-int levelPrecedente=1;
+    int levelPrecedente = 1;
+
     public Hud(SpriteBatch sb, PlayScreen screen){
         worldTimer = 25;
         timeCount = 0;
+
+        this.screen = screen;
 
         viewport = new ScreenViewport();
         stage = new Stage(viewport, sb);

@@ -14,38 +14,35 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Sound;
-
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 
 import static com.mygdx.game.MyGdxGame.APPLICATION;
 import static com.mygdx.game.MyGdxGame.V_WIDTH;
 
 public class CommandInfoScreen implements Screen {
 
-    private MyGdxGame game;
+    private final MyGdxGame game;
 
-    private Skin skin;
+    private final Skin skin;
 
-    private Stage stage;
-    private FitViewport viewport;
+    private final Stage stage;
+    private final FitViewport viewport;
 
-    private Texture background;
+    private final Texture background;
 
-    private Table table;
+    private final Table table;
 
-    private Label titleLabel;
+    private final Label titleLabel;
 
-    private Label leftLabel;
-    private Label rightLabel;
-    private Label jumpLabel;
-    private Label dashLabel;
-    private Label difficultyLabel;
+    private final Label leftLabel;
+    private final Label rightLabel;
+    private final Label jumpLabel;
+    private final Label dashLabel;
+    private final Label difficultyLabel;
 
-    private TextButton normalButton;
-    private TextButton hardButton;
+    private final TextButton normalButton;
+    private final TextButton hardButton;
 
     public CommandInfoScreen(final MyGdxGame game)  {
         this.game = game;
@@ -81,6 +78,7 @@ public class CommandInfoScreen implements Screen {
                 Sound.playButtonSound();
                 game.hardMode = false;
                 game.playScreen = new PlayScreen(game);
+                Hud.score = 0;
                 game.changeScreen(APPLICATION);
             }
         });
@@ -97,6 +95,7 @@ public class CommandInfoScreen implements Screen {
                 Sound.playButtonSound();
                 game.hardMode = true;
                 game.playScreen = new PlayScreen(game);
+                Hud.score = 0;
                 game.changeScreen(APPLICATION);
             }
         });

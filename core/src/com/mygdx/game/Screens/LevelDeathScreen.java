@@ -21,7 +21,6 @@ import java.io.IOException;
 
 import static com.mygdx.game.MyGdxGame.levelFile;
 import static com.mygdx.game.Scenes.Hud.addScore;
-import static com.mygdx.game.Scenes.Hud.score;
 import static com.mygdx.game.Screens.GameOverScreen.getPlayed;
 import static com.mygdx.game.Screens.GameOverScreen.setPlayed;
 
@@ -36,9 +35,9 @@ public class LevelDeathScreen implements Screen {
 
     private final Table table;
 
-    private Label gameOverLabel;
-    private TextButton playAgainButton;
-    private TextButton exitButton;
+    private final Label gameOverLabel;
+    private final TextButton playAgainButton;
+    private final TextButton exitButton;
 
     public LevelDeathScreen(final MyGdxGame game){
         this.game = game;
@@ -80,14 +79,12 @@ public class LevelDeathScreen implements Screen {
                         System.out.println("Errore nel playagain");
                         throw (new RuntimeException());
                     }
-                    game.playScreen = new PlayScreen(game);
-                    game.changeScreen(MyGdxGame.APPLICATION);
                 } else {
                     setPlayed(getPlayed() + 1);
                     addScore(-10);
-                    game.playScreen = new PlayScreen(game);
-                    game.changeScreen(MyGdxGame.APPLICATION);
                 }
+                game.playScreen = new PlayScreen(game);
+                game.changeScreen(MyGdxGame.APPLICATION);
             }
         });
 

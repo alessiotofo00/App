@@ -42,7 +42,7 @@ public class  PlayScreen implements Screen {
     private final OrthographicCamera gamecam;
     private final Viewport gamePort;
 
-    private final Hud hud;
+    public static Hud hud;
     private TiledMap map = null;
     private final OrthogonalTiledMapRenderer renderer;
     //player declaration
@@ -85,9 +85,6 @@ public class  PlayScreen implements Screen {
         gamePort = new FitViewport(MyGdxGame.V_WIDTH / MyGdxGame.PPM,
                 MyGdxGame.V_HEIGHT / MyGdxGame.PPM,
                 gamecam);
-        hud = new Hud(game.batch, this);
-
-
 
         try {
             BufferedReader buf = new BufferedReader(new FileReader(String.valueOf(Gdx.files.internal("levelHolder.txt"))));
@@ -194,6 +191,7 @@ public class  PlayScreen implements Screen {
         healthBar = new HealthBar(world, this);
         //listener
         world.setContactListener(new B2ContactListener());
+        hud = new Hud(game.batch, this);
     }
 
 

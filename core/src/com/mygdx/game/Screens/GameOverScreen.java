@@ -6,19 +6,23 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Sound;
 
-import javax.swing.text.LabelView;
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 import static com.mygdx.game.MyGdxGame.levelFile;
 import static com.mygdx.game.Scenes.Hud.*;
-import static com.mygdx.game.Screens.PlayScreen.level;
 
 public class GameOverScreen implements Screen {
 
@@ -26,19 +30,17 @@ public class GameOverScreen implements Screen {
 
     private final MyGdxGame game;
 
-    private final Skin skin;
-
     private final Stage stage;
     private final FitViewport viewport;
 
     private final Table table;
 
-    private Label gameOverLabel;
-    private TextButton playAgainButton;
-    private TextButton exitButton;
+    private final Label gameOverLabel;
+    private final TextButton playAgainButton;
+    private final TextButton exitButton;
     protected Label recordScoreLabel;
-    private Label endScoreLabel;
-    private Label newRecLabel;
+    private final Label endScoreLabel;
+    private final Label newRecLabel;
 
     public static int played=0;
    // private Integer recordScore;
@@ -47,7 +49,7 @@ public class GameOverScreen implements Screen {
     public GameOverScreen(final MyGdxGame game) {
 
         this.game = game;
-        this.skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
+        Skin skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
 
         viewport = new FitViewport(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport);
@@ -164,6 +166,7 @@ public class GameOverScreen implements Screen {
                         throw (new RuntimeException());
                     }
                     game.playScreen = new PlayScreen(game);
+                    score = 0;
                     game.changeScreen(MyGdxGame.APPLICATION);
                 } else {
                     setPlayed(getPlayed() + 1);
@@ -186,8 +189,8 @@ public class GameOverScreen implements Screen {
                     game.changeScreen(MyGdxGame.MENU);
                 }
             });
-            recordScoreLabel = new Label(String.format("Not this time! Old Record: " + recordScore), skin);
-            newRecLabel = new Label(String.format("WOW NEW RECORD: " + score), skin);
+            recordScoreLabel = new Label("Not this time! Old Record: " + recordScore, skin);
+            newRecLabel = new Label("WOW NEW RECORD: " + score, skin);
 
             table.add(gameOverLabel).expandX();
             table.row();
