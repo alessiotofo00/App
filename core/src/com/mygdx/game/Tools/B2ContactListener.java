@@ -59,16 +59,6 @@ public class B2ContactListener  implements ContactListener {
                 else
                     ((Enemy) fixB.getUserData()).hitPlayer();
                 break;
-
-            /*
-            case MyGdxGame.PLAYER_BIT | MyGdxGame.COIN_BIT:
-                if(fixA.getFilterData().categoryBits == MyGdxGame.COIN_BIT)
-                    ((RectInteractiveTileObject)fixA.getUserData()).hitPlayer();
-                else
-                    ((RectInteractiveTileObject) fixB.getUserData()).hitPlayer();
-                break;
-
-               */
         }
     }
 
