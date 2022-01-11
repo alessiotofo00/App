@@ -29,8 +29,6 @@ public class CommandInfoScreen implements Screen {
     private final Stage stage;
     private final FitViewport viewport;
 
-    private final Texture background;
-
     private final Table table;
 
     private final Label titleLabel;
@@ -51,7 +49,6 @@ public class CommandInfoScreen implements Screen {
         skin = new Skin(Gdx.files.internal("skin-commodore/uiskin.json"));
         viewport = new FitViewport(V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport);
-        background = new Texture(Gdx.files.internal("dragon-menu.jpg"));
 
         table = new Table();
         table.top(); //set the table on the top of the stage
@@ -138,7 +135,6 @@ public class CommandInfoScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.batch.begin();
-        game.batch.draw(background, 0, 0, V_WIDTH / MyGdxGame.PPM, MyGdxGame.V_HEIGHT / MyGdxGame.PPM);
         game.batch.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
