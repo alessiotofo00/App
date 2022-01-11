@@ -186,7 +186,7 @@ public class  PlayScreen implements Screen {
 
         world = new World(new Vector2(0, -13), true); //il -10 indica la gravità nel mondo di gioco
         b2dr = new Box2DDebugRenderer();
-        //b2dr.setDrawBodies(false);
+        b2dr.setDrawBodies(false);
         creator = new B2WorldCreator(this);
         player = new Player(this);
         healthBar = new HealthBar(world, this);
@@ -231,13 +231,13 @@ public class  PlayScreen implements Screen {
         }
         //tasti per il movimento
         if(player.currentState != Player.State.GAMEOVER) {
-            //if (player.b2body.getLinearVelocity().y == 0 || canJump) {
+            if (player.b2body.getLinearVelocity().y == 0 || canJump) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
                 Sound.playJumpSound();
                 player.b2body.applyLinearImpulse(new Vector2(0, 4), player.b2body.getWorldCenter(), true);
                 canJump = false;
             }
-            //}
+            }
             if (canDash){
                 if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT) /*&& Gdx.input.isKeyPressed(Input.Keys.D)*/ && player.runningRight) {
                     player.b2body.applyLinearImpulse(new Vector2(1.5f, 1.1f), player.b2body.getWorldCenter(), true);
@@ -292,6 +292,7 @@ public class  PlayScreen implements Screen {
         //controllo che il Player abbia ricevuto un numero >= di hit rispetto alla sua vita -> metto GAMEOVER come stato corrente
         if(Player.hits >= 4){
             player.currentState = Player.State.GAMEOVER;
+            musicMenu.stop();
         }
         if(paused){
             Gdx.app.log("paused", "yes");

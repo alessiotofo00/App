@@ -19,6 +19,7 @@ import com.mygdx.game.Sound;
 import java.io.*;
 
 import static com.mygdx.game.MyGdxGame.levelFile;
+import static com.mygdx.game.MyGdxGame.musicMenu;
 import static com.mygdx.game.Scenes.Hud.*;
 
 public class GameOverScreen implements Screen {
@@ -179,6 +180,7 @@ public class GameOverScreen implements Screen {
                     game.playScreen = new PlayScreen(game);
                     game.changeScreen(MyGdxGame.APPLICATION);
                 }
+                musicMenu.play();
             }
         });
 
