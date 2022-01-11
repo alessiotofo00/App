@@ -29,6 +29,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import static com.mygdx.game.MyGdxGame.musicMenu;
 import static com.mygdx.game.MyGdxGame.soundJump;
 import static com.mygdx.game.Scenes.Hud.addScore;
 
@@ -225,6 +226,7 @@ public class  PlayScreen implements Screen {
         //tasto per la pausa
         if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             paused = true;
+            musicMenu.stop();
             game.changeScreen(MyGdxGame.PAUSE);
         }
         //tasti per il movimento

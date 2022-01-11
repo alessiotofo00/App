@@ -19,6 +19,7 @@ import com.mygdx.game.Sound;
 import com.mygdx.game.Tools.GifDecoder;
 
 import static com.mygdx.game.MyGdxGame.V_WIDTH;
+import static com.mygdx.game.MyGdxGame.musicMenu;
 
 public class PauseScreen implements Screen {
 
@@ -64,6 +65,8 @@ public class PauseScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 Sound.playButtonSound();
                 Gdx.app.log("ClickedResume", "yes");
+                musicMenu.setLooping(true);
+                musicMenu.play();
                 game.changeScreen(MyGdxGame.APPLICATION);
                 PlayScreen.paused = false;
             }

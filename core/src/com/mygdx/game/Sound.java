@@ -6,7 +6,7 @@ public class Sound {
     public static boolean musicEnabled = true;
     public static boolean soundEnabled = true;
     public static float musicVolume = 1.0f;
-    public static float soundVolume = 1.0f;
+    public static float soundVolume = 1.5f;
 
     //cambia stato musica
     public static void changeMusicState() {

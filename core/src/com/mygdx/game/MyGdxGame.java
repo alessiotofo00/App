@@ -71,7 +71,7 @@ public class MyGdxGame<SKELETON_BIT> extends Game {
 
 	public boolean hardMode = false;
 	//descrittore del file per la chiamata del load e dell'assegnamento
-	private final AssetDescriptor<Music> menuMusicDescriptor = new AssetDescriptor<>("audio/menu-music.mp3", Music.class);
+	private final AssetDescriptor<Music> menuMusicDescriptor = new AssetDescriptor<>("audio/backgroundCut.mp3", Music.class);
 	private final AssetDescriptor<Music> soundJumpDescriptor = new AssetDescriptor<>("audio/jump.wav", Music.class);
 	private final AssetDescriptor<Music>soundDoubleJumpDescriptor=new AssetDescriptor<>("audio/doublejump.mp3", Music.class);
 	private final AssetDescriptor<Music>soundCoinDescriptor=new AssetDescriptor<>("audio/coin.mp3", Music.class);
